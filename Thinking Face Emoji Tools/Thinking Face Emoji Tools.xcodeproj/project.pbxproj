@@ -20,6 +20,7 @@
 		20235BC324C614EE00867F48 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 20235BC224C614EE00867F48 /* ToolbarItemIcon.pdf */; };
 		20235BCF24C61B2300867F48 /* icon_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 20235BCE24C61B2300867F48 /* icon_128.png */; };
 		20235BD124C61D8700867F48 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 20235BD024C61D8700867F48 /* script.js */; };
+		2095671124C62BA7009CDACE /* icon_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 20235BCE24C61B2300867F48 /* icon_128.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,6 @@
 		20235BBA24C614EE00867F48 /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
 		20235BBD24C614EE00867F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		20235BBF24C614EE00867F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20235BC024C614EE00867F48 /* _script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = _script.js; sourceTree = "<group>"; };
 		20235BC224C614EE00867F48 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 		20235BC424C614EE00867F48 /* Thinking_Face_Emoji_Tools_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thinking_Face_Emoji_Tools_Extension.entitlements; sourceTree = "<group>"; };
 		20235BCE24C61B2300867F48 /* icon_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_128.png; path = ../../dist/images/icon_128.png; sourceTree = "<group>"; };
@@ -135,7 +135,6 @@
 				20235BBA24C614EE00867F48 /* SafariExtensionViewController.swift */,
 				20235BBC24C614EE00867F48 /* SafariExtensionViewController.xib */,
 				20235BBF24C614EE00867F48 /* Info.plist */,
-				20235BC024C614EE00867F48 /* _script.js */,
 				20235BC224C614EE00867F48 /* ToolbarItemIcon.pdf */,
 				20235BC424C614EE00867F48 /* Thinking_Face_Emoji_Tools_Extension.entitlements */,
 			);
@@ -223,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2095671124C62BA7009CDACE /* icon_128.png in Resources */,
 				20235BA124C614EC00867F48 /* Thinking_Face_Emoji_Tools.entitlements in Resources */,
 				20235BAA24C614EE00867F48 /* Assets.xcassets in Resources */,
 				20235BA624C614EC00867F48 /* Main.storyboard in Resources */,
