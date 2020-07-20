@@ -4,7 +4,7 @@
 
   import uploadEmoji from '../upload-emoji.js';
 
-  const SET_ICON_URL = chrome.runtime.getURL('images/icon_128.png');
+  const SET_ICON_URL = safari.extension.baseURI + 'icon_128.png';
 
   let uploads = [];
   let uploadsStatusById = {};

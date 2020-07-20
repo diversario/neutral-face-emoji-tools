@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		20235BA124C614EC00867F48 /* Thinking_Face_Emoji_Tools.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 20235BA024C614EC00867F48 /* Thinking_Face_Emoji_Tools.entitlements */; };
+		20235BA324C614EC00867F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20235BA224C614EC00867F48 /* AppDelegate.swift */; };
+		20235BA624C614EC00867F48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20235BA424C614EC00867F48 /* Main.storyboard */; };
+		20235BA824C614EC00867F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20235BA724C614EC00867F48 /* ViewController.swift */; };
+		20235BAA24C614EE00867F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20235BA924C614EE00867F48 /* Assets.xcassets */; };
+		20235BB124C614EE00867F48 /* Thinking Face Emoji Tools Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 20235BB024C614EE00867F48 /* Thinking Face Emoji Tools Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		20235BB624C614EE00867F48 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20235BB524C614EE00867F48 /* Cocoa.framework */; };
+		20235BB924C614EE00867F48 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20235BB824C614EE00867F48 /* SafariExtensionHandler.swift */; };
+		20235BBB24C614EE00867F48 /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20235BBA24C614EE00867F48 /* SafariExtensionViewController.swift */; };
+		20235BBE24C614EE00867F48 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20235BBC24C614EE00867F48 /* SafariExtensionViewController.xib */; };
+		20235BC324C614EE00867F48 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 20235BC224C614EE00867F48 /* ToolbarItemIcon.pdf */; };
+		20235BCF24C61B2300867F48 /* icon_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 20235BCE24C61B2300867F48 /* icon_128.png */; };
+		20235BD124C61D8700867F48 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 20235BD024C61D8700867F48 /* script.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20235BB224C614EE00867F48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20235B9524C614EC00867F48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20235BAF24C614EE00867F48;
+			remoteInfo = "Thinking Face Emoji Tools Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20235BCA24C614EE00867F48 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20235BB124C614EE00867F48 /* Thinking Face Emoji Tools Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		20235B9D24C614EC00867F48 /* Thinking Face Emoji Tools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Thinking Face Emoji Tools.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20235BA024C614EC00867F48 /* Thinking_Face_Emoji_Tools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thinking_Face_Emoji_Tools.entitlements; sourceTree = "<group>"; };
+		20235BA224C614EC00867F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		20235BA524C614EC00867F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		20235BA724C614EC00867F48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		20235BA924C614EE00867F48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		20235BAB24C614EE00867F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20235BB024C614EE00867F48 /* Thinking Face Emoji Tools Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Thinking Face Emoji Tools Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20235BB524C614EE00867F48 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		20235BB824C614EE00867F48 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		20235BBA24C614EE00867F48 /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
+		20235BBD24C614EE00867F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
+		20235BBF24C614EE00867F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20235BC024C614EE00867F48 /* _script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = _script.js; sourceTree = "<group>"; };
+		20235BC224C614EE00867F48 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
+		20235BC424C614EE00867F48 /* Thinking_Face_Emoji_Tools_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thinking_Face_Emoji_Tools_Extension.entitlements; sourceTree = "<group>"; };
+		20235BCE24C61B2300867F48 /* icon_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_128.png; path = ../../dist/images/icon_128.png; sourceTree = "<group>"; };
+		20235BD024C61D8700867F48 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		20235B9A24C614EC00867F48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20235BAD24C614EE00867F48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20235BB624C614EE00867F48 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20235B9424C614EC00867F48 = {
+			isa = PBXGroup;
+			children = (
+				20235B9F24C614EC00867F48 /* Thinking Face Emoji Tools */,
+				20235BB724C614EE00867F48 /* Thinking Face Emoji Tools Extension */,
+				20235BB424C614EE00867F48 /* Frameworks */,
+				20235B9E24C614EC00867F48 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		20235B9E24C614EC00867F48 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20235B9D24C614EC00867F48 /* Thinking Face Emoji Tools.app */,
+				20235BB024C614EE00867F48 /* Thinking Face Emoji Tools Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20235B9F24C614EC00867F48 /* Thinking Face Emoji Tools */ = {
+			isa = PBXGroup;
+			children = (
+				20235BA024C614EC00867F48 /* Thinking_Face_Emoji_Tools.entitlements */,
+				20235BA224C614EC00867F48 /* AppDelegate.swift */,
+				20235BA424C614EC00867F48 /* Main.storyboard */,
+				20235BA724C614EC00867F48 /* ViewController.swift */,
+				20235BA924C614EE00867F48 /* Assets.xcassets */,
+				20235BAB24C614EE00867F48 /* Info.plist */,
+			);
+			path = "Thinking Face Emoji Tools";
+			sourceTree = "<group>";
+		};
+		20235BB424C614EE00867F48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20235BB524C614EE00867F48 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		20235BB724C614EE00867F48 /* Thinking Face Emoji Tools Extension */ = {
+			isa = PBXGroup;
+			children = (
+				20235BD024C61D8700867F48 /* script.js */,
+				20235BCE24C61B2300867F48 /* icon_128.png */,
+				20235BB824C614EE00867F48 /* SafariExtensionHandler.swift */,
+				20235BBA24C614EE00867F48 /* SafariExtensionViewController.swift */,
+				20235BBC24C614EE00867F48 /* SafariExtensionViewController.xib */,
+				20235BBF24C614EE00867F48 /* Info.plist */,
+				20235BC024C614EE00867F48 /* _script.js */,
+				20235BC224C614EE00867F48 /* ToolbarItemIcon.pdf */,
+				20235BC424C614EE00867F48 /* Thinking_Face_Emoji_Tools_Extension.entitlements */,
+			);
+			path = "Thinking Face Emoji Tools Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		20235B9C24C614EC00867F48 /* Thinking Face Emoji Tools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20235BCB24C614EE00867F48 /* Build configuration list for PBXNativeTarget "Thinking Face Emoji Tools" */;
+			buildPhases = (
+				20235B9924C614EC00867F48 /* Sources */,
+				20235B9A24C614EC00867F48 /* Frameworks */,
+				20235B9B24C614EC00867F48 /* Resources */,
+				20235BCA24C614EE00867F48 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20235BB324C614EE00867F48 /* PBXTargetDependency */,
+			);
+			name = "Thinking Face Emoji Tools";
+			productName = "Thinking Face Emoji Tools";
+			productReference = 20235B9D24C614EC00867F48 /* Thinking Face Emoji Tools.app */;
+			productType = "com.apple.product-type.application";
+		};
+		20235BAF24C614EE00867F48 /* Thinking Face Emoji Tools Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20235BC724C614EE00867F48 /* Build configuration list for PBXNativeTarget "Thinking Face Emoji Tools Extension" */;
+			buildPhases = (
+				20235BAC24C614EE00867F48 /* Sources */,
+				20235BAD24C614EE00867F48 /* Frameworks */,
+				20235BAE24C614EE00867F48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Thinking Face Emoji Tools Extension";
+			productName = "Thinking Face Emoji Tools Extension";
+			productReference = 20235BB024C614EE00867F48 /* Thinking Face Emoji Tools Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20235B9524C614EC00867F48 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1160;
+				ORGANIZATIONNAME = "Ilya Shaisultanov";
+				TargetAttributes = {
+					20235B9C24C614EC00867F48 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					20235BAF24C614EE00867F48 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+				};
+			};
+			buildConfigurationList = 20235B9824C614EC00867F48 /* Build configuration list for PBXProject "Thinking Face Emoji Tools" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 20235B9424C614EC00867F48;
+			productRefGroup = 20235B9E24C614EC00867F48 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				20235B9C24C614EC00867F48 /* Thinking Face Emoji Tools */,
+				20235BAF24C614EE00867F48 /* Thinking Face Emoji Tools Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20235B9B24C614EC00867F48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20235BA124C614EC00867F48 /* Thinking_Face_Emoji_Tools.entitlements in Resources */,
+				20235BAA24C614EE00867F48 /* Assets.xcassets in Resources */,
+				20235BA624C614EC00867F48 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20235BAE24C614EE00867F48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20235BD124C61D8700867F48 /* script.js in Resources */,
+				20235BC324C614EE00867F48 /* ToolbarItemIcon.pdf in Resources */,
+				20235BBE24C614EE00867F48 /* SafariExtensionViewController.xib in Resources */,
+				20235BCF24C61B2300867F48 /* icon_128.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20235B9924C614EC00867F48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20235BA824C614EC00867F48 /* ViewController.swift in Sources */,
+				20235BA324C614EC00867F48 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20235BAC24C614EE00867F48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20235BBB24C614EE00867F48 /* SafariExtensionViewController.swift in Sources */,
+				20235BB924C614EE00867F48 /* SafariExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20235BB324C614EE00867F48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20235BAF24C614EE00867F48 /* Thinking Face Emoji Tools Extension */;
+			targetProxy = 20235BB224C614EE00867F48 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		20235BA424C614EC00867F48 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20235BA524C614EC00867F48 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		20235BBC24C614EE00867F48 /* SafariExtensionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20235BBD24C614EE00867F48 /* Base */,
+			);
+			name = SafariExtensionViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		20235BC524C614EE00867F48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		20235BC624C614EE00867F48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		20235BC824C614EE00867F48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Thinking Face Emoji Tools Extension/Thinking_Face_Emoji_Tools_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5F6QZASLQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Thinking Face Emoji Tools Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Thinking-Face-Emoji-Tools-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		20235BC924C614EE00867F48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Thinking Face Emoji Tools Extension/Thinking_Face_Emoji_Tools_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5F6QZASLQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Thinking Face Emoji Tools Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Thinking-Face-Emoji-Tools-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		20235BCC24C614EE00867F48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Thinking Face Emoji Tools/Thinking_Face_Emoji_Tools.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5F6QZASLQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Thinking Face Emoji Tools/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Thinking-Face-Emoji-Tools";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		20235BCD24C614EE00867F48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Thinking Face Emoji Tools/Thinking_Face_Emoji_Tools.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5F6QZASLQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Thinking Face Emoji Tools/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Thinking-Face-Emoji-Tools";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		20235B9824C614EC00867F48 /* Build configuration list for PBXProject "Thinking Face Emoji Tools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20235BC524C614EE00867F48 /* Debug */,
+				20235BC624C614EE00867F48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20235BC724C614EE00867F48 /* Build configuration list for PBXNativeTarget "Thinking Face Emoji Tools Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20235BC824C614EE00867F48 /* Debug */,
+				20235BC924C614EE00867F48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20235BCB24C614EE00867F48 /* Build configuration list for PBXNativeTarget "Thinking Face Emoji Tools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20235BCC24C614EE00867F48 /* Debug */,
+				20235BCD24C614EE00867F48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 20235B9524C614EC00867F48 /* Project object */;
+}
