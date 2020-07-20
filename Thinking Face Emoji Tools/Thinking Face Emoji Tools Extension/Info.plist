@@ -59,6 +59,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 Ilya Shaisultanov. All rights reserved.</string>
 	<key>NSHumanReadableDescription</key>
-	<string>Visit your Slack&apos;s /customize/emoji page to drag &amp; drop to upload emoji.</string>
+	<string>Visit your Slack's /customize/emoji page to drag &amp; drop to upload emoji.</string>
 </dict>
 </plist>
