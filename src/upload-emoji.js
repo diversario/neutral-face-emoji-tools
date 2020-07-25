@@ -16,7 +16,7 @@ ConcurrencyManager(slackApi, MAX_CONCURRENT_REQUESTS);
 const NO_OP = function () {};
 
 function printError(error) {
-  return error.toJSON ? error.toJSON() : error
+  return error.toJSON ? error.toJSON().message : error.message
 }
 
 export default function uploadEmoji (file, opts) {
@@ -111,7 +111,11 @@ export default function uploadEmoji (file, opts) {
 
         switch (error) {
           case 'error_name_taken':
-            log.error(`[${name}] ⬆️✋ emoji already exists`)
+            log.error(`[${name}] ⬆️✋ emoji already exists and overwrite is${opts.allowOverwrite ? '' : ' not'} allowed)
+
+            if (!opts.allowOverwrite) {
+              throw new Error('Emoji already exists')
+            }
 
             return remove(name, err => {
               if (err) {
@@ -132,7 +136,7 @@ export default function uploadEmoji (file, opts) {
 
       callback(id, error, response);
     }).catch((error) => {
-      log.error(`[${name}] ⬆️💣 upload failed on attempt ${attemptCount}`, printError(error))
+      log.error(`[${name}] ⬆️😨 upload failed on attempt ${attemptCount}`, printError(error))
 
       if (error.response) {
         if (attemptCount < 3) {
@@ -151,7 +155,7 @@ export default function uploadEmoji (file, opts) {
           log.error(`[${name}] ⬆️⚰️ out of attempts to upload`)
         }
       } else {
-        log.error(`[${name}] ⬆️❓something else happened on attempt ${attemptCount}`, printError(error))
+        log.error(`[${name}] ⬆️❌giving up upload on attempt ${attemptCount}`, printError(error))
       }
 
       callback(id, error, null);

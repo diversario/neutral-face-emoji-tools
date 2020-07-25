@@ -16,6 +16,7 @@
   let replaceStr = ''
 
   let showOpts = false
+  let allowOverwrite = false
 
   function toggleOpts() {
     showOpts = !showOpts
@@ -23,7 +24,7 @@
 
   function uploadFiles (files, idx) {
     const uploadFns = files.map(file => {
-      const obj = uploadEmoji(file, {prefix, suffix})
+      const obj = uploadEmoji(file, {prefix, suffix, allowOverwrite})
 
       uploadsStatusById = {
         ...uploadsStatusById,
@@ -132,6 +133,12 @@
   <p class="subheading">Drag and drop images into the area below. Images will be uploaded using their filename as the emoji name.</p>
   <p class="input-note">Example: <span class="normal">"meow-party.gif" will be added as <span class="mono"><strong>:{prefix}meow-party{suffix}:</strong></span></span></p>
   <button class="c-button c-button--outline c-button--medium toggle-opts" type="button" name="options" on:click={toggleOpts}>⚙️ { showOpts ? "Hide" : "Show"} options</button>
+  <p class="customizations" style="display:{showOpts ? "flex" : "none"}">
+    <label>
+      <input type=checkbox bind:checked={allowOverwrite}>
+      Allow overwriting existing emoji (does not apply to standard emoji)
+    </label>
+  </p>
   <p class="customizations" style="display:{showOpts ? "flex" : "none"}">
     <input bind:value={prefix} type="text" name="prefix" placeholder="optional prefix">
     &nbsp;

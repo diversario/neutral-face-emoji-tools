@@ -12889,7 +12889,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const NO_OP = function () {};
 
     function printError(error) {
-      return error.toJSON ? error.toJSON() : error;
+      return error.toJSON ? error.toJSON().message : error.message;
     }
 
     function uploadEmoji(file, opts) {
@@ -12985,6 +12985,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
             switch (error) {
               case 'error_name_taken':
                 log.error(`[${name}] ⬆️✋ emoji already exists`);
+
+                if (!opts.allowOverwrite) {
+                  throw new Error('Emoji already exists');
+                }
+
                 return remove(name, err => {
                   if (err) {
                     throw new Error("Couldn't remove emoji");
@@ -13005,7 +13010,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           log.info(`[${name}] ⬆️✅ uploaded`);
           callback(id, error, response);
         }).catch(error => {
-          log.error(`[${name}] ⬆️💣 upload failed on attempt ${attemptCount}`, printError(error));
+          log.error(`[${name}] ⬆️😨 upload failed on attempt ${attemptCount}`, printError(error));
 
           if (error.response) {
             if (attemptCount < 3) {
@@ -13022,7 +13027,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               log.error(`[${name}] ⬆️⚰️ out of attempts to upload`);
             }
           } else {
-            log.error(`[${name}] ⬆️❓something else happened on attempt ${attemptCount}`, printError(error));
+            log.error(`[${name}] ⬆️❌giving up upload on attempt ${attemptCount}`, printError(error));
           }
 
           callback(id, error, null);
@@ -13041,29 +13046,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function add_css$2() {
     	var style = element("style");
     	style.id = "svelte-21xepa-style";
-    	style.textContent = ".neutral-face-emoji-tools.svelte-21xepa.svelte-21xepa{border:var(--color-slack-border) 1px solid;border-left:var(--color-neutral-face-emoji-tools) 3px solid;margin:0 0 25px 0;padding:25px;background:white}.icon.heading.svelte-21xepa.svelte-21xepa{margin:0 5px 0 0;height:1.25em;vertical-align:-25%}.input-note.svelte-21xepa.svelte-21xepa{font-size:.9rem;line-height:1.25rem;color:var(--color-text-gray)}.uploads.svelte-21xepa.svelte-21xepa{list-style-type:none;margin:0;font-size:0.9rem}.customizations.svelte-21xepa.svelte-21xepa{display:flex\n  }.toggle-opts.svelte-21xepa.svelte-21xepa{margin-bottom:1rem}.neutral-face-emoji-tools.svelte-21xepa .mono.svelte-21xepa{font-family:'Courier New', Courier, monospace\n  }\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiYXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBpbXBvcnQgVXBsb2FkIGZyb20gJy4vdXBsb2FkLnN2ZWx0ZSc7XG4gIGltcG9ydCBGaWxlRHJvcHpvbmUgZnJvbSAnLi9maWxlLWRyb3B6b25lLnN2ZWx0ZSc7XG5cbiAgaW1wb3J0IHVwbG9hZEVtb2ppIGZyb20gJy4uL3VwbG9hZC1lbW9qaS5qcyc7XG5cbiAgY29uc3QgU0VUX0lDT05fVVJMID0gc2FmYXJpLmV4dGVuc2lvbi5iYXNlVVJJICsgJ2ljb25fMTI4XzEyOC5wbmcnO1xuXG4gIGxldCB1cGxvYWRzID0gW107XG4gIGxldCB1cGxvYWRzU3RhdHVzQnlJZCA9IHt9O1xuXG4gIGxldCBwcmVmaXggPSAnJ1xuICBsZXQgc3VmZml4ID0gJydcblxuICBsZXQgc2VhcmNoU3RyID0gJydcbiAgbGV0IHJlcGxhY2VTdHIgPSAnJ1xuXG4gIGxldCBzaG93T3B0cyA9IGZhbHNlXG5cbiAgZnVuY3Rpb24gdG9nZ2xlT3B0cygpIHtcbiAgICBzaG93T3B0cyA9ICFzaG93T3B0c1xuICB9XG5cbiAgZnVuY3Rpb24gdXBsb2FkRmlsZXMgKGZpbGVzLCBpZHgpIHtcbiAgICBjb25zdCB1cGxvYWRGbnMgPSBmaWxlcy5tYXAoZmlsZSA9PiB7XG4gICAgICBjb25zdCBvYmogPSB1cGxvYWRFbW9qaShmaWxlLCB7cHJlZml4LCBzdWZmaXh9KVxuXG4gICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgIFtvYmouaWRdOiB7XG4gICAgICAgICAgdHlwZTogJ3VwbG9hZGluZycsXG4gICAgICAgICAgbWVzc2FnZTogJ1VwbG9hZGluZy4uLidcbiAgICAgICAgfVxuICAgICAgfTtcblxuICAgICAgdXBsb2FkcyA9IFsuLi51cGxvYWRzLCB7XG4gICAgICAgIGZpbGUsXG4gICAgICAgIGlkOiBvYmouaWRcbiAgICAgIH1dO1xuXG4gICAgICByZXR1cm4gb2JqLnVwbG9hZFxuICAgIH0pO1xuXG4gICAgcHJvY2Vzc1VwbG9hZHModXBsb2FkRm5zLnJldmVyc2UoKSlcbiAgfVxuXG4gIGZ1bmN0aW9uIHByb2Nlc3NVcGxvYWRzKHVwbG9hZHMpIHtcbiAgICBpZiAoIXVwbG9hZHMgfHwgdXBsb2Fkcy5sZW5ndGggPT0gMCkgcmV0dXJuXG5cbiAgICBjb25zdCBuZXh0VXBsb2FkID0gdXBsb2Fkcy5wb3AoKVxuICAgIC8vIGNvbnN0IG5leHRUaWNrID0gRGF0ZS5ub3coKSArIDEwMDBcblxuICAgIG5leHRVcGxvYWQoKGlkLCBlcnJvcikgPT4ge1xuICAgICAgICBpZiAoZXJyb3IpIHtcbiAgICAgICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgICAgIC4uLnVwbG9hZHNTdGF0dXNCeUlkLFxuICAgICAgICAgICAgW2lkXToge1xuICAgICAgICAgICAgICB0eXBlOiAnZXJyb3InLFxuICAgICAgICAgICAgICBtZXNzYWdlOiBlcnJvci5tZXNzYWdlIHx8IGVycm9yXG4gICAgICAgICAgICB9XG4gICAgICAgICAgfTtcbiAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgICAgIC4uLnVwbG9hZHNTdGF0dXNCeUlkLFxuICAgICAgICAgICAgW2lkXToge1xuICAgICAgICAgICAgICB0eXBlOiAnc3VjY2VzcycsXG4gICAgICAgICAgICAgIG1lc3NhZ2U6ICdTdWNjZXNzZnVsbHkgVXBsb2FkZWQuJ1xuICAgICAgICAgICAgfVxuICAgICAgICAgIH07XG4gICAgICAgIH1cblxuICAgICAgICAvLyBsZXQgc2xlZXBGb3IgPSBuZXh0VGljayAtIERhdGUubm93KClcbiAgICAgICAgLy8gaWYgKHNsZWVwRm9yIDwgMCkgc2xlZXBGb3IgPSAwXG5cbiAgICAgICAgLy8gc2V0VGltZW91dCgoKSA9PiBwcm9jZXNzVXBsb2Fkcyh1cGxvYWRzKSwgc2xlZXBGb3IpXG4gICAgICAgIHByb2Nlc3NVcGxvYWRzKHVwbG9hZHMpXG4gICAgICB9KTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGhhbmRsZUZpbGVzQWRkZWQgKGV2ZW50KSB7XG4gICAgY29uc3QgZmlsZXMgPSBldmVudC5kZXRhaWw7XG5cbiAgICB1cGxvYWRGaWxlcyhmaWxlcyk7XG4gIH1cbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5uZXV0cmFsLWZhY2UtZW1vamktdG9vbHMge1xuICAgIGJvcmRlcjogdmFyKC0tY29sb3Itc2xhY2stYm9yZGVyKSAxcHggc29saWQ7XG4gICAgYm9yZGVyLWxlZnQ6IHZhcigtLWNvbG9yLW5ldXRyYWwtZmFjZS1lbW9qaS10b29scykgM3B4IHNvbGlkO1xuICAgIG1hcmdpbjogMCAwIDI1cHggMDtcbiAgICBwYWRkaW5nOiAyNXB4O1xuICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICB9XG5cbiAgLmljb24uaGVhZGluZyB7XG4gICAgbWFyZ2luOiAwIDVweCAwIDA7XG4gICAgaGVpZ2h0OiAxLjI1ZW07XG4gICAgdmVydGljYWwtYWxpZ246IC0yNSU7XG4gIH1cblxuICAuaW5wdXQtbm90ZSB7XG4gICAgZm9udC1zaXplOiAuOXJlbTtcbiAgICBsaW5lLWhlaWdodDogMS4yNXJlbTtcbiAgICBjb2xvcjogdmFyKC0tY29sb3ItdGV4dC1ncmF5KTtcbiAgfVxuXG4gIC51cGxvYWRzIHtcbiAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gICAgbWFyZ2luOiAwO1xuICAgIGZvbnQtc2l6ZTogMC45cmVtO1xuICB9XG5cbiAgLmN1c3RvbWl6YXRpb25zIHtcbiAgICBkaXNwbGF5OiBmbGV4XG4gIH1cblxuICAudG9nZ2xlLW9wdHMge1xuICAgIG1hcmdpbi1ib3R0b206IDFyZW07XG4gIH1cblxuICAubmV1dHJhbC1mYWNlLWVtb2ppLXRvb2xzIC5tb25ve1xuICAgIGZvbnQtZmFtaWx5OiAnQ291cmllciBOZXcnLCBDb3VyaWVyLCBtb25vc3BhY2VcbiAgfVxuPC9zdHlsZT5cblxuPGRpdiBjbGFzcz1cIm5ldXRyYWwtZmFjZS1lbW9qaS10b29sc1wiPlxuICA8aDQgY2xhc3M9XCJoZWFkaW5nXCI+XG4gICAgPGltZyBjbGFzcz1cImljb24gaGVhZGluZ1wiIHNyYz1cIntTRVRfSUNPTl9VUkx9XCIgYWx0PVwiXCIgLz5cbiAgICA8c3BhbiBjbGFzcz1cInRleHRcIj5CdWxrIEVtb2ppIFVwbG9hZGVyPC9zcGFuPlxuICA8L2g0PlxuICA8cCBjbGFzcz1cInN1YmhlYWRpbmdcIj5EcmFnIGFuZCBkcm9wIGltYWdlcyBpbnRvIHRoZSBhcmVhIGJlbG93LiBJbWFnZXMgd2lsbCBiZSB1cGxvYWRlZCB1c2luZyB0aGVpciBmaWxlbmFtZSBhcyB0aGUgZW1vamkgbmFtZS48L3A+XG4gIDxwIGNsYXNzPVwiaW5wdXQtbm90ZVwiPkV4YW1wbGU6IDxzcGFuIGNsYXNzPVwibm9ybWFsXCI+XCJtZW93LXBhcnR5LmdpZlwiIHdpbGwgYmUgYWRkZWQgYXMgPHNwYW4gY2xhc3M9XCJtb25vXCI+PHN0cm9uZz46e3ByZWZpeH1tZW93LXBhcnR5e3N1ZmZpeH06PC9zdHJvbmc+PC9zcGFuPjwvc3Bhbj48L3A+XG4gIDxidXR0b24gY2xhc3M9XCJjLWJ1dHRvbiBjLWJ1dHRvbi0tb3V0bGluZSBjLWJ1dHRvbi0tbWVkaXVtIHRvZ2dsZS1vcHRzXCIgdHlwZT1cImJ1dHRvblwiIG5hbWU9XCJvcHRpb25zXCIgb246Y2xpY2s9e3RvZ2dsZU9wdHN9PuKame+4jyB7IHNob3dPcHRzID8gXCJIaWRlXCIgOiBcIlNob3dcIn0gb3B0aW9uczwvYnV0dG9uPlxuICA8cCBjbGFzcz1cImN1c3RvbWl6YXRpb25zXCIgc3R5bGU9XCJkaXNwbGF5OntzaG93T3B0cyA/IFwiZmxleFwiIDogXCJub25lXCJ9XCI+XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3ByZWZpeH0gdHlwZT1cInRleHRcIiBuYW1lPVwicHJlZml4XCIgcGxhY2Vob2xkZXI9XCJvcHRpb25hbCBwcmVmaXhcIj5cbiAgICAmbmJzcDtcbiAgICA8aW5wdXQgYmluZDp2YWx1ZT17c3VmZml4fSB0eXBlPVwidGV4dFwiIG5hbWU9XCJzdWZmaXhcIiBwbGFjZWhvbGRlcj1cIm9wdGlvbmFsIHN1ZmZpeFwiPlxuICA8L3A+XG4gIDwhLS0gPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7c2hvd09wdHMgPyBcImZsZXhcIiA6IFwibm9uZVwifVwiPlxuICAgIDxpbnB1dCBiaW5kOnZhbHVlPXtzZWFyY2hTdHJ9IHR5cGU9XCJ0ZXh0XCIgbmFtZT1cInNlYXJjaFN0clwiIHBsYWNlaG9sZGVyPVwicmVwbGFjZSB0aGVzZSBjaGFyYWN0ZXJzLi4uXCI+XG4gICAgJm5ic3A7XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3JlcGxhY2VTdHJ9IHR5cGU9XCJ0ZXh0XCIgbmFtZT1cInJlcGxhY2VTdHJcIiBwbGFjZWhvbGRlcj1cIi4uLndpdGggdGhlc2VcIj5cbiAgPC9wPiAtLT5cbiAgPEZpbGVEcm9wem9uZSBvbjpmaWxlc2FkZGVkPXtoYW5kbGVGaWxlc0FkZGVkfSAvPlxuICA8dWwgY2xhc3M9XCJ1cGxvYWRzXCI+XG4gICAgeyNlYWNoIHVwbG9hZHMgYXMgdXBsb2FkICh1cGxvYWQuaWQpfVxuICAgICAgPFVwbG9hZCB1cGxvYWQ9e3VwbG9hZH0gc3RhdHVzPXt1cGxvYWRzU3RhdHVzQnlJZFt1cGxvYWQuaWRdfSBwcmVmaXg9e3ByZWZpeH0gc3VmZml4PXtzdWZmaXh9IHNlYXJjaFN0cj17c2VhcmNoU3RyfSByZXBsYWNlU3RyPXtyZXBsYWNlU3RyfSAvPlxuICAgIHsvZWFjaH1cbiAgPC91bD5cbjwvZGl2PlxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQXVGRSx5QkFBeUIsNEJBQUMsQ0FBQyxBQUN6QixNQUFNLENBQUUsSUFBSSxvQkFBb0IsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQzNDLFdBQVcsQ0FBRSxJQUFJLGdDQUFnQyxDQUFDLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FDNUQsTUFBTSxDQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FDbEIsT0FBTyxDQUFFLElBQUksQ0FDYixVQUFVLENBQUUsS0FBSyxBQUNuQixDQUFDLEFBRUQsS0FBSyxRQUFRLDRCQUFDLENBQUMsQUFDYixNQUFNLENBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUNqQixNQUFNLENBQUUsTUFBTSxDQUNkLGNBQWMsQ0FBRSxJQUFJLEFBQ3RCLENBQUMsQUFFRCxXQUFXLDRCQUFDLENBQUMsQUFDWCxTQUFTLENBQUUsS0FBSyxDQUNoQixXQUFXLENBQUUsT0FBTyxDQUNwQixLQUFLLENBQUUsSUFBSSxpQkFBaUIsQ0FBQyxBQUMvQixDQUFDLEFBRUQsUUFBUSw0QkFBQyxDQUFDLEFBQ1IsZUFBZSxDQUFFLElBQUksQ0FDckIsTUFBTSxDQUFFLENBQUMsQ0FDVCxTQUFTLENBQUUsTUFBTSxBQUNuQixDQUFDLEFBRUQsZUFBZSw0QkFBQyxDQUFDLEFBQ2YsT0FBTyxDQUFFLElBQUk7RUFDZixDQUFDLEFBRUQsWUFBWSw0QkFBQyxDQUFDLEFBQ1osYUFBYSxDQUFFLElBQUksQUFDckIsQ0FBQyxBQUVELHVDQUF5QixDQUFDLG1CQUFLLENBQUMsQUFDOUIsV0FBVyxDQUFFLGFBQWEsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVM7RUFDaEQsQ0FBQyJ9 */";
+    	style.textContent = ".neutral-face-emoji-tools.svelte-21xepa.svelte-21xepa{border:var(--color-slack-border) 1px solid;border-left:var(--color-neutral-face-emoji-tools) 3px solid;margin:0 0 25px 0;padding:25px;background:white}.icon.heading.svelte-21xepa.svelte-21xepa{margin:0 5px 0 0;height:1.25em;vertical-align:-25%}.input-note.svelte-21xepa.svelte-21xepa{font-size:.9rem;line-height:1.25rem;color:var(--color-text-gray)}.uploads.svelte-21xepa.svelte-21xepa{list-style-type:none;margin:0;font-size:0.9rem}.customizations.svelte-21xepa.svelte-21xepa{display:flex\n  }.toggle-opts.svelte-21xepa.svelte-21xepa{margin-bottom:1rem}.neutral-face-emoji-tools.svelte-21xepa .mono.svelte-21xepa{font-family:'Courier New', Courier, monospace\n  }\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiYXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBpbXBvcnQgVXBsb2FkIGZyb20gJy4vdXBsb2FkLnN2ZWx0ZSc7XG4gIGltcG9ydCBGaWxlRHJvcHpvbmUgZnJvbSAnLi9maWxlLWRyb3B6b25lLnN2ZWx0ZSc7XG5cbiAgaW1wb3J0IHVwbG9hZEVtb2ppIGZyb20gJy4uL3VwbG9hZC1lbW9qaS5qcyc7XG5cbiAgY29uc3QgU0VUX0lDT05fVVJMID0gc2FmYXJpLmV4dGVuc2lvbi5iYXNlVVJJICsgJ2ljb25fMTI4XzEyOC5wbmcnO1xuXG4gIGxldCB1cGxvYWRzID0gW107XG4gIGxldCB1cGxvYWRzU3RhdHVzQnlJZCA9IHt9O1xuXG4gIGxldCBwcmVmaXggPSAnJ1xuICBsZXQgc3VmZml4ID0gJydcblxuICBsZXQgc2VhcmNoU3RyID0gJydcbiAgbGV0IHJlcGxhY2VTdHIgPSAnJ1xuXG4gIGxldCBzaG93T3B0cyA9IGZhbHNlXG4gIGxldCBhbGxvd092ZXJ3cml0ZSA9IGZhbHNlXG5cbiAgZnVuY3Rpb24gdG9nZ2xlT3B0cygpIHtcbiAgICBzaG93T3B0cyA9ICFzaG93T3B0c1xuICB9XG5cbiAgZnVuY3Rpb24gdXBsb2FkRmlsZXMgKGZpbGVzLCBpZHgpIHtcbiAgICBjb25zdCB1cGxvYWRGbnMgPSBmaWxlcy5tYXAoZmlsZSA9PiB7XG4gICAgICBjb25zdCBvYmogPSB1cGxvYWRFbW9qaShmaWxlLCB7cHJlZml4LCBzdWZmaXgsIGFsbG93T3ZlcndyaXRlfSlcblxuICAgICAgdXBsb2Fkc1N0YXR1c0J5SWQgPSB7XG4gICAgICAgIC4uLnVwbG9hZHNTdGF0dXNCeUlkLFxuICAgICAgICBbb2JqLmlkXToge1xuICAgICAgICAgIHR5cGU6ICd1cGxvYWRpbmcnLFxuICAgICAgICAgIG1lc3NhZ2U6ICdVcGxvYWRpbmcuLi4nXG4gICAgICAgIH1cbiAgICAgIH07XG5cbiAgICAgIHVwbG9hZHMgPSBbLi4udXBsb2Fkcywge1xuICAgICAgICBmaWxlLFxuICAgICAgICBpZDogb2JqLmlkXG4gICAgICB9XTtcblxuICAgICAgcmV0dXJuIG9iai51cGxvYWRcbiAgICB9KTtcblxuICAgIHByb2Nlc3NVcGxvYWRzKHVwbG9hZEZucy5yZXZlcnNlKCkpXG4gIH1cblxuICBmdW5jdGlvbiBwcm9jZXNzVXBsb2Fkcyh1cGxvYWRzKSB7XG4gICAgaWYgKCF1cGxvYWRzIHx8IHVwbG9hZHMubGVuZ3RoID09IDApIHJldHVyblxuXG4gICAgY29uc3QgbmV4dFVwbG9hZCA9IHVwbG9hZHMucG9wKClcbiAgICAvLyBjb25zdCBuZXh0VGljayA9IERhdGUubm93KCkgKyAxMDAwXG5cbiAgICBuZXh0VXBsb2FkKChpZCwgZXJyb3IpID0+IHtcbiAgICAgICAgaWYgKGVycm9yKSB7XG4gICAgICAgICAgdXBsb2Fkc1N0YXR1c0J5SWQgPSB7XG4gICAgICAgICAgICAuLi51cGxvYWRzU3RhdHVzQnlJZCxcbiAgICAgICAgICAgIFtpZF06IHtcbiAgICAgICAgICAgICAgdHlwZTogJ2Vycm9yJyxcbiAgICAgICAgICAgICAgbWVzc2FnZTogZXJyb3IubWVzc2FnZSB8fCBlcnJvclxuICAgICAgICAgICAgfVxuICAgICAgICAgIH07XG4gICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgdXBsb2Fkc1N0YXR1c0J5SWQgPSB7XG4gICAgICAgICAgICAuLi51cGxvYWRzU3RhdHVzQnlJZCxcbiAgICAgICAgICAgIFtpZF06IHtcbiAgICAgICAgICAgICAgdHlwZTogJ3N1Y2Nlc3MnLFxuICAgICAgICAgICAgICBtZXNzYWdlOiAnU3VjY2Vzc2Z1bGx5IFVwbG9hZGVkLidcbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9O1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gbGV0IHNsZWVwRm9yID0gbmV4dFRpY2sgLSBEYXRlLm5vdygpXG4gICAgICAgIC8vIGlmIChzbGVlcEZvciA8IDApIHNsZWVwRm9yID0gMFxuXG4gICAgICAgIC8vIHNldFRpbWVvdXQoKCkgPT4gcHJvY2Vzc1VwbG9hZHModXBsb2FkcyksIHNsZWVwRm9yKVxuICAgICAgICBwcm9jZXNzVXBsb2Fkcyh1cGxvYWRzKVxuICAgICAgfSk7XG4gIH1cblxuICBmdW5jdGlvbiBoYW5kbGVGaWxlc0FkZGVkIChldmVudCkge1xuICAgIGNvbnN0IGZpbGVzID0gZXZlbnQuZGV0YWlsO1xuXG4gICAgdXBsb2FkRmlsZXMoZmlsZXMpO1xuICB9XG48L3NjcmlwdD5cblxuPHN0eWxlPlxuICAubmV1dHJhbC1mYWNlLWVtb2ppLXRvb2xzIHtcbiAgICBib3JkZXI6IHZhcigtLWNvbG9yLXNsYWNrLWJvcmRlcikgMXB4IHNvbGlkO1xuICAgIGJvcmRlci1sZWZ0OiB2YXIoLS1jb2xvci1uZXV0cmFsLWZhY2UtZW1vamktdG9vbHMpIDNweCBzb2xpZDtcbiAgICBtYXJnaW46IDAgMCAyNXB4IDA7XG4gICAgcGFkZGluZzogMjVweDtcbiAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgfVxuXG4gIC5pY29uLmhlYWRpbmcge1xuICAgIG1hcmdpbjogMCA1cHggMCAwO1xuICAgIGhlaWdodDogMS4yNWVtO1xuICAgIHZlcnRpY2FsLWFsaWduOiAtMjUlO1xuICB9XG5cbiAgLmlucHV0LW5vdGUge1xuICAgIGZvbnQtc2l6ZTogLjlyZW07XG4gICAgbGluZS1oZWlnaHQ6IDEuMjVyZW07XG4gICAgY29sb3I6IHZhcigtLWNvbG9yLXRleHQtZ3JheSk7XG4gIH1cblxuICAudXBsb2FkcyB7XG4gICAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xuICAgIG1hcmdpbjogMDtcbiAgICBmb250LXNpemU6IDAuOXJlbTtcbiAgfVxuXG4gIC5jdXN0b21pemF0aW9ucyB7XG4gICAgZGlzcGxheTogZmxleFxuICB9XG5cbiAgLnRvZ2dsZS1vcHRzIHtcbiAgICBtYXJnaW4tYm90dG9tOiAxcmVtO1xuICB9XG5cbiAgLm5ldXRyYWwtZmFjZS1lbW9qaS10b29scyAubW9ub3tcbiAgICBmb250LWZhbWlseTogJ0NvdXJpZXIgTmV3JywgQ291cmllciwgbW9ub3NwYWNlXG4gIH1cbjwvc3R5bGU+XG5cbjxkaXYgY2xhc3M9XCJuZXV0cmFsLWZhY2UtZW1vamktdG9vbHNcIj5cbiAgPGg0IGNsYXNzPVwiaGVhZGluZ1wiPlxuICAgIDxpbWcgY2xhc3M9XCJpY29uIGhlYWRpbmdcIiBzcmM9XCJ7U0VUX0lDT05fVVJMfVwiIGFsdD1cIlwiIC8+XG4gICAgPHNwYW4gY2xhc3M9XCJ0ZXh0XCI+QnVsayBFbW9qaSBVcGxvYWRlcjwvc3Bhbj5cbiAgPC9oND5cbiAgPHAgY2xhc3M9XCJzdWJoZWFkaW5nXCI+RHJhZyBhbmQgZHJvcCBpbWFnZXMgaW50byB0aGUgYXJlYSBiZWxvdy4gSW1hZ2VzIHdpbGwgYmUgdXBsb2FkZWQgdXNpbmcgdGhlaXIgZmlsZW5hbWUgYXMgdGhlIGVtb2ppIG5hbWUuPC9wPlxuICA8cCBjbGFzcz1cImlucHV0LW5vdGVcIj5FeGFtcGxlOiA8c3BhbiBjbGFzcz1cIm5vcm1hbFwiPlwibWVvdy1wYXJ0eS5naWZcIiB3aWxsIGJlIGFkZGVkIGFzIDxzcGFuIGNsYXNzPVwibW9ub1wiPjxzdHJvbmc+OntwcmVmaXh9bWVvdy1wYXJ0eXtzdWZmaXh9Ojwvc3Ryb25nPjwvc3Bhbj48L3NwYW4+PC9wPlxuICA8YnV0dG9uIGNsYXNzPVwiYy1idXR0b24gYy1idXR0b24tLW91dGxpbmUgYy1idXR0b24tLW1lZGl1bSB0b2dnbGUtb3B0c1wiIHR5cGU9XCJidXR0b25cIiBuYW1lPVwib3B0aW9uc1wiIG9uOmNsaWNrPXt0b2dnbGVPcHRzfT7impnvuI8geyBzaG93T3B0cyA/IFwiSGlkZVwiIDogXCJTaG93XCJ9IG9wdGlvbnM8L2J1dHRvbj5cbiAgPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7c2hvd09wdHMgPyBcImZsZXhcIiA6IFwibm9uZVwifVwiPlxuICAgIDxsYWJlbD5cbiAgICAgIDxpbnB1dCB0eXBlPWNoZWNrYm94IGJpbmQ6Y2hlY2tlZD17YWxsb3dPdmVyd3JpdGV9PlxuICAgICAgQWxsb3cgb3ZlcndyaXRpbmcgZXhpc3RpbmcgZW1vamkgKGRvZXMgbm90IGFwcGx5IHRvIHN0YW5kYXJkIGVtb2ppKVxuICAgIDwvbGFiZWw+XG4gIDwvcD5cbiAgPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7c2hvd09wdHMgPyBcImZsZXhcIiA6IFwibm9uZVwifVwiPlxuICAgIDxpbnB1dCBiaW5kOnZhbHVlPXtwcmVmaXh9IHR5cGU9XCJ0ZXh0XCIgbmFtZT1cInByZWZpeFwiIHBsYWNlaG9sZGVyPVwib3B0aW9uYWwgcHJlZml4XCI+XG4gICAgJm5ic3A7XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3N1ZmZpeH0gdHlwZT1cInRleHRcIiBuYW1lPVwic3VmZml4XCIgcGxhY2Vob2xkZXI9XCJvcHRpb25hbCBzdWZmaXhcIj5cbiAgPC9wPlxuICA8IS0tIDxwIGNsYXNzPVwiY3VzdG9taXphdGlvbnNcIiBzdHlsZT1cImRpc3BsYXk6e3Nob3dPcHRzID8gXCJmbGV4XCIgOiBcIm5vbmVcIn1cIj5cbiAgICA8aW5wdXQgYmluZDp2YWx1ZT17c2VhcmNoU3RyfSB0eXBlPVwidGV4dFwiIG5hbWU9XCJzZWFyY2hTdHJcIiBwbGFjZWhvbGRlcj1cInJlcGxhY2UgdGhlc2UgY2hhcmFjdGVycy4uLlwiPlxuICAgICZuYnNwO1xuICAgIDxpbnB1dCBiaW5kOnZhbHVlPXtyZXBsYWNlU3RyfSB0eXBlPVwidGV4dFwiIG5hbWU9XCJyZXBsYWNlU3RyXCIgcGxhY2Vob2xkZXI9XCIuLi53aXRoIHRoZXNlXCI+XG4gIDwvcD4gLS0+XG4gIDxGaWxlRHJvcHpvbmUgb246ZmlsZXNhZGRlZD17aGFuZGxlRmlsZXNBZGRlZH0gLz5cbiAgPHVsIGNsYXNzPVwidXBsb2Fkc1wiPlxuICAgIHsjZWFjaCB1cGxvYWRzIGFzIHVwbG9hZCAodXBsb2FkLmlkKX1cbiAgICAgIDxVcGxvYWQgdXBsb2FkPXt1cGxvYWR9IHN0YXR1cz17dXBsb2Fkc1N0YXR1c0J5SWRbdXBsb2FkLmlkXX0gcHJlZml4PXtwcmVmaXh9IHN1ZmZpeD17c3VmZml4fSBzZWFyY2hTdHI9e3NlYXJjaFN0cn0gcmVwbGFjZVN0cj17cmVwbGFjZVN0cn0gLz5cbiAgICB7L2VhY2h9XG4gIDwvdWw+XG48L2Rpdj5cbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUF3RkUseUJBQXlCLDRCQUFDLENBQUMsQUFDekIsTUFBTSxDQUFFLElBQUksb0JBQW9CLENBQUMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUMzQyxXQUFXLENBQUUsSUFBSSxnQ0FBZ0MsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQzVELE1BQU0sQ0FBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQ2xCLE9BQU8sQ0FBRSxJQUFJLENBQ2IsVUFBVSxDQUFFLEtBQUssQUFDbkIsQ0FBQyxBQUVELEtBQUssUUFBUSw0QkFBQyxDQUFDLEFBQ2IsTUFBTSxDQUFFLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FDakIsTUFBTSxDQUFFLE1BQU0sQ0FDZCxjQUFjLENBQUUsSUFBSSxBQUN0QixDQUFDLEFBRUQsV0FBVyw0QkFBQyxDQUFDLEFBQ1gsU0FBUyxDQUFFLEtBQUssQ0FDaEIsV0FBVyxDQUFFLE9BQU8sQ0FDcEIsS0FBSyxDQUFFLElBQUksaUJBQWlCLENBQUMsQUFDL0IsQ0FBQyxBQUVELFFBQVEsNEJBQUMsQ0FBQyxBQUNSLGVBQWUsQ0FBRSxJQUFJLENBQ3JCLE1BQU0sQ0FBRSxDQUFDLENBQ1QsU0FBUyxDQUFFLE1BQU0sQUFDbkIsQ0FBQyxBQUVELGVBQWUsNEJBQUMsQ0FBQyxBQUNmLE9BQU8sQ0FBRSxJQUFJO0VBQ2YsQ0FBQyxBQUVELFlBQVksNEJBQUMsQ0FBQyxBQUNaLGFBQWEsQ0FBRSxJQUFJLEFBQ3JCLENBQUMsQUFFRCx1Q0FBeUIsQ0FBQyxtQkFBSyxDQUFDLEFBQzlCLFdBQVcsQ0FBRSxhQUFhLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTO0VBQ2hELENBQUMifQ== */";
     	append_dev(document.head, style);
     }
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[14] = list[i];
+    	child_ctx[16] = list[i];
     	return child_ctx;
     }
 
-    // (147:4) {#each uploads as upload (upload.id)}
+    // (154:4) {#each uploads as upload (upload.id)}
     function create_each_block(key_1, ctx) {
     	let first;
     	let current;
 
     	const upload = new Upload({
     			props: {
-    				upload: /*upload*/ ctx[14],
-    				status: /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[14].id],
+    				upload: /*upload*/ ctx[16],
+    				status: /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[16].id],
     				prefix: /*prefix*/ ctx[2],
     				suffix: /*suffix*/ ctx[3],
-    				searchStr: /*searchStr*/ ctx[6],
-    				replaceStr: /*replaceStr*/ ctx[7]
+    				searchStr: /*searchStr*/ ctx[7],
+    				replaceStr: /*replaceStr*/ ctx[8]
     			},
     			$$inline: true
     		});
@@ -13083,8 +13088,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		},
     		p: function update(ctx, dirty) {
     			const upload_changes = {};
-    			if (dirty & /*uploads*/ 1) upload_changes.upload = /*upload*/ ctx[14];
-    			if (dirty & /*uploadsStatusById, uploads*/ 3) upload_changes.status = /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[14].id];
+    			if (dirty & /*uploads*/ 1) upload_changes.upload = /*upload*/ ctx[16];
+    			if (dirty & /*uploadsStatusById, uploads*/ 3) upload_changes.status = /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[16].id];
     			if (dirty & /*prefix*/ 4) upload_changes.prefix = /*prefix*/ ctx[2];
     			if (dirty & /*suffix*/ 8) upload_changes.suffix = /*suffix*/ ctx[3];
     			upload.$set(upload_changes);
@@ -13108,7 +13113,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(147:4) {#each uploads as upload (upload.id)}",
+    		source: "(154:4) {#each uploads as upload (upload.id)}",
     		ctx
     	});
 
@@ -13144,21 +13149,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	let t15;
     	let t16;
     	let p2;
+    	let label;
     	let input0;
     	let t17;
-    	let input1;
     	let t18;
+    	let p3;
+    	let input1;
     	let t19;
+    	let input2;
+    	let t20;
+    	let t21;
     	let ul;
     	let each_blocks = [];
     	let each_1_lookup = new Map();
     	let current;
     	let dispose;
     	const filedropzone = new File_dropzone({ $$inline: true });
-    	filedropzone.$on("filesadded", /*handleFilesAdded*/ ctx[9]);
+    	filedropzone.$on("filesadded", /*handleFilesAdded*/ ctx[10]);
     	let each_value = /*uploads*/ ctx[0];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*upload*/ ctx[14].id;
+    	const get_key = ctx => /*upload*/ ctx[16].id;
     	validate_each_keys(ctx, each_value, get_each_context, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -13197,12 +13207,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			t15 = text(" options");
     			t16 = space();
     			p2 = element("p");
+    			label = element("label");
     			input0 = element("input");
-    			t17 = text("\n     \n    ");
-    			input1 = element("input");
+    			t17 = text("\n      Allow overwriting existing emoji (does not apply to standard emoji)");
     			t18 = space();
+    			p3 = element("p");
+    			input1 = element("input");
+    			t19 = text("\n     \n    ");
+    			input2 = element("input");
+    			t20 = space();
     			create_component(filedropzone.$$.fragment);
-    			t19 = space();
+    			t21 = space();
     			ul = element("ul");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -13210,41 +13225,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			}
 
     			attr_dev(img, "class", "icon heading svelte-21xepa");
-    			if (img.src !== (img_src_value = /*SET_ICON_URL*/ ctx[5])) attr_dev(img, "src", img_src_value);
+    			if (img.src !== (img_src_value = /*SET_ICON_URL*/ ctx[6])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 128, 4, 2581);
+    			add_location(img, file$2, 129, 4, 2626);
     			attr_dev(span0, "class", "text");
-    			add_location(span0, file$2, 129, 4, 2642);
+    			add_location(span0, file$2, 130, 4, 2687);
     			attr_dev(h4, "class", "heading");
-    			add_location(h4, file$2, 127, 2, 2556);
+    			add_location(h4, file$2, 128, 2, 2601);
     			attr_dev(p0, "class", "subheading");
-    			add_location(p0, file$2, 131, 2, 2698);
-    			add_location(strong, file$2, 132, 107, 2937);
+    			add_location(p0, file$2, 132, 2, 2743);
+    			add_location(strong, file$2, 133, 107, 2982);
     			attr_dev(span1, "class", "mono svelte-21xepa");
-    			add_location(span1, file$2, 132, 88, 2918);
+    			add_location(span1, file$2, 133, 88, 2963);
     			attr_dev(span2, "class", "normal");
-    			add_location(span2, file$2, 132, 33, 2863);
+    			add_location(span2, file$2, 133, 33, 2908);
     			attr_dev(p1, "class", "input-note svelte-21xepa");
-    			add_location(p1, file$2, 132, 2, 2832);
+    			add_location(p1, file$2, 133, 2, 2877);
     			attr_dev(button, "class", "c-button c-button--outline c-button--medium toggle-opts svelte-21xepa");
     			attr_dev(button, "type", "button");
     			attr_dev(button, "name", "options");
-    			add_location(button, file$2, 133, 2, 3003);
-    			attr_dev(input0, "type", "text");
-    			attr_dev(input0, "name", "prefix");
-    			attr_dev(input0, "placeholder", "optional prefix");
-    			add_location(input0, file$2, 135, 4, 3254);
-    			attr_dev(input1, "type", "text");
-    			attr_dev(input1, "name", "suffix");
-    			attr_dev(input1, "placeholder", "optional suffix");
-    			add_location(input1, file$2, 137, 4, 3353);
+    			add_location(button, file$2, 134, 2, 3048);
+    			attr_dev(input0, "type", "checkbox");
+    			add_location(input0, file$2, 137, 6, 3313);
+    			add_location(label, file$2, 136, 4, 3299);
     			attr_dev(p2, "class", "customizations svelte-21xepa");
     			set_style(p2, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
-    			add_location(p2, file$2, 134, 2, 3178);
+    			add_location(p2, file$2, 135, 2, 3223);
+    			attr_dev(input1, "type", "text");
+    			attr_dev(input1, "name", "prefix");
+    			attr_dev(input1, "placeholder", "optional prefix");
+    			add_location(input1, file$2, 142, 4, 3537);
+    			attr_dev(input2, "type", "text");
+    			attr_dev(input2, "name", "suffix");
+    			attr_dev(input2, "placeholder", "optional suffix");
+    			add_location(input2, file$2, 144, 4, 3636);
+    			attr_dev(p3, "class", "customizations svelte-21xepa");
+    			set_style(p3, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
+    			add_location(p3, file$2, 141, 2, 3461);
     			attr_dev(ul, "class", "uploads svelte-21xepa");
-    			add_location(ul, file$2, 145, 2, 3799);
+    			add_location(ul, file$2, 152, 2, 4082);
     			attr_dev(div, "class", "neutral-face-emoji-tools svelte-21xepa");
-    			add_location(div, file$2, 126, 0, 2515);
+    			add_location(div, file$2, 127, 0, 2560);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -13276,14 +13297,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			append_dev(button, t15);
     			append_dev(div, t16);
     			append_dev(div, p2);
-    			append_dev(p2, input0);
-    			set_input_value(input0, /*prefix*/ ctx[2]);
-    			append_dev(p2, t17);
-    			append_dev(p2, input1);
-    			set_input_value(input1, /*suffix*/ ctx[3]);
+    			append_dev(p2, label);
+    			append_dev(label, input0);
+    			input0.checked = /*allowOverwrite*/ ctx[5];
+    			append_dev(label, t17);
     			append_dev(div, t18);
+    			append_dev(div, p3);
+    			append_dev(p3, input1);
+    			set_input_value(input1, /*prefix*/ ctx[2]);
+    			append_dev(p3, t19);
+    			append_dev(p3, input2);
+    			set_input_value(input2, /*suffix*/ ctx[3]);
+    			append_dev(div, t20);
     			mount_component(filedropzone, div, null);
-    			append_dev(div, t19);
+    			append_dev(div, t21);
     			append_dev(div, ul);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -13294,9 +13321,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(button, "click", /*toggleOpts*/ ctx[8], false, false, false),
-    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[12]),
-    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[13])
+    				listen_dev(button, "click", /*toggleOpts*/ ctx[9], false, false, false),
+    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[13]),
+    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[14]),
+    				listen_dev(input2, "input", /*input2_input_handler*/ ctx[15])
     			];
     		},
     		p: function update(ctx, [dirty]) {
@@ -13304,19 +13332,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			if (!current || dirty & /*suffix*/ 8) set_data_dev(t10, /*suffix*/ ctx[3]);
     			if ((!current || dirty & /*showOpts*/ 16) && t14_value !== (t14_value = (/*showOpts*/ ctx[4] ? "Hide" : "Show") + "")) set_data_dev(t14, t14_value);
 
-    			if (dirty & /*prefix*/ 4 && input0.value !== /*prefix*/ ctx[2]) {
-    				set_input_value(input0, /*prefix*/ ctx[2]);
-    			}
-
-    			if (dirty & /*suffix*/ 8 && input1.value !== /*suffix*/ ctx[3]) {
-    				set_input_value(input1, /*suffix*/ ctx[3]);
+    			if (dirty & /*allowOverwrite*/ 32) {
+    				input0.checked = /*allowOverwrite*/ ctx[5];
     			}
 
     			if (!current || dirty & /*showOpts*/ 16) {
     				set_style(p2, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
     			}
 
-    			if (dirty & /*uploads, uploadsStatusById, prefix, suffix, searchStr, replaceStr*/ 207) {
+    			if (dirty & /*prefix*/ 4 && input1.value !== /*prefix*/ ctx[2]) {
+    				set_input_value(input1, /*prefix*/ ctx[2]);
+    			}
+
+    			if (dirty & /*suffix*/ 8 && input2.value !== /*suffix*/ ctx[3]) {
+    				set_input_value(input2, /*suffix*/ ctx[3]);
+    			}
+
+    			if (!current || dirty & /*showOpts*/ 16) {
+    				set_style(p3, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
+    			}
+
+    			if (dirty & /*uploads, uploadsStatusById, prefix, suffix, searchStr, replaceStr*/ 399) {
     				const each_value = /*uploads*/ ctx[0];
     				validate_each_argument(each_value);
     				group_outros();
@@ -13376,6 +13412,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	let searchStr = "";
     	let replaceStr = "";
     	let showOpts = false;
+    	let allowOverwrite = false;
 
     	function toggleOpts() {
     		$$invalidate(4, showOpts = !showOpts);
@@ -13383,7 +13420,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     	function uploadFiles(files, idx) {
     		const uploadFns = files.map(file => {
-    			const obj = uploadEmoji(file, { prefix, suffix });
+    			const obj = uploadEmoji(file, { prefix, suffix, allowOverwrite });
 
     			$$invalidate(1, uploadsStatusById = {
     				...uploadsStatusById,
@@ -13445,12 +13482,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("App", $$slots, []);
 
-    	function input0_input_handler() {
+    	function input0_change_handler() {
+    		allowOverwrite = this.checked;
+    		$$invalidate(5, allowOverwrite);
+    	}
+
+    	function input1_input_handler() {
     		prefix = this.value;
     		$$invalidate(2, prefix);
     	}
 
-    	function input1_input_handler() {
+    	function input2_input_handler() {
     		suffix = this.value;
     		$$invalidate(3, suffix);
     	}
@@ -13467,6 +13509,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		searchStr,
     		replaceStr,
     		showOpts,
+    		allowOverwrite,
     		toggleOpts,
     		uploadFiles,
     		processUploads,
@@ -13478,9 +13521,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		if ("uploadsStatusById" in $$props) $$invalidate(1, uploadsStatusById = $$props.uploadsStatusById);
     		if ("prefix" in $$props) $$invalidate(2, prefix = $$props.prefix);
     		if ("suffix" in $$props) $$invalidate(3, suffix = $$props.suffix);
-    		if ("searchStr" in $$props) $$invalidate(6, searchStr = $$props.searchStr);
-    		if ("replaceStr" in $$props) $$invalidate(7, replaceStr = $$props.replaceStr);
+    		if ("searchStr" in $$props) $$invalidate(7, searchStr = $$props.searchStr);
+    		if ("replaceStr" in $$props) $$invalidate(8, replaceStr = $$props.replaceStr);
     		if ("showOpts" in $$props) $$invalidate(4, showOpts = $$props.showOpts);
+    		if ("allowOverwrite" in $$props) $$invalidate(5, allowOverwrite = $$props.allowOverwrite);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -13493,6 +13537,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		prefix,
     		suffix,
     		showOpts,
+    		allowOverwrite,
     		SET_ICON_URL,
     		searchStr,
     		replaceStr,
@@ -13500,8 +13545,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		handleFilesAdded,
     		uploadFiles,
     		processUploads,
-    		input0_input_handler,
-    		input1_input_handler
+    		input0_change_handler,
+    		input1_input_handler,
+    		input2_input_handler
     	];
     }
 
