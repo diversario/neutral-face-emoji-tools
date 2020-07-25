@@ -111,7 +111,7 @@ export default function uploadEmoji (file, opts) {
 
         switch (error) {
           case 'error_name_taken':
-            log.error(`[${name}] ⬆️✋ emoji already exists and overwrite is${opts.allowOverwrite ? '' : ' not'} allowed)
+            log.error(`[${name}] ⬆️✋ emoji already exists and overwrite is${opts.allowOverwrite ? '' : ' not'} allowed`)
 
             if (!opts.allowOverwrite) {
               throw new Error('Emoji already exists')
