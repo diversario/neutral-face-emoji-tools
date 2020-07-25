@@ -414,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Thinking Face Emoji Tools Extension/Thinking_Face_Emoji_Tools_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = N6UYB4CUX6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Thinking Face Emoji Tools Extension/Info.plist";
@@ -438,7 +438,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Thinking Face Emoji Tools Extension/Thinking_Face_Emoji_Tools_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = N6UYB4CUX6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Thinking Face Emoji Tools Extension/Info.plist";
@@ -465,7 +465,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = N6UYB4CUX6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Thinking Face Emoji Tools/Info.plist";
@@ -490,7 +490,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = N6UYB4CUX6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Thinking Face Emoji Tools/Info.plist";
