@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-console.log("💩🥳")
 (function () {
     'use strict';
 
@@ -129,6 +128,16 @@ console.log("💩🥳")
 
     function children(element) {
       return Array.from(element.childNodes);
+    }
+
+    function set_input_value(input, value) {
+      if (value != null || input.value) {
+        input.value = value;
+      }
+    }
+
+    function set_style(node, key, value, important) {
+      node.style.setProperty(key, value, important ? 'important' : '');
     }
 
     function toggle_class(element, name, toggle) {
@@ -636,8 +645,8 @@ console.log("💩🥳")
 
     function add_css() {
     	var style = element("style");
-    	style.id = "svelte-em8etn-style";
-    	style.textContent = ".upload.svelte-em8etn.svelte-em8etn{display:flex;align-items:center;padding:2px 0 1px 0;border-bottom:1px solid var(--color-slack-border)}.upload.svelte-em8etn.svelte-em8etn:last-child{border-bottom:none}.preview.svelte-em8etn.svelte-em8etn{width:1.25rem;height:1.25rem;margin-right:0.5em}.filename.svelte-em8etn.svelte-em8etn{font-weight:bold;margin-right:1em}.status.svelte-em8etn.svelte-em8etn{display:flex;justify-content:center;align-items:center;color:var(--color-slack-info);font-family:Consolas, monospace}.status.svelte-em8etn .icon.svelte-em8etn{display:none;margin-right:0.25em}.status.svelte-em8etn .icon.svelte-em8etn:before{display:block}.upload.uploading.svelte-em8etn .status .icon.uploading.svelte-em8etn{display:block}.upload.error.svelte-em8etn .status .icon.error.svelte-em8etn{display:block}.upload.success.svelte-em8etn .status .icon.success.svelte-em8etn{display:block}.upload.uploading.svelte-em8etn .status.svelte-em8etn{color:var(--color-slack-info)}.upload.error.svelte-em8etn .status.svelte-em8etn{color:var(--color-slack-error)}.upload.success.svelte-em8etn .status.svelte-em8etn{color:var(--color-slack-success)}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBsb2FkLnN2ZWx0ZSIsInNvdXJjZXMiOlsidXBsb2FkLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBleHBvcnQgbGV0IHVwbG9hZDtcbiAgZXhwb3J0IGxldCBzdGF0dXM7XG5cbiAgY29uc3QgZmlsZVByZXZpZXcgPSB3aW5kb3cuVVJMLmNyZWF0ZU9iamVjdFVSTCh1cGxvYWQuZmlsZSk7XG48L3NjcmlwdD5cblxuPHN0eWxlPlxuICAudXBsb2FkIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgcGFkZGluZzogMnB4IDAgMXB4IDA7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHZhcigtLWNvbG9yLXNsYWNrLWJvcmRlcik7XG4gIH1cblxuICAudXBsb2FkOmxhc3QtY2hpbGQge1xuICAgIGJvcmRlci1ib3R0b206IG5vbmU7XG4gIH1cblxuICAucHJldmlldyB7XG4gICAgd2lkdGg6IDEuMjVyZW07XG4gICAgaGVpZ2h0OiAxLjI1cmVtO1xuICAgIG1hcmdpbi1yaWdodDogMC41ZW07XG4gIH1cblxuICAuZmlsZW5hbWUge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIG1hcmdpbi1yaWdodDogMWVtO1xuICB9XG5cbiAgLnN0YXR1cyB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGNvbG9yOiB2YXIoLS1jb2xvci1zbGFjay1pbmZvKTtcbiAgICBmb250LWZhbWlseTogQ29uc29sYXMsIG1vbm9zcGFjZTtcbiAgfVxuXG4gIC5zdGF0dXMgLmljb24ge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gICAgbWFyZ2luLXJpZ2h0OiAwLjI1ZW07XG4gIH1cblxuICAuc3RhdHVzIC5pY29uOmJlZm9yZSB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cblxuICAudXBsb2FkLnVwbG9hZGluZyAuc3RhdHVzIC5pY29uLnVwbG9hZGluZyB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cblxuICAudXBsb2FkLmVycm9yIC5zdGF0dXMgLmljb24uZXJyb3Ige1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICB9XG5cbiAgLnVwbG9hZC5zdWNjZXNzIC5zdGF0dXMgLmljb24uc3VjY2VzcyB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cblxuICAudXBsb2FkLnVwbG9hZGluZyAuc3RhdHVzIHtcbiAgICBjb2xvcjogdmFyKC0tY29sb3Itc2xhY2staW5mbyk7XG4gIH1cblxuICAudXBsb2FkLmVycm9yIC5zdGF0dXMge1xuICAgIGNvbG9yOiB2YXIoLS1jb2xvci1zbGFjay1lcnJvcik7XG4gIH1cblxuICAudXBsb2FkLnN1Y2Nlc3MgLnN0YXR1cyB7XG4gICAgY29sb3I6IHZhcigtLWNvbG9yLXNsYWNrLXN1Y2Nlc3MpO1xuICB9XG48L3N0eWxlPlxuXG48bGlcbiAgY2xhc3M9XCJ1cGxvYWRcIlxuICBjbGFzczp1cGxvYWRpbmc9e3N0YXR1cy50eXBlID09PSAndXBsb2FkaW5nJ31cbiAgY2xhc3M6ZXJyb3I9e3N0YXR1cy50eXBlID09PSAnZXJyb3InfVxuICBjbGFzczpzdWNjZXNzPXtzdGF0dXMudHlwZSA9PT0gJ3N1Y2Nlc3MnfT5cbiAgPGltZyBjbGFzcz1cInByZXZpZXdcIiBzcmM9e2ZpbGVQcmV2aWV3fSBhbHQ9XCJcIiAvPlxuICA8c3BhbiBjbGFzcz1cImZpbGVuYW1lXCI+e3VwbG9hZC5maWxlLm5hbWV9PC9zcGFuPlxuICA8c3BhbiBjbGFzcz1cInN0YXR1c1wiPlxuICAgIDxpIGNsYXNzPVwiaWNvbiB1cGxvYWRpbmcgdHNfaWNvbiB0c19pY29uX3NwaW5uZXJcIj48L2k+XG4gICAgPGkgY2xhc3M9XCJpY29uIGVycm9yIHRzX2ljb24gdHNfaWNvbl93YXJuaW5nXCI+PC9pPlxuICAgIDxpIGNsYXNzPVwiaWNvbiBzdWNjZXNzIHRzX2ljb24gdHNfaWNvbl9jaGVja19jaXJjbGVfb1wiPjwvaT5cbiAgICA8c3BhbiBjbGFzcz1cInRleHRcIj57c3RhdHVzLm1lc3NhZ2V9PC9zcGFuPlxuICA8L3NwYW4+XG48L2xpPiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRRSxPQUFPLDRCQUFDLENBQUMsQUFDUCxPQUFPLENBQUUsSUFBSSxDQUNiLFdBQVcsQ0FBRSxNQUFNLENBQ25CLE9BQU8sQ0FBRSxHQUFHLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQ3BCLGFBQWEsQ0FBRSxHQUFHLENBQUMsS0FBSyxDQUFDLElBQUksb0JBQW9CLENBQUMsQUFDcEQsQ0FBQyxBQUVELG1DQUFPLFdBQVcsQUFBQyxDQUFDLEFBQ2xCLGFBQWEsQ0FBRSxJQUFJLEFBQ3JCLENBQUMsQUFFRCxRQUFRLDRCQUFDLENBQUMsQUFDUixLQUFLLENBQUUsT0FBTyxDQUNkLE1BQU0sQ0FBRSxPQUFPLENBQ2YsWUFBWSxDQUFFLEtBQUssQUFDckIsQ0FBQyxBQUVELFNBQVMsNEJBQUMsQ0FBQyxBQUNULFdBQVcsQ0FBRSxJQUFJLENBQ2pCLFlBQVksQ0FBRSxHQUFHLEFBQ25CLENBQUMsQUFFRCxPQUFPLDRCQUFDLENBQUMsQUFDUCxPQUFPLENBQUUsSUFBSSxDQUNiLGVBQWUsQ0FBRSxNQUFNLENBQ3ZCLFdBQVcsQ0FBRSxNQUFNLENBQ25CLEtBQUssQ0FBRSxJQUFJLGtCQUFrQixDQUFDLENBQzlCLFdBQVcsQ0FBRSxRQUFRLENBQUMsQ0FBQyxTQUFTLEFBQ2xDLENBQUMsQUFFRCxxQkFBTyxDQUFDLEtBQUssY0FBQyxDQUFDLEFBQ2IsT0FBTyxDQUFFLElBQUksQ0FDYixZQUFZLENBQUUsTUFBTSxBQUN0QixDQUFDLEFBRUQscUJBQU8sQ0FBQyxtQkFBSyxPQUFPLEFBQUMsQ0FBQyxBQUNwQixPQUFPLENBQUUsS0FBSyxBQUNoQixDQUFDLEFBRUQsT0FBTyx3QkFBVSxDQUFDLE9BQU8sQ0FBQyxLQUFLLFVBQVUsY0FBQyxDQUFDLEFBQ3pDLE9BQU8sQ0FBRSxLQUFLLEFBQ2hCLENBQUMsQUFFRCxPQUFPLG9CQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssTUFBTSxjQUFDLENBQUMsQUFDakMsT0FBTyxDQUFFLEtBQUssQUFDaEIsQ0FBQyxBQUVELE9BQU8sc0JBQVEsQ0FBQyxPQUFPLENBQUMsS0FBSyxRQUFRLGNBQUMsQ0FBQyxBQUNyQyxPQUFPLENBQUUsS0FBSyxBQUNoQixDQUFDLEFBRUQsT0FBTyx3QkFBVSxDQUFDLE9BQU8sY0FBQyxDQUFDLEFBQ3pCLEtBQUssQ0FBRSxJQUFJLGtCQUFrQixDQUFDLEFBQ2hDLENBQUMsQUFFRCxPQUFPLG9CQUFNLENBQUMsT0FBTyxjQUFDLENBQUMsQUFDckIsS0FBSyxDQUFFLElBQUksbUJBQW1CLENBQUMsQUFDakMsQ0FBQyxBQUVELE9BQU8sc0JBQVEsQ0FBQyxPQUFPLGNBQUMsQ0FBQyxBQUN2QixLQUFLLENBQUUsSUFBSSxxQkFBcUIsQ0FBQyxBQUNuQyxDQUFDIn0= */";
+    	style.id = "svelte-1snl5gf-style";
+    	style.textContent = ".upload.svelte-1snl5gf.svelte-1snl5gf{display:flex;align-items:center;padding:2px 0 1px 0;border-bottom:1px solid var(--color-slack-border)}.upload.svelte-1snl5gf.svelte-1snl5gf:last-child{border-bottom:none}.preview.svelte-1snl5gf.svelte-1snl5gf{width:1.25rem;height:1.25rem;margin-right:0.5em}.filename.svelte-1snl5gf.svelte-1snl5gf{font-weight:bold;margin-right:1em}.ext.svelte-1snl5gf.svelte-1snl5gf{font-weight:bold;margin-right:1em;color:rgba(0, 0, 0, 0.2)\n  }.status.svelte-1snl5gf.svelte-1snl5gf{display:flex;justify-content:center;align-items:center;color:var(--color-slack-info);font-family:Consolas, monospace}.status.svelte-1snl5gf .icon.svelte-1snl5gf{display:none;margin-right:0.25em}.status.svelte-1snl5gf .icon.svelte-1snl5gf:before{display:block}.upload.uploading.svelte-1snl5gf .status .icon.uploading.svelte-1snl5gf{display:block}.upload.error.svelte-1snl5gf .status .icon.error.svelte-1snl5gf{display:block}.upload.success.svelte-1snl5gf .status .icon.success.svelte-1snl5gf{display:block}.upload.uploading.svelte-1snl5gf .status.svelte-1snl5gf{color:var(--color-slack-info)}.upload.error.svelte-1snl5gf .status.svelte-1snl5gf{color:var(--color-slack-error)}.upload.success.svelte-1snl5gf .status.svelte-1snl5gf{color:var(--color-slack-success)}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBsb2FkLnN2ZWx0ZSIsInNvdXJjZXMiOlsidXBsb2FkLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBleHBvcnQgbGV0IHVwbG9hZDtcbiAgZXhwb3J0IGxldCBzdGF0dXM7XG4gIGV4cG9ydCBsZXQgcHJlZml4O1xuICBleHBvcnQgbGV0IHN1ZmZpeDtcbiAgZXhwb3J0IGxldCBzZWFyY2hTdHI7XG4gIGV4cG9ydCBsZXQgcmVwbGFjZVN0cjtcblxuICBjb25zdCBmaWxlUHJldmlldyA9IHdpbmRvdy5VUkwuY3JlYXRlT2JqZWN0VVJMKHVwbG9hZC5maWxlKTtcbiAgY29uc3QgY2h1bmtzID0gdXBsb2FkLmZpbGUubmFtZS5zcGxpdCgnLicpXG4gIGNvbnN0IGV4dCA9IGNodW5rcy5wb3AoKVxuICBjb25zdCBvcmlnaW5hbE5hbWUgPSBjaHVua3Muam9pbignLicpXG4gIGNvbnN0IGZpbGVuYW1lID0gYCR7cHJlZml4fSR7b3JpZ2luYWxOYW1lfSR7c3VmZml4fWBcbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC51cGxvYWQge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBwYWRkaW5nOiAycHggMCAxcHggMDtcbiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgdmFyKC0tY29sb3Itc2xhY2stYm9yZGVyKTtcbiAgfVxuXG4gIC51cGxvYWQ6bGFzdC1jaGlsZCB7XG4gICAgYm9yZGVyLWJvdHRvbTogbm9uZTtcbiAgfVxuXG4gIC5wcmV2aWV3IHtcbiAgICB3aWR0aDogMS4yNXJlbTtcbiAgICBoZWlnaHQ6IDEuMjVyZW07XG4gICAgbWFyZ2luLXJpZ2h0OiAwLjVlbTtcbiAgfVxuXG4gIC5maWxlbmFtZSB7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgbWFyZ2luLXJpZ2h0OiAxZW07XG4gIH1cblxuICAuZXh0IHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBtYXJnaW4tcmlnaHQ6IDFlbTtcbiAgICBjb2xvcjogcmdiYSgwLCAwLCAwLCAwLjIpXG4gIH1cblxuICAuc3RhdHVzIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgY29sb3I6IHZhcigtLWNvbG9yLXNsYWNrLWluZm8pO1xuICAgIGZvbnQtZmFtaWx5OiBDb25zb2xhcywgbW9ub3NwYWNlO1xuICB9XG5cbiAgLnN0YXR1cyAuaWNvbiB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgICBtYXJnaW4tcmlnaHQ6IDAuMjVlbTtcbiAgfVxuXG4gIC5zdGF0dXMgLmljb246YmVmb3JlIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxuXG4gIC51cGxvYWQudXBsb2FkaW5nIC5zdGF0dXMgLmljb24udXBsb2FkaW5nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxuXG4gIC51cGxvYWQuZXJyb3IgLnN0YXR1cyAuaWNvbi5lcnJvciB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cblxuICAudXBsb2FkLnN1Y2Nlc3MgLnN0YXR1cyAuaWNvbi5zdWNjZXNzIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxuXG4gIC51cGxvYWQudXBsb2FkaW5nIC5zdGF0dXMge1xuICAgIGNvbG9yOiB2YXIoLS1jb2xvci1zbGFjay1pbmZvKTtcbiAgfVxuXG4gIC51cGxvYWQuZXJyb3IgLnN0YXR1cyB7XG4gICAgY29sb3I6IHZhcigtLWNvbG9yLXNsYWNrLWVycm9yKTtcbiAgfVxuXG4gIC51cGxvYWQuc3VjY2VzcyAuc3RhdHVzIHtcbiAgICBjb2xvcjogdmFyKC0tY29sb3Itc2xhY2stc3VjY2Vzcyk7XG4gIH1cbjwvc3R5bGU+XG5cbjxsaVxuICBjbGFzcz1cInVwbG9hZFwiXG4gIGNsYXNzOnVwbG9hZGluZz17c3RhdHVzLnR5cGUgPT09ICd1cGxvYWRpbmcnfVxuICBjbGFzczplcnJvcj17c3RhdHVzLnR5cGUgPT09ICdlcnJvcid9XG4gIGNsYXNzOnN1Y2Nlc3M9e3N0YXR1cy50eXBlID09PSAnc3VjY2Vzcyd9PlxuICA8aW1nIGNsYXNzPVwicHJldmlld1wiIHNyYz17ZmlsZVByZXZpZXd9IGFsdD1cIlwiIC8+XG4gIDxzcGFuIGNsYXNzPVwiZmlsZW5hbWVcIj57ZmlsZW5hbWV9PHNwYW4gY2xhc3M9XCJleHRcIj4ue2V4dH08L3NwYW4+PC9zcGFuPlxuICA8c3BhbiBjbGFzcz1cInN0YXR1c1wiPlxuICAgIDxpIGNsYXNzPVwiaWNvbiB1cGxvYWRpbmcgdHNfaWNvbiB0c19pY29uX3NwaW5uZXJcIj48L2k+XG4gICAgPGkgY2xhc3M9XCJpY29uIGVycm9yIHRzX2ljb24gdHNfaWNvbl93YXJuaW5nXCI+PC9pPlxuICAgIDxpIGNsYXNzPVwiaWNvbiBzdWNjZXNzIHRzX2ljb24gdHNfaWNvbl9jaGVja19jaXJjbGVfb1wiPjwvaT5cbiAgICA8c3BhbiBjbGFzcz1cInRleHRcIj57c3RhdHVzLm1lc3NhZ2V9PC9zcGFuPlxuICA8L3NwYW4+XG48L2xpPlxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQWdCRSxPQUFPLDhCQUFDLENBQUMsQUFDUCxPQUFPLENBQUUsSUFBSSxDQUNiLFdBQVcsQ0FBRSxNQUFNLENBQ25CLE9BQU8sQ0FBRSxHQUFHLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQ3BCLGFBQWEsQ0FBRSxHQUFHLENBQUMsS0FBSyxDQUFDLElBQUksb0JBQW9CLENBQUMsQUFDcEQsQ0FBQyxBQUVELHFDQUFPLFdBQVcsQUFBQyxDQUFDLEFBQ2xCLGFBQWEsQ0FBRSxJQUFJLEFBQ3JCLENBQUMsQUFFRCxRQUFRLDhCQUFDLENBQUMsQUFDUixLQUFLLENBQUUsT0FBTyxDQUNkLE1BQU0sQ0FBRSxPQUFPLENBQ2YsWUFBWSxDQUFFLEtBQUssQUFDckIsQ0FBQyxBQUVELFNBQVMsOEJBQUMsQ0FBQyxBQUNULFdBQVcsQ0FBRSxJQUFJLENBQ2pCLFlBQVksQ0FBRSxHQUFHLEFBQ25CLENBQUMsQUFFRCxJQUFJLDhCQUFDLENBQUMsQUFDSixXQUFXLENBQUUsSUFBSSxDQUNqQixZQUFZLENBQUUsR0FBRyxDQUNqQixLQUFLLENBQUUsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUM7RUFDM0IsQ0FBQyxBQUVELE9BQU8sOEJBQUMsQ0FBQyxBQUNQLE9BQU8sQ0FBRSxJQUFJLENBQ2IsZUFBZSxDQUFFLE1BQU0sQ0FDdkIsV0FBVyxDQUFFLE1BQU0sQ0FDbkIsS0FBSyxDQUFFLElBQUksa0JBQWtCLENBQUMsQ0FDOUIsV0FBVyxDQUFFLFFBQVEsQ0FBQyxDQUFDLFNBQVMsQUFDbEMsQ0FBQyxBQUVELHNCQUFPLENBQUMsS0FBSyxlQUFDLENBQUMsQUFDYixPQUFPLENBQUUsSUFBSSxDQUNiLFlBQVksQ0FBRSxNQUFNLEFBQ3RCLENBQUMsQUFFRCxzQkFBTyxDQUFDLG9CQUFLLE9BQU8sQUFBQyxDQUFDLEFBQ3BCLE9BQU8sQ0FBRSxLQUFLLEFBQ2hCLENBQUMsQUFFRCxPQUFPLHlCQUFVLENBQUMsT0FBTyxDQUFDLEtBQUssVUFBVSxlQUFDLENBQUMsQUFDekMsT0FBTyxDQUFFLEtBQUssQUFDaEIsQ0FBQyxBQUVELE9BQU8scUJBQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxNQUFNLGVBQUMsQ0FBQyxBQUNqQyxPQUFPLENBQUUsS0FBSyxBQUNoQixDQUFDLEFBRUQsT0FBTyx1QkFBUSxDQUFDLE9BQU8sQ0FBQyxLQUFLLFFBQVEsZUFBQyxDQUFDLEFBQ3JDLE9BQU8sQ0FBRSxLQUFLLEFBQ2hCLENBQUMsQUFFRCxPQUFPLHlCQUFVLENBQUMsT0FBTyxlQUFDLENBQUMsQUFDekIsS0FBSyxDQUFFLElBQUksa0JBQWtCLENBQUMsQUFDaEMsQ0FBQyxBQUVELE9BQU8scUJBQU0sQ0FBQyxPQUFPLGVBQUMsQ0FBQyxBQUNyQixLQUFLLENBQUUsSUFBSSxtQkFBbUIsQ0FBQyxBQUNqQyxDQUFDLEFBRUQsT0FBTyx1QkFBUSxDQUFDLE9BQU8sZUFBQyxDQUFDLEFBQ3ZCLEtBQUssQ0FBRSxJQUFJLHFCQUFxQixDQUFDLEFBQ25DLENBQUMifQ== */";
     	append_dev(document.head, style);
     }
 
@@ -646,59 +655,63 @@ console.log("💩🥳")
     	let img;
     	let img_src_value;
     	let t0;
-    	let span0;
-    	let t1_value = /*upload*/ ctx[0].file.name + "";
-    	let t1;
-    	let t2;
-    	let span2;
-    	let i0;
-    	let t3;
-    	let i1;
-    	let t4;
-    	let i2;
-    	let t5;
     	let span1;
-    	let t6_value = /*status*/ ctx[1].message + "";
+    	let t1;
+    	let span0;
+    	let t4;
+    	let span3;
+    	let i0;
+    	let t5;
+    	let i1;
     	let t6;
+    	let i2;
+    	let t7;
+    	let span2;
+    	let t8_value = /*status*/ ctx[0].message + "";
+    	let t8;
 
     	const block = {
     		c: function create() {
     			li = element("li");
     			img = element("img");
     			t0 = space();
-    			span0 = element("span");
-    			t1 = text(t1_value);
-    			t2 = space();
-    			span2 = element("span");
-    			i0 = element("i");
-    			t3 = space();
-    			i1 = element("i");
-    			t4 = space();
-    			i2 = element("i");
-    			t5 = space();
     			span1 = element("span");
-    			t6 = text(t6_value);
-    			attr_dev(img, "class", "preview svelte-em8etn");
-    			if (img.src !== (img_src_value = /*filePreview*/ ctx[2])) attr_dev(img, "src", img_src_value);
+    			t1 = text(/*filename*/ ctx[3]);
+    			span0 = element("span");
+    			span0.textContent = `.${/*ext*/ ctx[2]}`;
+    			t4 = space();
+    			span3 = element("span");
+    			i0 = element("i");
+    			t5 = space();
+    			i1 = element("i");
+    			t6 = space();
+    			i2 = element("i");
+    			t7 = space();
+    			span2 = element("span");
+    			t8 = text(t8_value);
+    			attr_dev(img, "class", "preview svelte-1snl5gf");
+    			if (img.src !== (img_src_value = /*filePreview*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file, 77, 2, 1338);
-    			attr_dev(span0, "class", "filename svelte-em8etn");
-    			add_location(span0, file, 78, 2, 1389);
-    			attr_dev(i0, "class", "icon uploading ts_icon ts_icon_spinner svelte-em8etn");
-    			add_location(i0, file, 80, 4, 1466);
-    			attr_dev(i1, "class", "icon error ts_icon ts_icon_warning svelte-em8etn");
-    			add_location(i1, file, 81, 4, 1525);
-    			attr_dev(i2, "class", "icon success ts_icon ts_icon_check_circle_o svelte-em8etn");
-    			add_location(i2, file, 82, 4, 1580);
-    			attr_dev(span1, "class", "text");
-    			add_location(span1, file, 83, 4, 1644);
-    			attr_dev(span2, "class", "status svelte-em8etn");
-    			add_location(span2, file, 79, 2, 1440);
-    			attr_dev(li, "class", "upload svelte-em8etn");
-    			toggle_class(li, "uploading", /*status*/ ctx[1].type === "uploading");
-    			toggle_class(li, "error", /*status*/ ctx[1].type === "error");
-    			toggle_class(li, "success", /*status*/ ctx[1].type === "success");
-    			add_location(li, file, 72, 0, 1182);
+    			add_location(img, file, 91, 2, 1686);
+    			attr_dev(span0, "class", "ext svelte-1snl5gf");
+    			add_location(span0, file, 92, 35, 1770);
+    			attr_dev(span1, "class", "filename svelte-1snl5gf");
+    			add_location(span1, file, 92, 2, 1737);
+    			attr_dev(i0, "class", "icon uploading ts_icon ts_icon_spinner svelte-1snl5gf");
+    			add_location(i0, file, 94, 4, 1837);
+    			attr_dev(i1, "class", "icon error ts_icon ts_icon_warning svelte-1snl5gf");
+    			add_location(i1, file, 95, 4, 1896);
+    			attr_dev(i2, "class", "icon success ts_icon ts_icon_check_circle_o svelte-1snl5gf");
+    			add_location(i2, file, 96, 4, 1951);
+    			attr_dev(span2, "class", "text");
+    			add_location(span2, file, 97, 4, 2015);
+    			attr_dev(span3, "class", "status svelte-1snl5gf");
+    			add_location(span3, file, 93, 2, 1811);
+    			attr_dev(li, "class", "upload svelte-1snl5gf");
+    			toggle_class(li, "uploading", /*status*/ ctx[0].type === "uploading");
+    			toggle_class(li, "error", /*status*/ ctx[0].type === "error");
+    			toggle_class(li, "success", /*status*/ ctx[0].type === "success");
+    			add_location(li, file, 86, 0, 1530);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -707,33 +720,33 @@ console.log("💩🥳")
     			insert_dev(target, li, anchor);
     			append_dev(li, img);
     			append_dev(li, t0);
-    			append_dev(li, span0);
-    			append_dev(span0, t1);
-    			append_dev(li, t2);
-    			append_dev(li, span2);
-    			append_dev(span2, i0);
-    			append_dev(span2, t3);
-    			append_dev(span2, i1);
-    			append_dev(span2, t4);
-    			append_dev(span2, i2);
-    			append_dev(span2, t5);
-    			append_dev(span2, span1);
-    			append_dev(span1, t6);
+    			append_dev(li, span1);
+    			append_dev(span1, t1);
+    			append_dev(span1, span0);
+    			append_dev(li, t4);
+    			append_dev(li, span3);
+    			append_dev(span3, i0);
+    			append_dev(span3, t5);
+    			append_dev(span3, i1);
+    			append_dev(span3, t6);
+    			append_dev(span3, i2);
+    			append_dev(span3, t7);
+    			append_dev(span3, span2);
+    			append_dev(span2, t8);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*upload*/ 1 && t1_value !== (t1_value = /*upload*/ ctx[0].file.name + "")) set_data_dev(t1, t1_value);
-    			if (dirty & /*status*/ 2 && t6_value !== (t6_value = /*status*/ ctx[1].message + "")) set_data_dev(t6, t6_value);
+    			if (dirty & /*status*/ 1 && t8_value !== (t8_value = /*status*/ ctx[0].message + "")) set_data_dev(t8, t8_value);
 
-    			if (dirty & /*status*/ 2) {
-    				toggle_class(li, "uploading", /*status*/ ctx[1].type === "uploading");
+    			if (dirty & /*status*/ 1) {
+    				toggle_class(li, "uploading", /*status*/ ctx[0].type === "uploading");
     			}
 
-    			if (dirty & /*status*/ 2) {
-    				toggle_class(li, "error", /*status*/ ctx[1].type === "error");
+    			if (dirty & /*status*/ 1) {
+    				toggle_class(li, "error", /*status*/ ctx[0].type === "error");
     			}
 
-    			if (dirty & /*status*/ 2) {
-    				toggle_class(li, "success", /*status*/ ctx[1].type === "success");
+    			if (dirty & /*status*/ 1) {
+    				toggle_class(li, "success", /*status*/ ctx[0].type === "success");
     			}
     		},
     		i: noop,
@@ -757,8 +770,16 @@ console.log("💩🥳")
     function instance($$self, $$props, $$invalidate) {
     	let { upload } = $$props;
     	let { status } = $$props;
+    	let { prefix } = $$props;
+    	let { suffix } = $$props;
+    	let { searchStr } = $$props;
+    	let { replaceStr } = $$props;
     	const filePreview = window.URL.createObjectURL(upload.file);
-    	const writable_props = ["upload", "status"];
+    	const chunks = upload.file.name.split(".");
+    	const ext = chunks.pop();
+    	const originalName = chunks.join(".");
+    	const filename = `${prefix}${originalName}${suffix}`;
+    	const writable_props = ["upload", "status", "prefix", "suffix", "searchStr", "replaceStr"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Upload> was created with unknown prop '${key}'`);
@@ -768,29 +789,67 @@ console.log("💩🥳")
     	validate_slots("Upload", $$slots, []);
 
     	$$self.$set = $$props => {
-    		if ("upload" in $$props) $$invalidate(0, upload = $$props.upload);
-    		if ("status" in $$props) $$invalidate(1, status = $$props.status);
+    		if ("upload" in $$props) $$invalidate(4, upload = $$props.upload);
+    		if ("status" in $$props) $$invalidate(0, status = $$props.status);
+    		if ("prefix" in $$props) $$invalidate(5, prefix = $$props.prefix);
+    		if ("suffix" in $$props) $$invalidate(6, suffix = $$props.suffix);
+    		if ("searchStr" in $$props) $$invalidate(7, searchStr = $$props.searchStr);
+    		if ("replaceStr" in $$props) $$invalidate(8, replaceStr = $$props.replaceStr);
     	};
 
-    	$$self.$capture_state = () => ({ upload, status, filePreview });
+    	$$self.$capture_state = () => ({
+    		upload,
+    		status,
+    		prefix,
+    		suffix,
+    		searchStr,
+    		replaceStr,
+    		filePreview,
+    		chunks,
+    		ext,
+    		originalName,
+    		filename
+    	});
 
     	$$self.$inject_state = $$props => {
-    		if ("upload" in $$props) $$invalidate(0, upload = $$props.upload);
-    		if ("status" in $$props) $$invalidate(1, status = $$props.status);
+    		if ("upload" in $$props) $$invalidate(4, upload = $$props.upload);
+    		if ("status" in $$props) $$invalidate(0, status = $$props.status);
+    		if ("prefix" in $$props) $$invalidate(5, prefix = $$props.prefix);
+    		if ("suffix" in $$props) $$invalidate(6, suffix = $$props.suffix);
+    		if ("searchStr" in $$props) $$invalidate(7, searchStr = $$props.searchStr);
+    		if ("replaceStr" in $$props) $$invalidate(8, replaceStr = $$props.replaceStr);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [upload, status, filePreview];
+    	return [
+    		status,
+    		filePreview,
+    		ext,
+    		filename,
+    		upload,
+    		prefix,
+    		suffix,
+    		searchStr,
+    		replaceStr
+    	];
     }
 
     class Upload extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		if (!document.getElementById("svelte-em8etn-style")) add_css();
-    		init(this, options, instance, create_fragment, safe_not_equal, { upload: 0, status: 1 });
+    		if (!document.getElementById("svelte-1snl5gf-style")) add_css();
+
+    		init(this, options, instance, create_fragment, safe_not_equal, {
+    			upload: 4,
+    			status: 0,
+    			prefix: 5,
+    			suffix: 6,
+    			searchStr: 7,
+    			replaceStr: 8
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -802,12 +861,28 @@ console.log("💩🥳")
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*upload*/ ctx[0] === undefined && !("upload" in props)) {
+    		if (/*upload*/ ctx[4] === undefined && !("upload" in props)) {
     			console.warn("<Upload> was created without expected prop 'upload'");
     		}
 
-    		if (/*status*/ ctx[1] === undefined && !("status" in props)) {
+    		if (/*status*/ ctx[0] === undefined && !("status" in props)) {
     			console.warn("<Upload> was created without expected prop 'status'");
+    		}
+
+    		if (/*prefix*/ ctx[5] === undefined && !("prefix" in props)) {
+    			console.warn("<Upload> was created without expected prop 'prefix'");
+    		}
+
+    		if (/*suffix*/ ctx[6] === undefined && !("suffix" in props)) {
+    			console.warn("<Upload> was created without expected prop 'suffix'");
+    		}
+
+    		if (/*searchStr*/ ctx[7] === undefined && !("searchStr" in props)) {
+    			console.warn("<Upload> was created without expected prop 'searchStr'");
+    		}
+
+    		if (/*replaceStr*/ ctx[8] === undefined && !("replaceStr" in props)) {
+    			console.warn("<Upload> was created without expected prop 'replaceStr'");
     		}
     	}
 
@@ -824,6 +899,38 @@ console.log("💩🥳")
     	}
 
     	set status(value) {
+    		throw new Error("<Upload>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get prefix() {
+    		throw new Error("<Upload>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set prefix(value) {
+    		throw new Error("<Upload>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get suffix() {
+    		throw new Error("<Upload>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set suffix(value) {
+    		throw new Error("<Upload>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get searchStr() {
+    		throw new Error("<Upload>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set searchStr(value) {
+    		throw new Error("<Upload>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get replaceStr() {
+    		throw new Error("<Upload>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set replaceStr(value) {
     		throw new Error("<Upload>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -12734,6 +12841,17 @@ console.log("💩🥳")
     uuid.unparse = unparse;
     var uuid_1 = uuid;
 
+    function info(...msg) {
+      console.log(`💬 ${msg.join(' ')}`);
+    }
+    function error(...msg) {
+      console.log(`🤬 ${msg.join(' ')}`);
+    }
+    var log = {
+      info,
+      error
+    };
+
     function getSlackApiData() {
       const scripts = document.querySelectorAll('script[type="text/javascript"]');
       let apiToken;
@@ -12770,39 +12888,151 @@ console.log("💩🥳")
 
     const NO_OP = function () {};
 
-    function uploadEmoji(file, callback = NO_OP) {
-      const {
-        apiToken,
-        versionUid
-      } = getSlackApiData();
-      const timestamp = Date.now() / 1000;
-      const version = versionUid ? versionUid.substring(0, 8) : 'noversion';
-      const id = uuid_1.v4();
-      const name = file.name.split('.')[0];
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('mode', 'data');
-      formData.append('token', apiToken);
-      formData.append('image', file);
-      slackApi({
-        method: 'post',
-        url: `/emoji.add`,
-        params: {
-          '_x_id': `${version}-${timestamp}`
-        },
-        data: formData,
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }).catch(error => {
-        callback(error, null);
-      }).then(response => {
-        const error = lodash.get(response, 'data.error');
+    function printError(error) {
+      return error.toJSON ? error.toJSON() : error;
+    }
 
-        callback(error, response);
-      });
-      return id;
+    function uploadEmoji(file, opts) {
+      const id = uuid_1.v4();
+
+      let remove = (name, callback = NO_OP, attemptCount = 0) => {
+        const {
+          apiToken,
+          versionUid
+        } = getSlackApiData();
+        const timestamp = Date.now() / 1000;
+        const version = versionUid ? versionUid.substring(0, 8) : 'noversion';
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('token', apiToken);
+        slackApi({
+          method: 'post',
+          url: `/emoji.remove`,
+          params: {
+            '_x_id': `${version}-${timestamp}`
+          },
+          data: formData,
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(response => {
+          if (response && response.data.ok) {
+            log.info(`[${name}] 🔥✅ deleted`);
+            callback();
+          } else {
+            log.error(`[${name}] ${response}`);
+            throw new Error('Something happened!');
+          }
+        }).catch(error => {
+          log.error(`[${name}] 🔥💣 delete failed on attempt ${attemptCount}`, printError(error));
+
+          if (error.response) {
+            if (attemptCount < 3) {
+              if (error.response.status == 429) {
+                let delay = error.response.headers['retry-after'];
+                log.error(`[${name}] 🔥💤 throttling delete for ${delay} seconds`);
+                return setTimeout(() => {
+                  remove(name, callback, ++attemptCount);
+                }, delay * 1000);
+              } else {
+                log.error(`[${name}] 🔥🤷‍♀️Unknown status code ${error.response.status}`);
+              }
+            } else {
+              log.error(`[${name}] 🔥⚰️ out of attempts to delete`);
+            }
+          } else {
+            log.error(`[${name}] 🔥❓something else happened on attempt ${attemptCount}`, printError(error));
+          }
+
+          callback(error);
+        });
+      };
+
+      let upload = (callback = NO_OP, attemptCount = 0) => {
+        const {
+          apiToken,
+          versionUid
+        } = getSlackApiData();
+        const timestamp = Date.now() / 1000;
+        const version = versionUid ? versionUid.substring(0, 8) : 'noversion';
+        const chunks = file.name.split('.');
+        chunks.pop();
+        const filename = chunks.join('.');
+        const name = `${opts.prefix}${filename}${opts.suffix}`;
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('mode', 'data');
+        formData.append('token', apiToken);
+        formData.append('image', file);
+        slackApi({
+          method: 'post',
+          url: `/emoji.add`,
+          params: {
+            '_x_id': `${version}-${timestamp}`
+          },
+          data: formData,
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(response => {
+          const error = lodash.get(response, 'data.error');
+
+          if (error) {
+            log.error(`[${name}] ⬆️😢 error uploading:`, printError(error));
+
+            switch (error) {
+              case 'error_name_taken':
+                log.error(`[${name}] ⬆️✋ emoji already exists`);
+                return remove(name, err => {
+                  if (err) {
+                    throw new Error("Couldn't remove emoji");
+                  }
+
+                  upload(callback, ++attemptCount);
+                });
+
+              case 'error_name_taken_i18n':
+                log.error(`[${name}] ⬆️⛔️ conflicts with standard emoji name`);
+                throw new Error("Cannot overwrite this emoji");
+
+              default:
+                throw error;
+            }
+          }
+
+          log.info(`[${name}] ⬆️✅ uploaded`);
+          callback(id, error, response);
+        }).catch(error => {
+          log.error(`[${name}] ⬆️💣 upload failed on attempt ${attemptCount}`, printError(error));
+
+          if (error.response) {
+            if (attemptCount < 3) {
+              if (error.response.status == 429) {
+                let delay = error.response.headers['retry-after'];
+                log.error(`[${name}] ⬆️💤 throttling upload for ${delay} seconds`);
+                return setTimeout(() => {
+                  upload(callback, ++attemptCount);
+                }, delay * 1000);
+              } else {
+                log.error(`[${name}] ⬆️🤷‍♀️Unknown status code ${error.response.status}`);
+              }
+            } else {
+              log.error(`[${name}] ⬆️⚰️ out of attempts to upload`);
+            }
+          } else {
+            log.error(`[${name}] ⬆️❓something else happened on attempt ${attemptCount}`, printError(error));
+          }
+
+          callback(id, error, null);
+        });
+      };
+
+      return {
+        id,
+        upload
+      };
     }
 
     /* src/components/app.svelte generated by Svelte v3.22.2 */
@@ -12810,26 +13040,30 @@ console.log("💩🥳")
 
     function add_css$2() {
     	var style = element("style");
-    	style.id = "svelte-xnpujy-style";
-    	style.textContent = ".neutral-face-emoji-tools.svelte-xnpujy{border:var(--color-slack-border) 1px solid;border-left:var(--color-neutral-face-emoji-tools) 3px solid;margin:0 0 25px 0;padding:25px;background:white}.icon.heading.svelte-xnpujy{margin:0 5px 0 0;height:1.25em;vertical-align:-25%}.input-note.svelte-xnpujy{font-size:.9rem;line-height:1.25rem;color:var(--color-text-gray)}.uploads.svelte-xnpujy{list-style-type:none;margin:0;font-size:0.9rem}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiYXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBpbXBvcnQgVXBsb2FkIGZyb20gJy4vdXBsb2FkLnN2ZWx0ZSc7XG4gIGltcG9ydCBGaWxlRHJvcHpvbmUgZnJvbSAnLi9maWxlLWRyb3B6b25lLnN2ZWx0ZSc7XG5cbiAgaW1wb3J0IHVwbG9hZEVtb2ppIGZyb20gJy4uL3VwbG9hZC1lbW9qaS5qcyc7XG5cbiAgY29uc3QgU0VUX0lDT05fVVJMID0gc2FmYXJpLmV4dGVuc2lvbi5iYXNlVVJJICsgJ2ljb25fMTI4LnBuZyc7XG5cbiAgbGV0IHVwbG9hZHMgPSBbXTtcbiAgbGV0IHVwbG9hZHNTdGF0dXNCeUlkID0ge307XG5cbiAgZnVuY3Rpb24gdXBsb2FkRmlsZXMgKGZpbGVzKSB7XG4gICAgZmlsZXMuZm9yRWFjaChmaWxlID0+IHtcbiAgICAgIGNvbnN0IGlkID0gdXBsb2FkRW1vamkoZmlsZSwgKGVycm9yKSA9PiB7XG4gICAgICAgIGlmIChlcnJvcikge1xuICAgICAgICAgIHVwbG9hZHNTdGF0dXNCeUlkID0ge1xuICAgICAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgICAgICBbaWRdOiB7XG4gICAgICAgICAgICAgIHR5cGU6ICdlcnJvcicsXG4gICAgICAgICAgICAgIG1lc3NhZ2U6IGVycm9yLm1lc3NhZ2UgfHwgZXJyb3JcbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9O1xuICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgIHVwbG9hZHNTdGF0dXNCeUlkID0ge1xuICAgICAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgICAgICBbaWRdOiB7XG4gICAgICAgICAgICAgIHR5cGU6ICdzdWNjZXNzJyxcbiAgICAgICAgICAgICAgbWVzc2FnZTogJ1N1Y2Nlc3NmdWxseSBVcGxvYWRlZC4nXG4gICAgICAgICAgICB9XG4gICAgICAgICAgfTtcbiAgICAgICAgfVxuICAgICAgfSk7XG4gICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgIFtpZF06IHtcbiAgICAgICAgICB0eXBlOiAndXBsb2FkaW5nJyxcbiAgICAgICAgICBtZXNzYWdlOiAnVXBsb2FkaW5nLi4uJ1xuICAgICAgICB9XG4gICAgICB9O1xuICAgICAgdXBsb2FkcyA9IFsuLi51cGxvYWRzLCB7XG4gICAgICAgIGZpbGUsXG4gICAgICAgIGlkXG4gICAgICB9XTtcbiAgICB9KTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGhhbmRsZUZpbGVzQWRkZWQgKGV2ZW50KSB7XG4gICAgY29uc3QgZmlsZXMgPSBldmVudC5kZXRhaWw7XG5cbiAgICB1cGxvYWRGaWxlcyhmaWxlcyk7XG4gIH1cbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5uZXV0cmFsLWZhY2UtZW1vamktdG9vbHMge1xuICAgIGJvcmRlcjogdmFyKC0tY29sb3Itc2xhY2stYm9yZGVyKSAxcHggc29saWQ7XG4gICAgYm9yZGVyLWxlZnQ6IHZhcigtLWNvbG9yLW5ldXRyYWwtZmFjZS1lbW9qaS10b29scykgM3B4IHNvbGlkO1xuICAgIG1hcmdpbjogMCAwIDI1cHggMDtcbiAgICBwYWRkaW5nOiAyNXB4O1xuICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICB9XG5cbiAgLmljb24uaGVhZGluZyB7XG4gICAgbWFyZ2luOiAwIDVweCAwIDA7XG4gICAgaGVpZ2h0OiAxLjI1ZW07XG4gICAgdmVydGljYWwtYWxpZ246IC0yNSU7XG4gIH1cblxuICAuaW5wdXQtbm90ZSB7XG4gICAgZm9udC1zaXplOiAuOXJlbTtcbiAgICBsaW5lLWhlaWdodDogMS4yNXJlbTtcbiAgICBjb2xvcjogdmFyKC0tY29sb3ItdGV4dC1ncmF5KTtcbiAgfVxuXG4gIC51cGxvYWRzIHtcbiAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gICAgbWFyZ2luOiAwO1xuICAgIGZvbnQtc2l6ZTogMC45cmVtO1xuICB9XG48L3N0eWxlPlxuXG48ZGl2IGNsYXNzPVwibmV1dHJhbC1mYWNlLWVtb2ppLXRvb2xzXCI+XG4gIDxoNCBjbGFzcz1cImhlYWRpbmdcIj5cbiAgICA8aW1nIGNsYXNzPVwiaWNvbiBoZWFkaW5nXCIgc3JjPVwie1NFVF9JQ09OX1VSTH1cIiBhbHQ9XCJcIiAvPlxuICAgIDxzcGFuIGNsYXNzPVwidGV4dFwiPkJ1bGsgRW1vamkgVXBsb2FkZXI8L3NwYW4+XG4gIDwvaDQ+XG4gIDxwIGNsYXNzPVwic3ViaGVhZGluZ1wiPkRyYWcgYW5kIGRyb3AgaW1hZ2VzIGludG8gdGhlIGFyZWEgYmVsb3cuIEFueSBpbWFnZXMgZHJvcHBlZCB0aGVyZSB3aWxsIGJlIGF1dG9tYXRpY2FsbHkgdXBsb2FkZWQgdXNpbmcgdGhlaXIgZmlsZW5hbWUgYXMgdGhlIGVtb2ppIG5hbWUuPC9wPlxuICA8cCBjbGFzcz1cImlucHV0LW5vdGVcIj5FeGFtcGxlOiA8c3BhbiBjbGFzcz1cIm5vcm1hbFwiPlwiZGl0dG8uZ2lmXCIgd2lsbCBiZSBhZGRlZCBhcyBcImRpdHRvXCI8L3NwYW4+PC9wPlxuICA8RmlsZURyb3B6b25lIG9uOmZpbGVzYWRkZWQ9e2hhbmRsZUZpbGVzQWRkZWR9IC8+XG4gIDx1bCBjbGFzcz1cInVwbG9hZHNcIj5cbiAgICB7I2VhY2ggdXBsb2FkcyBhcyB1cGxvYWQgKHVwbG9hZC5pZCl9XG4gICAgICA8VXBsb2FkIHVwbG9hZD17dXBsb2FkfSBzdGF0dXM9e3VwbG9hZHNTdGF0dXNCeUlkW3VwbG9hZC5pZF19IC8+XG4gICAgey9lYWNofVxuICA8L3VsPlxuPC9kaXY+XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBc0RFLHlCQUF5QixjQUFDLENBQUMsQUFDekIsTUFBTSxDQUFFLElBQUksb0JBQW9CLENBQUMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUMzQyxXQUFXLENBQUUsSUFBSSxnQ0FBZ0MsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQzVELE1BQU0sQ0FBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQ2xCLE9BQU8sQ0FBRSxJQUFJLENBQ2IsVUFBVSxDQUFFLEtBQUssQUFDbkIsQ0FBQyxBQUVELEtBQUssUUFBUSxjQUFDLENBQUMsQUFDYixNQUFNLENBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUNqQixNQUFNLENBQUUsTUFBTSxDQUNkLGNBQWMsQ0FBRSxJQUFJLEFBQ3RCLENBQUMsQUFFRCxXQUFXLGNBQUMsQ0FBQyxBQUNYLFNBQVMsQ0FBRSxLQUFLLENBQ2hCLFdBQVcsQ0FBRSxPQUFPLENBQ3BCLEtBQUssQ0FBRSxJQUFJLGlCQUFpQixDQUFDLEFBQy9CLENBQUMsQUFFRCxRQUFRLGNBQUMsQ0FBQyxBQUNSLGVBQWUsQ0FBRSxJQUFJLENBQ3JCLE1BQU0sQ0FBRSxDQUFDLENBQ1QsU0FBUyxDQUFFLE1BQU0sQUFDbkIsQ0FBQyJ9 */";
+    	style.id = "svelte-21xepa-style";
+    	style.textContent = ".neutral-face-emoji-tools.svelte-21xepa.svelte-21xepa{border:var(--color-slack-border) 1px solid;border-left:var(--color-neutral-face-emoji-tools) 3px solid;margin:0 0 25px 0;padding:25px;background:white}.icon.heading.svelte-21xepa.svelte-21xepa{margin:0 5px 0 0;height:1.25em;vertical-align:-25%}.input-note.svelte-21xepa.svelte-21xepa{font-size:.9rem;line-height:1.25rem;color:var(--color-text-gray)}.uploads.svelte-21xepa.svelte-21xepa{list-style-type:none;margin:0;font-size:0.9rem}.customizations.svelte-21xepa.svelte-21xepa{display:flex\n  }.toggle-opts.svelte-21xepa.svelte-21xepa{margin-bottom:1rem}.neutral-face-emoji-tools.svelte-21xepa .mono.svelte-21xepa{font-family:'Courier New', Courier, monospace\n  }\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiYXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBpbXBvcnQgVXBsb2FkIGZyb20gJy4vdXBsb2FkLnN2ZWx0ZSc7XG4gIGltcG9ydCBGaWxlRHJvcHpvbmUgZnJvbSAnLi9maWxlLWRyb3B6b25lLnN2ZWx0ZSc7XG5cbiAgaW1wb3J0IHVwbG9hZEVtb2ppIGZyb20gJy4uL3VwbG9hZC1lbW9qaS5qcyc7XG5cbiAgY29uc3QgU0VUX0lDT05fVVJMID0gc2FmYXJpLmV4dGVuc2lvbi5iYXNlVVJJICsgJ2ljb25fMTI4XzEyOC5wbmcnO1xuXG4gIGxldCB1cGxvYWRzID0gW107XG4gIGxldCB1cGxvYWRzU3RhdHVzQnlJZCA9IHt9O1xuXG4gIGxldCBwcmVmaXggPSAnJ1xuICBsZXQgc3VmZml4ID0gJydcblxuICBsZXQgc2VhcmNoU3RyID0gJydcbiAgbGV0IHJlcGxhY2VTdHIgPSAnJ1xuXG4gIGxldCBzaG93T3B0cyA9IGZhbHNlXG5cbiAgZnVuY3Rpb24gdG9nZ2xlT3B0cygpIHtcbiAgICBzaG93T3B0cyA9ICFzaG93T3B0c1xuICB9XG5cbiAgZnVuY3Rpb24gdXBsb2FkRmlsZXMgKGZpbGVzLCBpZHgpIHtcbiAgICBjb25zdCB1cGxvYWRGbnMgPSBmaWxlcy5tYXAoZmlsZSA9PiB7XG4gICAgICBjb25zdCBvYmogPSB1cGxvYWRFbW9qaShmaWxlLCB7cHJlZml4LCBzdWZmaXh9KVxuXG4gICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgIFtvYmouaWRdOiB7XG4gICAgICAgICAgdHlwZTogJ3VwbG9hZGluZycsXG4gICAgICAgICAgbWVzc2FnZTogJ1VwbG9hZGluZy4uLidcbiAgICAgICAgfVxuICAgICAgfTtcblxuICAgICAgdXBsb2FkcyA9IFsuLi51cGxvYWRzLCB7XG4gICAgICAgIGZpbGUsXG4gICAgICAgIGlkOiBvYmouaWRcbiAgICAgIH1dO1xuXG4gICAgICByZXR1cm4gb2JqLnVwbG9hZFxuICAgIH0pO1xuXG4gICAgcHJvY2Vzc1VwbG9hZHModXBsb2FkRm5zLnJldmVyc2UoKSlcbiAgfVxuXG4gIGZ1bmN0aW9uIHByb2Nlc3NVcGxvYWRzKHVwbG9hZHMpIHtcbiAgICBpZiAoIXVwbG9hZHMgfHwgdXBsb2Fkcy5sZW5ndGggPT0gMCkgcmV0dXJuXG5cbiAgICBjb25zdCBuZXh0VXBsb2FkID0gdXBsb2Fkcy5wb3AoKVxuICAgIC8vIGNvbnN0IG5leHRUaWNrID0gRGF0ZS5ub3coKSArIDEwMDBcblxuICAgIG5leHRVcGxvYWQoKGlkLCBlcnJvcikgPT4ge1xuICAgICAgICBpZiAoZXJyb3IpIHtcbiAgICAgICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgICAgIC4uLnVwbG9hZHNTdGF0dXNCeUlkLFxuICAgICAgICAgICAgW2lkXToge1xuICAgICAgICAgICAgICB0eXBlOiAnZXJyb3InLFxuICAgICAgICAgICAgICBtZXNzYWdlOiBlcnJvci5tZXNzYWdlIHx8IGVycm9yXG4gICAgICAgICAgICB9XG4gICAgICAgICAgfTtcbiAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgICAgIC4uLnVwbG9hZHNTdGF0dXNCeUlkLFxuICAgICAgICAgICAgW2lkXToge1xuICAgICAgICAgICAgICB0eXBlOiAnc3VjY2VzcycsXG4gICAgICAgICAgICAgIG1lc3NhZ2U6ICdTdWNjZXNzZnVsbHkgVXBsb2FkZWQuJ1xuICAgICAgICAgICAgfVxuICAgICAgICAgIH07XG4gICAgICAgIH1cblxuICAgICAgICAvLyBsZXQgc2xlZXBGb3IgPSBuZXh0VGljayAtIERhdGUubm93KClcbiAgICAgICAgLy8gaWYgKHNsZWVwRm9yIDwgMCkgc2xlZXBGb3IgPSAwXG5cbiAgICAgICAgLy8gc2V0VGltZW91dCgoKSA9PiBwcm9jZXNzVXBsb2Fkcyh1cGxvYWRzKSwgc2xlZXBGb3IpXG4gICAgICAgIHByb2Nlc3NVcGxvYWRzKHVwbG9hZHMpXG4gICAgICB9KTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGhhbmRsZUZpbGVzQWRkZWQgKGV2ZW50KSB7XG4gICAgY29uc3QgZmlsZXMgPSBldmVudC5kZXRhaWw7XG5cbiAgICB1cGxvYWRGaWxlcyhmaWxlcyk7XG4gIH1cbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5uZXV0cmFsLWZhY2UtZW1vamktdG9vbHMge1xuICAgIGJvcmRlcjogdmFyKC0tY29sb3Itc2xhY2stYm9yZGVyKSAxcHggc29saWQ7XG4gICAgYm9yZGVyLWxlZnQ6IHZhcigtLWNvbG9yLW5ldXRyYWwtZmFjZS1lbW9qaS10b29scykgM3B4IHNvbGlkO1xuICAgIG1hcmdpbjogMCAwIDI1cHggMDtcbiAgICBwYWRkaW5nOiAyNXB4O1xuICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICB9XG5cbiAgLmljb24uaGVhZGluZyB7XG4gICAgbWFyZ2luOiAwIDVweCAwIDA7XG4gICAgaGVpZ2h0OiAxLjI1ZW07XG4gICAgdmVydGljYWwtYWxpZ246IC0yNSU7XG4gIH1cblxuICAuaW5wdXQtbm90ZSB7XG4gICAgZm9udC1zaXplOiAuOXJlbTtcbiAgICBsaW5lLWhlaWdodDogMS4yNXJlbTtcbiAgICBjb2xvcjogdmFyKC0tY29sb3ItdGV4dC1ncmF5KTtcbiAgfVxuXG4gIC51cGxvYWRzIHtcbiAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gICAgbWFyZ2luOiAwO1xuICAgIGZvbnQtc2l6ZTogMC45cmVtO1xuICB9XG5cbiAgLmN1c3RvbWl6YXRpb25zIHtcbiAgICBkaXNwbGF5OiBmbGV4XG4gIH1cblxuICAudG9nZ2xlLW9wdHMge1xuICAgIG1hcmdpbi1ib3R0b206IDFyZW07XG4gIH1cblxuICAubmV1dHJhbC1mYWNlLWVtb2ppLXRvb2xzIC5tb25ve1xuICAgIGZvbnQtZmFtaWx5OiAnQ291cmllciBOZXcnLCBDb3VyaWVyLCBtb25vc3BhY2VcbiAgfVxuPC9zdHlsZT5cblxuPGRpdiBjbGFzcz1cIm5ldXRyYWwtZmFjZS1lbW9qaS10b29sc1wiPlxuICA8aDQgY2xhc3M9XCJoZWFkaW5nXCI+XG4gICAgPGltZyBjbGFzcz1cImljb24gaGVhZGluZ1wiIHNyYz1cIntTRVRfSUNPTl9VUkx9XCIgYWx0PVwiXCIgLz5cbiAgICA8c3BhbiBjbGFzcz1cInRleHRcIj5CdWxrIEVtb2ppIFVwbG9hZGVyPC9zcGFuPlxuICA8L2g0PlxuICA8cCBjbGFzcz1cInN1YmhlYWRpbmdcIj5EcmFnIGFuZCBkcm9wIGltYWdlcyBpbnRvIHRoZSBhcmVhIGJlbG93LiBJbWFnZXMgd2lsbCBiZSB1cGxvYWRlZCB1c2luZyB0aGVpciBmaWxlbmFtZSBhcyB0aGUgZW1vamkgbmFtZS48L3A+XG4gIDxwIGNsYXNzPVwiaW5wdXQtbm90ZVwiPkV4YW1wbGU6IDxzcGFuIGNsYXNzPVwibm9ybWFsXCI+XCJtZW93LXBhcnR5LmdpZlwiIHdpbGwgYmUgYWRkZWQgYXMgPHNwYW4gY2xhc3M9XCJtb25vXCI+PHN0cm9uZz46e3ByZWZpeH1tZW93LXBhcnR5e3N1ZmZpeH06PC9zdHJvbmc+PC9zcGFuPjwvc3Bhbj48L3A+XG4gIDxidXR0b24gY2xhc3M9XCJjLWJ1dHRvbiBjLWJ1dHRvbi0tb3V0bGluZSBjLWJ1dHRvbi0tbWVkaXVtIHRvZ2dsZS1vcHRzXCIgdHlwZT1cImJ1dHRvblwiIG5hbWU9XCJvcHRpb25zXCIgb246Y2xpY2s9e3RvZ2dsZU9wdHN9PuKame+4jyB7IHNob3dPcHRzID8gXCJIaWRlXCIgOiBcIlNob3dcIn0gb3B0aW9uczwvYnV0dG9uPlxuICA8cCBjbGFzcz1cImN1c3RvbWl6YXRpb25zXCIgc3R5bGU9XCJkaXNwbGF5OntzaG93T3B0cyA/IFwiZmxleFwiIDogXCJub25lXCJ9XCI+XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3ByZWZpeH0gdHlwZT1cInRleHRcIiBuYW1lPVwicHJlZml4XCIgcGxhY2Vob2xkZXI9XCJvcHRpb25hbCBwcmVmaXhcIj5cbiAgICAmbmJzcDtcbiAgICA8aW5wdXQgYmluZDp2YWx1ZT17c3VmZml4fSB0eXBlPVwidGV4dFwiIG5hbWU9XCJzdWZmaXhcIiBwbGFjZWhvbGRlcj1cIm9wdGlvbmFsIHN1ZmZpeFwiPlxuICA8L3A+XG4gIDwhLS0gPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7c2hvd09wdHMgPyBcImZsZXhcIiA6IFwibm9uZVwifVwiPlxuICAgIDxpbnB1dCBiaW5kOnZhbHVlPXtzZWFyY2hTdHJ9IHR5cGU9XCJ0ZXh0XCIgbmFtZT1cInNlYXJjaFN0clwiIHBsYWNlaG9sZGVyPVwicmVwbGFjZSB0aGVzZSBjaGFyYWN0ZXJzLi4uXCI+XG4gICAgJm5ic3A7XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3JlcGxhY2VTdHJ9IHR5cGU9XCJ0ZXh0XCIgbmFtZT1cInJlcGxhY2VTdHJcIiBwbGFjZWhvbGRlcj1cIi4uLndpdGggdGhlc2VcIj5cbiAgPC9wPiAtLT5cbiAgPEZpbGVEcm9wem9uZSBvbjpmaWxlc2FkZGVkPXtoYW5kbGVGaWxlc0FkZGVkfSAvPlxuICA8dWwgY2xhc3M9XCJ1cGxvYWRzXCI+XG4gICAgeyNlYWNoIHVwbG9hZHMgYXMgdXBsb2FkICh1cGxvYWQuaWQpfVxuICAgICAgPFVwbG9hZCB1cGxvYWQ9e3VwbG9hZH0gc3RhdHVzPXt1cGxvYWRzU3RhdHVzQnlJZFt1cGxvYWQuaWRdfSBwcmVmaXg9e3ByZWZpeH0gc3VmZml4PXtzdWZmaXh9IHNlYXJjaFN0cj17c2VhcmNoU3RyfSByZXBsYWNlU3RyPXtyZXBsYWNlU3RyfSAvPlxuICAgIHsvZWFjaH1cbiAgPC91bD5cbjwvZGl2PlxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQXVGRSx5QkFBeUIsNEJBQUMsQ0FBQyxBQUN6QixNQUFNLENBQUUsSUFBSSxvQkFBb0IsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQzNDLFdBQVcsQ0FBRSxJQUFJLGdDQUFnQyxDQUFDLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FDNUQsTUFBTSxDQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FDbEIsT0FBTyxDQUFFLElBQUksQ0FDYixVQUFVLENBQUUsS0FBSyxBQUNuQixDQUFDLEFBRUQsS0FBSyxRQUFRLDRCQUFDLENBQUMsQUFDYixNQUFNLENBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUNqQixNQUFNLENBQUUsTUFBTSxDQUNkLGNBQWMsQ0FBRSxJQUFJLEFBQ3RCLENBQUMsQUFFRCxXQUFXLDRCQUFDLENBQUMsQUFDWCxTQUFTLENBQUUsS0FBSyxDQUNoQixXQUFXLENBQUUsT0FBTyxDQUNwQixLQUFLLENBQUUsSUFBSSxpQkFBaUIsQ0FBQyxBQUMvQixDQUFDLEFBRUQsUUFBUSw0QkFBQyxDQUFDLEFBQ1IsZUFBZSxDQUFFLElBQUksQ0FDckIsTUFBTSxDQUFFLENBQUMsQ0FDVCxTQUFTLENBQUUsTUFBTSxBQUNuQixDQUFDLEFBRUQsZUFBZSw0QkFBQyxDQUFDLEFBQ2YsT0FBTyxDQUFFLElBQUk7RUFDZixDQUFDLEFBRUQsWUFBWSw0QkFBQyxDQUFDLEFBQ1osYUFBYSxDQUFFLElBQUksQUFDckIsQ0FBQyxBQUVELHVDQUF5QixDQUFDLG1CQUFLLENBQUMsQUFDOUIsV0FBVyxDQUFFLGFBQWEsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVM7RUFDaEQsQ0FBQyJ9 */";
     	append_dev(document.head, style);
     }
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
+    	child_ctx[14] = list[i];
     	return child_ctx;
     }
 
-    // (91:4) {#each uploads as upload (upload.id)}
+    // (147:4) {#each uploads as upload (upload.id)}
     function create_each_block(key_1, ctx) {
     	let first;
     	let current;
 
     	const upload = new Upload({
     			props: {
-    				upload: /*upload*/ ctx[5],
-    				status: /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[5].id]
+    				upload: /*upload*/ ctx[14],
+    				status: /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[14].id],
+    				prefix: /*prefix*/ ctx[2],
+    				suffix: /*suffix*/ ctx[3],
+    				searchStr: /*searchStr*/ ctx[6],
+    				replaceStr: /*replaceStr*/ ctx[7]
     			},
     			$$inline: true
     		});
@@ -12849,8 +13083,10 @@ console.log("💩🥳")
     		},
     		p: function update(ctx, dirty) {
     			const upload_changes = {};
-    			if (dirty & /*uploads*/ 1) upload_changes.upload = /*upload*/ ctx[5];
-    			if (dirty & /*uploadsStatusById, uploads*/ 3) upload_changes.status = /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[5].id];
+    			if (dirty & /*uploads*/ 1) upload_changes.upload = /*upload*/ ctx[14];
+    			if (dirty & /*uploadsStatusById, uploads*/ 3) upload_changes.status = /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[14].id];
+    			if (dirty & /*prefix*/ 4) upload_changes.prefix = /*prefix*/ ctx[2];
+    			if (dirty & /*suffix*/ 8) upload_changes.suffix = /*suffix*/ ctx[3];
     			upload.$set(upload_changes);
     		},
     		i: function intro(local) {
@@ -12872,7 +13108,7 @@ console.log("💩🥳")
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(91:4) {#each uploads as upload (upload.id)}",
+    		source: "(147:4) {#each uploads as upload (upload.id)}",
     		ctx
     	});
 
@@ -12891,18 +13127,38 @@ console.log("💩🥳")
     	let t4;
     	let p1;
     	let t5;
+    	let span2;
+    	let t6;
     	let span1;
+    	let strong;
     	let t7;
     	let t8;
+    	let t9;
+    	let t10;
+    	let t11;
+    	let t12;
+    	let button;
+    	let t13;
+    	let t14_value = (/*showOpts*/ ctx[4] ? "Hide" : "Show") + "";
+    	let t14;
+    	let t15;
+    	let t16;
+    	let p2;
+    	let input0;
+    	let t17;
+    	let input1;
+    	let t18;
+    	let t19;
     	let ul;
     	let each_blocks = [];
     	let each_1_lookup = new Map();
     	let current;
+    	let dispose;
     	const filedropzone = new File_dropzone({ $$inline: true });
-    	filedropzone.$on("filesadded", /*handleFilesAdded*/ ctx[3]);
+    	filedropzone.$on("filesadded", /*handleFilesAdded*/ ctx[9]);
     	let each_value = /*uploads*/ ctx[0];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*upload*/ ctx[5].id;
+    	const get_key = ctx => /*upload*/ ctx[14].id;
     	validate_each_keys(ctx, each_value, get_each_context, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -12921,44 +13177,79 @@ console.log("💩🥳")
     			span0.textContent = "Bulk Emoji Uploader";
     			t2 = space();
     			p0 = element("p");
-    			p0.textContent = "Drag and drop images into the area below. Any images dropped there will be automatically uploaded using their filename as the emoji name.";
+    			p0.textContent = "Drag and drop images into the area below. Images will be uploaded using their filename as the emoji name.";
     			t4 = space();
     			p1 = element("p");
     			t5 = text("Example: ");
+    			span2 = element("span");
+    			t6 = text("\"meow-party.gif\" will be added as ");
     			span1 = element("span");
-    			span1.textContent = "\"ditto.gif\" will be added as \"ditto\"";
-    			t7 = space();
+    			strong = element("strong");
+    			t7 = text(":");
+    			t8 = text(/*prefix*/ ctx[2]);
+    			t9 = text("meow-party");
+    			t10 = text(/*suffix*/ ctx[3]);
+    			t11 = text(":");
+    			t12 = space();
+    			button = element("button");
+    			t13 = text("⚙️ ");
+    			t14 = text(t14_value);
+    			t15 = text(" options");
+    			t16 = space();
+    			p2 = element("p");
+    			input0 = element("input");
+    			t17 = text("\n     \n    ");
+    			input1 = element("input");
+    			t18 = space();
     			create_component(filedropzone.$$.fragment);
-    			t8 = space();
+    			t19 = space();
     			ul = element("ul");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(img, "class", "icon heading svelte-xnpujy");
-    			if (img.src !== (img_src_value = /*SET_ICON_URL*/ ctx[2])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "class", "icon heading svelte-21xepa");
+    			if (img.src !== (img_src_value = /*SET_ICON_URL*/ ctx[5])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 83, 4, 1740);
+    			add_location(img, file$2, 128, 4, 2581);
     			attr_dev(span0, "class", "text");
-    			add_location(span0, file$2, 84, 4, 1801);
+    			add_location(span0, file$2, 129, 4, 2642);
     			attr_dev(h4, "class", "heading");
-    			add_location(h4, file$2, 82, 2, 1715);
+    			add_location(h4, file$2, 127, 2, 2556);
     			attr_dev(p0, "class", "subheading");
-    			add_location(p0, file$2, 86, 2, 1857);
-    			attr_dev(span1, "class", "normal");
-    			add_location(span1, file$2, 87, 33, 2054);
-    			attr_dev(p1, "class", "input-note svelte-xnpujy");
-    			add_location(p1, file$2, 87, 2, 2023);
-    			attr_dev(ul, "class", "uploads svelte-xnpujy");
-    			add_location(ul, file$2, 89, 2, 2177);
-    			attr_dev(div, "class", "neutral-face-emoji-tools svelte-xnpujy");
-    			add_location(div, file$2, 81, 0, 1674);
+    			add_location(p0, file$2, 131, 2, 2698);
+    			add_location(strong, file$2, 132, 107, 2937);
+    			attr_dev(span1, "class", "mono svelte-21xepa");
+    			add_location(span1, file$2, 132, 88, 2918);
+    			attr_dev(span2, "class", "normal");
+    			add_location(span2, file$2, 132, 33, 2863);
+    			attr_dev(p1, "class", "input-note svelte-21xepa");
+    			add_location(p1, file$2, 132, 2, 2832);
+    			attr_dev(button, "class", "c-button c-button--outline c-button--medium toggle-opts svelte-21xepa");
+    			attr_dev(button, "type", "button");
+    			attr_dev(button, "name", "options");
+    			add_location(button, file$2, 133, 2, 3003);
+    			attr_dev(input0, "type", "text");
+    			attr_dev(input0, "name", "prefix");
+    			attr_dev(input0, "placeholder", "optional prefix");
+    			add_location(input0, file$2, 135, 4, 3254);
+    			attr_dev(input1, "type", "text");
+    			attr_dev(input1, "name", "suffix");
+    			attr_dev(input1, "placeholder", "optional suffix");
+    			add_location(input1, file$2, 137, 4, 3353);
+    			attr_dev(p2, "class", "customizations svelte-21xepa");
+    			set_style(p2, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
+    			add_location(p2, file$2, 134, 2, 3178);
+    			attr_dev(ul, "class", "uploads svelte-21xepa");
+    			add_location(ul, file$2, 145, 2, 3799);
+    			attr_dev(div, "class", "neutral-face-emoji-tools svelte-21xepa");
+    			add_location(div, file$2, 126, 0, 2515);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
-    		m: function mount(target, anchor) {
+    		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
     			append_dev(div, h4);
     			append_dev(h4, img);
@@ -12969,10 +13260,30 @@ console.log("💩🥳")
     			append_dev(div, t4);
     			append_dev(div, p1);
     			append_dev(p1, t5);
-    			append_dev(p1, span1);
-    			append_dev(div, t7);
+    			append_dev(p1, span2);
+    			append_dev(span2, t6);
+    			append_dev(span2, span1);
+    			append_dev(span1, strong);
+    			append_dev(strong, t7);
+    			append_dev(strong, t8);
+    			append_dev(strong, t9);
+    			append_dev(strong, t10);
+    			append_dev(strong, t11);
+    			append_dev(div, t12);
+    			append_dev(div, button);
+    			append_dev(button, t13);
+    			append_dev(button, t14);
+    			append_dev(button, t15);
+    			append_dev(div, t16);
+    			append_dev(div, p2);
+    			append_dev(p2, input0);
+    			set_input_value(input0, /*prefix*/ ctx[2]);
+    			append_dev(p2, t17);
+    			append_dev(p2, input1);
+    			set_input_value(input1, /*suffix*/ ctx[3]);
+    			append_dev(div, t18);
     			mount_component(filedropzone, div, null);
-    			append_dev(div, t8);
+    			append_dev(div, t19);
     			append_dev(div, ul);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -12980,9 +13291,32 @@ console.log("💩🥳")
     			}
 
     			current = true;
+    			if (remount) run_all(dispose);
+
+    			dispose = [
+    				listen_dev(button, "click", /*toggleOpts*/ ctx[8], false, false, false),
+    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[12]),
+    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[13])
+    			];
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*uploads, uploadsStatusById*/ 3) {
+    			if (!current || dirty & /*prefix*/ 4) set_data_dev(t8, /*prefix*/ ctx[2]);
+    			if (!current || dirty & /*suffix*/ 8) set_data_dev(t10, /*suffix*/ ctx[3]);
+    			if ((!current || dirty & /*showOpts*/ 16) && t14_value !== (t14_value = (/*showOpts*/ ctx[4] ? "Hide" : "Show") + "")) set_data_dev(t14, t14_value);
+
+    			if (dirty & /*prefix*/ 4 && input0.value !== /*prefix*/ ctx[2]) {
+    				set_input_value(input0, /*prefix*/ ctx[2]);
+    			}
+
+    			if (dirty & /*suffix*/ 8 && input1.value !== /*suffix*/ ctx[3]) {
+    				set_input_value(input1, /*suffix*/ ctx[3]);
+    			}
+
+    			if (!current || dirty & /*showOpts*/ 16) {
+    				set_style(p2, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
+    			}
+
+    			if (dirty & /*uploads, uploadsStatusById, prefix, suffix, searchStr, replaceStr*/ 207) {
     				const each_value = /*uploads*/ ctx[0];
     				validate_each_argument(each_value);
     				group_outros();
@@ -13017,6 +13351,8 @@ console.log("💩🥳")
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].d();
     			}
+
+    			run_all(dispose);
     		}
     	};
 
@@ -13032,41 +13368,66 @@ console.log("💩🥳")
     }
 
     function instance$2($$self, $$props, $$invalidate) {
-    	const SET_ICON_URL = safari.extension.baseURI + "icon_128.png";
+    	const SET_ICON_URL = safari.extension.baseURI + "icon_128_128.png";
     	let uploads = [];
     	let uploadsStatusById = {};
+    	let prefix = "";
+    	let suffix = "";
+    	let searchStr = "";
+    	let replaceStr = "";
+    	let showOpts = false;
 
-    	function uploadFiles(files) {
-    		files.forEach(file => {
-    			const id = uploadEmoji(file, error => {
-    				if (error) {
-    					$$invalidate(1, uploadsStatusById = {
-    						...uploadsStatusById,
-    						[id]: {
-    							type: "error",
-    							message: error.message || error
-    						}
-    					});
-    				} else {
-    					$$invalidate(1, uploadsStatusById = {
-    						...uploadsStatusById,
-    						[id]: {
-    							type: "success",
-    							message: "Successfully Uploaded."
-    						}
-    					});
-    				}
-    			});
+    	function toggleOpts() {
+    		$$invalidate(4, showOpts = !showOpts);
+    	}
+
+    	function uploadFiles(files, idx) {
+    		const uploadFns = files.map(file => {
+    			const obj = uploadEmoji(file, { prefix, suffix });
 
     			$$invalidate(1, uploadsStatusById = {
     				...uploadsStatusById,
-    				[id]: {
+    				[obj.id]: {
     					type: "uploading",
     					message: "Uploading..."
     				}
     			});
 
-    			$$invalidate(0, uploads = [...uploads, { file, id }]);
+    			$$invalidate(0, uploads = [...uploads, { file, id: obj.id }]);
+    			return obj.upload;
+    		});
+
+    		processUploads(uploadFns.reverse());
+    	}
+
+    	function processUploads(uploads) {
+    		if (!uploads || uploads.length == 0) return;
+    		const nextUpload = uploads.pop();
+
+    		// const nextTick = Date.now() + 1000
+    		nextUpload((id, error) => {
+    			if (error) {
+    				$$invalidate(1, uploadsStatusById = {
+    					...uploadsStatusById,
+    					[id]: {
+    						type: "error",
+    						message: error.message || error
+    					}
+    				});
+    			} else {
+    				$$invalidate(1, uploadsStatusById = {
+    					...uploadsStatusById,
+    					[id]: {
+    						type: "success",
+    						message: "Successfully Uploaded."
+    					}
+    				});
+    			}
+
+    			// let sleepFor = nextTick - Date.now()
+    			// if (sleepFor < 0) sleepFor = 0
+    			// setTimeout(() => processUploads(uploads), sleepFor)
+    			processUploads(uploads);
     		});
     	}
 
@@ -13084,6 +13445,16 @@ console.log("💩🥳")
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("App", $$slots, []);
 
+    	function input0_input_handler() {
+    		prefix = this.value;
+    		$$invalidate(2, prefix);
+    	}
+
+    	function input1_input_handler() {
+    		suffix = this.value;
+    		$$invalidate(3, suffix);
+    	}
+
     	$$self.$capture_state = () => ({
     		Upload,
     		FileDropzone: File_dropzone,
@@ -13091,26 +13462,53 @@ console.log("💩🥳")
     		SET_ICON_URL,
     		uploads,
     		uploadsStatusById,
+    		prefix,
+    		suffix,
+    		searchStr,
+    		replaceStr,
+    		showOpts,
+    		toggleOpts,
     		uploadFiles,
+    		processUploads,
     		handleFilesAdded
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("uploads" in $$props) $$invalidate(0, uploads = $$props.uploads);
     		if ("uploadsStatusById" in $$props) $$invalidate(1, uploadsStatusById = $$props.uploadsStatusById);
+    		if ("prefix" in $$props) $$invalidate(2, prefix = $$props.prefix);
+    		if ("suffix" in $$props) $$invalidate(3, suffix = $$props.suffix);
+    		if ("searchStr" in $$props) $$invalidate(6, searchStr = $$props.searchStr);
+    		if ("replaceStr" in $$props) $$invalidate(7, replaceStr = $$props.replaceStr);
+    		if ("showOpts" in $$props) $$invalidate(4, showOpts = $$props.showOpts);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [uploads, uploadsStatusById, SET_ICON_URL, handleFilesAdded];
+    	return [
+    		uploads,
+    		uploadsStatusById,
+    		prefix,
+    		suffix,
+    		showOpts,
+    		SET_ICON_URL,
+    		searchStr,
+    		replaceStr,
+    		toggleOpts,
+    		handleFilesAdded,
+    		uploadFiles,
+    		processUploads,
+    		input0_input_handler,
+    		input1_input_handler
+    	];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		if (!document.getElementById("svelte-xnpujy-style")) add_css$2();
+    		if (!document.getElementById("svelte-21xepa-style")) add_css$2();
     		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -13122,7 +13520,7 @@ console.log("💩🥳")
     	}
     }
 
-    const ELEMENT_TO_INSERT_BEFORE_SELECTOR = '.p-customize_emoji_wrapper';
+    const ELEMENT_TO_INSERT_BEFORE_SELECTOR = '.p-customize_emoji_wrapper__container';
 
     function elementIsReady(selector) {
       return new Promise(resolve => {

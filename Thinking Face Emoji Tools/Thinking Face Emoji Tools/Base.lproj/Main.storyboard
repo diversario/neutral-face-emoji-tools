@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -107,7 +108,7 @@
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FWV-e2-WQh" userLabel="IconView">
                                         <rect key="frame" x="176" y="121" width="128" height="129"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="icon_128" id="Hhb-TZ-Dhg"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="icon_128_128" id="Hhb-TZ-Dhg"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EB0-ac-UZR">
                                         <rect key="frame" x="206" y="63" width="68" height="16"/>
@@ -160,6 +161,6 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="icon_128" width="128" height="128"/>
+        <image name="icon_128_128" width="128" height="128"/>
     </resources>
 </document>

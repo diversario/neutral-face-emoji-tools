@@ -14,7 +14,6 @@ npm run build
 
 cat <<EOF > ${SRCROOT}/Thinking\ Face\ Emoji\ Tools\ Extension/script.js
 document.addEventListener("DOMContentLoaded", function(event) {
-console.log("💩🥳")
 $(cat dist/content.js)
 });
 EOF

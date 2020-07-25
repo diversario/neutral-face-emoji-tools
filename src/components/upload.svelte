@@ -1,8 +1,16 @@
 <script>
   export let upload;
   export let status;
+  export let prefix;
+  export let suffix;
+  export let searchStr;
+  export let replaceStr;
 
   const filePreview = window.URL.createObjectURL(upload.file);
+  const chunks = upload.file.name.split('.')
+  const ext = chunks.pop()
+  const originalName = chunks.join('.')
+  const filename = `${prefix}${originalName}${suffix}`
 </script>
 
 <style>
@@ -26,6 +34,12 @@
   .filename {
     font-weight: bold;
     margin-right: 1em;
+  }
+
+  .ext {
+    font-weight: bold;
+    margin-right: 1em;
+    color: rgba(0, 0, 0, 0.2)
   }
 
   .status {
@@ -76,7 +90,7 @@
   class:error={status.type === 'error'}
   class:success={status.type === 'success'}>
   <img class="preview" src={filePreview} alt="" />
-  <span class="filename">{upload.file.name}</span>
+  <span class="filename">{filename}<span class="ext">.{ext}</span></span>
   <span class="status">
     <i class="icon uploading ts_icon ts_icon_spinner"></i>
     <i class="icon error ts_icon ts_icon_warning"></i>
