@@ -294,6 +294,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
 
+    const globals = typeof window !== 'undefined' ? window : typeof globalThis !== 'undefined' ? globalThis : global;
+
     function outro_and_destroy_block(block, lookup) {
       transition_out(block, 1, 1, () => {
         lookup.delete(block.key);
@@ -1397,7 +1399,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function add_css$1() {
     	var style = element("style");
     	style.id = "svelte-gefk64-style";
-    	style.textContent = ".dropzone.svelte-gefk64{display:flex;align-items:center;justify-content:center;text-align:center;position:relative;margin:0 0 10px 0;width:100%;height:150px;border:var(--color-dropzone-border) 3px dashed;border-radius:5px;background:var(--color-dropzone-bg);transition:background 450ms, border-color 450ms}.dropzone.over.svelte-gefk64,.dropzone.svelte-gefk64:hover{background:var(--color-dropzone-active-bg);border-color:var(--color-dropzone-active-border)}.file-input.svelte-gefk64{display:block;position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0}.file-input.svelte-gefk64:hover{cursor:pointer}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlsZS1kcm9wem9uZS5zdmVsdGUiLCJzb3VyY2VzIjpbImZpbGUtZHJvcHpvbmUuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XG4gIGltcG9ydCB7IGNyZWF0ZUV2ZW50RGlzcGF0Y2hlciB9IGZyb20gJ3N2ZWx0ZSc7XG4gIGltcG9ydCB7IGZyb21FdmVudCB9IGZyb20gJ2ZpbGUtc2VsZWN0b3InO1xuXG4gIGNvbnN0IGRpc3BhdGNoID0gY3JlYXRlRXZlbnREaXNwYXRjaGVyKCk7XG5cbiAgbGV0IGlzT3ZlckRyb3Bab25lID0gZmFsc2U7XG5cbiAgYXN5bmMgZnVuY3Rpb24gaGFuZGxlRHJvcCAoZXZlbnQpIHtcbiAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuICAgIGlzT3ZlckRyb3Bab25lID0gZmFsc2U7XG5cbiAgICBjb25zdCBmaWxlcyA9IGF3YWl0IGZyb21FdmVudChldmVudCk7XG4gICAgZGlzcGF0Y2goJ2ZpbGVzYWRkZWQnLCBmaWxlcyk7XG4gIH1cblxuICBhc3luYyBmdW5jdGlvbiBoYW5kbGVGaWxlQ2hhbmdlIChldmVudCkge1xuICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG4gICAgY29uc3QgZmlsZXMgPSBhd2FpdCBmcm9tRXZlbnQoZXZlbnQpO1xuICAgIGRpc3BhdGNoKCdmaWxlc2FkZGVkJywgZmlsZXMpO1xuICB9XG5cbiAgZnVuY3Rpb24gaGFuZGxlRHJhZ092ZXIgKGV2ZW50KSB7XG4gICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcbiAgICBpc092ZXJEcm9wWm9uZSA9IHRydWU7XG4gIH1cblxuICBmdW5jdGlvbiBoYW5kbGVEcmFnTGVhdmUgKCkge1xuICAgIGlzT3ZlckRyb3Bab25lID0gZmFsc2U7XG4gIH1cbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5kcm9wem9uZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgbWFyZ2luOiAwIDAgMTBweCAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTUwcHg7XG4gICAgYm9yZGVyOiB2YXIoLS1jb2xvci1kcm9wem9uZS1ib3JkZXIpIDNweCBkYXNoZWQ7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWNvbG9yLWRyb3B6b25lLWJnKTtcbiAgICB0cmFuc2l0aW9uOiBiYWNrZ3JvdW5kIDQ1MG1zLCBib3JkZXItY29sb3IgNDUwbXM7XG4gIH1cblxuICAuZHJvcHpvbmUub3ZlcixcbiAgLmRyb3B6b25lOmhvdmVyIHtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1jb2xvci1kcm9wem9uZS1hY3RpdmUtYmcpO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tY29sb3ItZHJvcHpvbmUtYWN0aXZlLWJvcmRlcik7XG4gIH1cblxuICAuZmlsZS1pbnB1dCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICByaWdodDogMDtcbiAgICBib3R0b206IDA7XG4gICAgbGVmdDogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBvcGFjaXR5OiAwO1xuICB9XG5cbiAgLmZpbGUtaW5wdXQ6aG92ZXIge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgfVxuPC9zdHlsZT5cblxuPGRpdlxuICBjbGFzcz1cImRyb3B6b25lXCJcbiAgY2xhc3M6b3Zlcj17aXNPdmVyRHJvcFpvbmV9XG4gIG9uOmRyb3A9e2hhbmRsZURyb3B9XG4gIG9uOmRyYWdvdmVyPXtoYW5kbGVEcmFnT3Zlcn1cbiAgb246ZHJhZ2xlYXZlPXtoYW5kbGVEcmFnTGVhdmV9PlxuICA8ZGl2IGNsYXNzPVwiZHJvcHpvbmVfX2NvbnRlbnQgaW5wdXRfbm90ZVwiPlxuICAgIDxzdHJvbmc+RHJvcCBpbWFnZXMgaGVyZTwvc3Ryb25nPiBvciBjbGljayB0byBvcGVuIGEgZmlsZSBkaWFsb2dcbiAgPC9kaXY+XG4gIDxpbnB1dFxuICAgIGNsYXNzPVwiZmlsZS1pbnB1dFwiXG4gICAgdHlwZT1cImZpbGVcIlxuICAgIG9uOmNoYW5nZT17aGFuZGxlRmlsZUNoYW5nZX0gLz5cbjwvZGl2PiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFpQ0UsU0FBUyxjQUFDLENBQUMsQUFDVCxPQUFPLENBQUUsSUFBSSxDQUNiLFdBQVcsQ0FBRSxNQUFNLENBQ25CLGVBQWUsQ0FBRSxNQUFNLENBQ3ZCLFVBQVUsQ0FBRSxNQUFNLENBQ2xCLFFBQVEsQ0FBRSxRQUFRLENBQ2xCLE1BQU0sQ0FBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQ2xCLEtBQUssQ0FBRSxJQUFJLENBQ1gsTUFBTSxDQUFFLEtBQUssQ0FDYixNQUFNLENBQUUsSUFBSSx1QkFBdUIsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQy9DLGFBQWEsQ0FBRSxHQUFHLENBQ2xCLFVBQVUsQ0FBRSxJQUFJLG1CQUFtQixDQUFDLENBQ3BDLFVBQVUsQ0FBRSxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsWUFBWSxDQUFDLEtBQUssQUFDbEQsQ0FBQyxBQUVELFNBQVMsbUJBQUssQ0FDZCx1QkFBUyxNQUFNLEFBQUMsQ0FBQyxBQUNmLFVBQVUsQ0FBRSxJQUFJLDBCQUEwQixDQUFDLENBQzNDLFlBQVksQ0FBRSxJQUFJLDhCQUE4QixDQUFDLEFBQ25ELENBQUMsQUFFRCxXQUFXLGNBQUMsQ0FBQyxBQUNYLE9BQU8sQ0FBRSxLQUFLLENBQ2QsUUFBUSxDQUFFLFFBQVEsQ0FDbEIsR0FBRyxDQUFFLENBQUMsQ0FDTixLQUFLLENBQUUsQ0FBQyxDQUNSLE1BQU0sQ0FBRSxDQUFDLENBQ1QsSUFBSSxDQUFFLENBQUMsQ0FDUCxLQUFLLENBQUUsSUFBSSxDQUNYLE9BQU8sQ0FBRSxDQUFDLEFBQ1osQ0FBQyxBQUVELHlCQUFXLE1BQU0sQUFBQyxDQUFDLEFBQ2pCLE1BQU0sQ0FBRSxPQUFPLEFBQ2pCLENBQUMifQ== */";
+    	style.textContent = ".dropzone.svelte-gefk64{display:flex;align-items:center;justify-content:center;text-align:center;position:relative;margin:0 0 10px 0;width:100%;height:150px;border:var(--color-dropzone-border) 3px dashed;border-radius:5px;background:var(--color-dropzone-bg);transition:background 450ms, border-color 450ms}.dropzone.over.svelte-gefk64,.dropzone.svelte-gefk64:hover{background:var(--color-dropzone-active-bg);border-color:var(--color-dropzone-active-border)}.file-input.svelte-gefk64{display:block;position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0}.file-input.svelte-gefk64:hover{cursor:pointer}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlsZS1kcm9wem9uZS5zdmVsdGUiLCJzb3VyY2VzIjpbImZpbGUtZHJvcHpvbmUuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XG4gIGltcG9ydCB7IGNyZWF0ZUV2ZW50RGlzcGF0Y2hlciB9IGZyb20gJ3N2ZWx0ZSc7XG4gIGltcG9ydCB7IGZyb21FdmVudCB9IGZyb20gJ2ZpbGUtc2VsZWN0b3InO1xuXG4gIGV4cG9ydCBsZXQgdmlzaWJsZSA9IHRydWVcblxuICBjb25zdCBkaXNwYXRjaCA9IGNyZWF0ZUV2ZW50RGlzcGF0Y2hlcigpO1xuXG4gIGxldCBpc092ZXJEcm9wWm9uZSA9IGZhbHNlO1xuXG4gIGFzeW5jIGZ1bmN0aW9uIGhhbmRsZURyb3AgKGV2ZW50KSB7XG4gICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcbiAgICBpc092ZXJEcm9wWm9uZSA9IGZhbHNlO1xuXG4gICAgY29uc3QgZmlsZXMgPSBhd2FpdCBmcm9tRXZlbnQoZXZlbnQpO1xuICAgIGRpc3BhdGNoKCdmaWxlc2FkZGVkJywgZmlsZXMpO1xuICB9XG5cbiAgYXN5bmMgZnVuY3Rpb24gaGFuZGxlRmlsZUNoYW5nZSAoZXZlbnQpIHtcbiAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuICAgIGNvbnN0IGZpbGVzID0gYXdhaXQgZnJvbUV2ZW50KGV2ZW50KTtcbiAgICBkaXNwYXRjaCgnZmlsZXNhZGRlZCcsIGZpbGVzKTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGhhbmRsZURyYWdPdmVyIChldmVudCkge1xuICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG4gICAgaXNPdmVyRHJvcFpvbmUgPSB0cnVlO1xuICB9XG5cbiAgZnVuY3Rpb24gaGFuZGxlRHJhZ0xlYXZlICgpIHtcbiAgICBpc092ZXJEcm9wWm9uZSA9IGZhbHNlO1xuICB9XG48L3NjcmlwdD5cblxuPHN0eWxlPlxuICAuZHJvcHpvbmUge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIG1hcmdpbjogMCAwIDEwcHggMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDE1MHB4O1xuICAgIGJvcmRlcjogdmFyKC0tY29sb3ItZHJvcHpvbmUtYm9yZGVyKSAzcHggZGFzaGVkO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1jb2xvci1kcm9wem9uZS1iZyk7XG4gICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZCA0NTBtcywgYm9yZGVyLWNvbG9yIDQ1MG1zO1xuICB9XG5cbiAgLmRyb3B6b25lLm92ZXIsXG4gIC5kcm9wem9uZTpob3ZlciB7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tY29sb3ItZHJvcHpvbmUtYWN0aXZlLWJnKTtcbiAgICBib3JkZXItY29sb3I6IHZhcigtLWNvbG9yLWRyb3B6b25lLWFjdGl2ZS1ib3JkZXIpO1xuICB9XG5cbiAgLmZpbGUtaW5wdXQge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgcmlnaHQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgb3BhY2l0eTogMDtcbiAgfVxuXG4gIC5maWxlLWlucHV0OmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gIH1cbjwvc3R5bGU+XG5cbjxkaXZcbiAgc3R5bGU9XCJkaXNwbGF5OiB7dmlzaWJsZSA/IFwiZmxleFwiOiBcIm5vbmVcIn1cIlxuICBjbGFzcz1cImRyb3B6b25lXCJcbiAgY2xhc3M6b3Zlcj17aXNPdmVyRHJvcFpvbmV9XG4gIG9uOmRyb3A9e2hhbmRsZURyb3B9XG4gIG9uOmRyYWdvdmVyPXtoYW5kbGVEcmFnT3Zlcn1cbiAgb246ZHJhZ2xlYXZlPXtoYW5kbGVEcmFnTGVhdmV9PlxuICA8ZGl2IGNsYXNzPVwiZHJvcHpvbmVfX2NvbnRlbnQgaW5wdXRfbm90ZVwiPlxuICAgIDxzdHJvbmc+RHJvcCBpbWFnZXMgaGVyZTwvc3Ryb25nPiBvciBjbGljayB0byBvcGVuIGEgZmlsZSBkaWFsb2dcbiAgPC9kaXY+XG4gIDxpbnB1dFxuICAgIGNsYXNzPVwiZmlsZS1pbnB1dFwiXG4gICAgdHlwZT1cImZpbGVcIlxuICAgIG9uOmNoYW5nZT17aGFuZGxlRmlsZUNoYW5nZX0gLz5cbjwvZGl2PlxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQW1DRSxTQUFTLGNBQUMsQ0FBQyxBQUNULE9BQU8sQ0FBRSxJQUFJLENBQ2IsV0FBVyxDQUFFLE1BQU0sQ0FDbkIsZUFBZSxDQUFFLE1BQU0sQ0FDdkIsVUFBVSxDQUFFLE1BQU0sQ0FDbEIsUUFBUSxDQUFFLFFBQVEsQ0FDbEIsTUFBTSxDQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FDbEIsS0FBSyxDQUFFLElBQUksQ0FDWCxNQUFNLENBQUUsS0FBSyxDQUNiLE1BQU0sQ0FBRSxJQUFJLHVCQUF1QixDQUFDLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsYUFBYSxDQUFFLEdBQUcsQ0FDbEIsVUFBVSxDQUFFLElBQUksbUJBQW1CLENBQUMsQ0FDcEMsVUFBVSxDQUFFLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxZQUFZLENBQUMsS0FBSyxBQUNsRCxDQUFDLEFBRUQsU0FBUyxtQkFBSyxDQUNkLHVCQUFTLE1BQU0sQUFBQyxDQUFDLEFBQ2YsVUFBVSxDQUFFLElBQUksMEJBQTBCLENBQUMsQ0FDM0MsWUFBWSxDQUFFLElBQUksOEJBQThCLENBQUMsQUFDbkQsQ0FBQyxBQUVELFdBQVcsY0FBQyxDQUFDLEFBQ1gsT0FBTyxDQUFFLEtBQUssQ0FDZCxRQUFRLENBQUUsUUFBUSxDQUNsQixHQUFHLENBQUUsQ0FBQyxDQUNOLEtBQUssQ0FBRSxDQUFDLENBQ1IsTUFBTSxDQUFFLENBQUMsQ0FDVCxJQUFJLENBQUUsQ0FBQyxDQUNQLEtBQUssQ0FBRSxJQUFJLENBQ1gsT0FBTyxDQUFFLENBQUMsQUFDWixDQUFDLEFBRUQseUJBQVcsTUFBTSxBQUFDLENBQUMsQUFDakIsTUFBTSxDQUFFLE9BQU8sQUFDakIsQ0FBQyJ9 */";
     	append_dev(document.head, style);
     }
 
@@ -1419,15 +1421,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			t1 = text(" or click to open a file dialog");
     			t2 = space();
     			input = element("input");
-    			add_location(strong, file$1, 77, 4, 1611);
+    			add_location(strong, file$1, 80, 4, 1686);
     			attr_dev(div0, "class", "dropzone__content input_note");
-    			add_location(div0, file$1, 76, 2, 1564);
+    			add_location(div0, file$1, 79, 2, 1639);
     			attr_dev(input, "class", "file-input svelte-gefk64");
     			attr_dev(input, "type", "file");
-    			add_location(input, file$1, 79, 2, 1687);
+    			add_location(input, file$1, 82, 2, 1762);
+    			set_style(div1, "display", /*visible*/ ctx[0] ? "flex" : "none");
     			attr_dev(div1, "class", "dropzone svelte-gefk64");
-    			toggle_class(div1, "over", /*isOverDropZone*/ ctx[0]);
-    			add_location(div1, file$1, 70, 0, 1420);
+    			toggle_class(div1, "over", /*isOverDropZone*/ ctx[1]);
+    			add_location(div1, file$1, 72, 0, 1449);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1442,15 +1445,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input, "change", /*handleFileChange*/ ctx[2], false, false, false),
-    				listen_dev(div1, "drop", /*handleDrop*/ ctx[1], false, false, false),
-    				listen_dev(div1, "dragover", /*handleDragOver*/ ctx[3], false, false, false),
-    				listen_dev(div1, "dragleave", /*handleDragLeave*/ ctx[4], false, false, false)
+    				listen_dev(input, "change", /*handleFileChange*/ ctx[3], false, false, false),
+    				listen_dev(div1, "drop", /*handleDrop*/ ctx[2], false, false, false),
+    				listen_dev(div1, "dragover", /*handleDragOver*/ ctx[4], false, false, false),
+    				listen_dev(div1, "dragleave", /*handleDragLeave*/ ctx[5], false, false, false)
     			];
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*isOverDropZone*/ 1) {
-    				toggle_class(div1, "over", /*isOverDropZone*/ ctx[0]);
+    			if (dirty & /*visible*/ 1) {
+    				set_style(div1, "display", /*visible*/ ctx[0] ? "flex" : "none");
+    			}
+
+    			if (dirty & /*isOverDropZone*/ 2) {
+    				toggle_class(div1, "over", /*isOverDropZone*/ ctx[1]);
     			}
     		},
     		i: noop,
@@ -1473,12 +1480,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
+    	let { visible = true } = $$props;
     	const dispatch = createEventDispatcher();
     	let isOverDropZone = false;
 
     	async function handleDrop(event) {
     		event.preventDefault();
-    		$$invalidate(0, isOverDropZone = false);
+    		$$invalidate(1, isOverDropZone = false);
     		const files = await fromEvent(event);
     		dispatch("filesadded", files);
     	}
@@ -1491,14 +1499,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     	function handleDragOver(event) {
     		event.preventDefault();
-    		$$invalidate(0, isOverDropZone = true);
+    		$$invalidate(1, isOverDropZone = true);
     	}
 
     	function handleDragLeave() {
-    		$$invalidate(0, isOverDropZone = false);
+    		$$invalidate(1, isOverDropZone = false);
     	}
 
-    	const writable_props = [];
+    	const writable_props = ["visible"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<File_dropzone> was created with unknown prop '${key}'`);
@@ -1507,9 +1515,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("File_dropzone", $$slots, []);
 
+    	$$self.$set = $$props => {
+    		if ("visible" in $$props) $$invalidate(0, visible = $$props.visible);
+    	};
+
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
     		fromEvent,
+    		visible,
     		dispatch,
     		isOverDropZone,
     		handleDrop,
@@ -1519,21 +1532,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("isOverDropZone" in $$props) $$invalidate(0, isOverDropZone = $$props.isOverDropZone);
+    		if ("visible" in $$props) $$invalidate(0, visible = $$props.visible);
+    		if ("isOverDropZone" in $$props) $$invalidate(1, isOverDropZone = $$props.isOverDropZone);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [isOverDropZone, handleDrop, handleFileChange, handleDragOver, handleDragLeave];
+    	return [
+    		visible,
+    		isOverDropZone,
+    		handleDrop,
+    		handleFileChange,
+    		handleDragOver,
+    		handleDragLeave
+    	];
     }
 
     class File_dropzone extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
     		if (!document.getElementById("svelte-gefk64-style")) add_css$1();
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { visible: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1541,6 +1562,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			options,
     			id: create_fragment$1.name
     		});
+    	}
+
+    	get visible() {
+    		throw new Error("<File_dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set visible(value) {
+    		throw new Error("<File_dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -12892,64 +12921,123 @@ document.addEventListener("DOMContentLoaded", function(event) {
       return error.toJSON ? error.toJSON().message : error.message;
     }
 
-    function uploadEmoji(file, opts) {
-      const id = uuid_1.v4();
+    function removeEmoji(name, callback = NO_OP, attemptCount = 0) {
+      const {
+        apiToken,
+        versionUid
+      } = getSlackApiData();
+      const timestamp = Date.now() / 1000;
+      const version = versionUid ? versionUid.substring(0, 8) : 'noversion';
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('token', apiToken);
+      slackApi({
+        method: 'post',
+        url: `/emoji.remove`,
+        params: {
+          '_x_id': `${version}-${timestamp}`
+        },
+        data: formData,
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(response => {
+        if (response && response.data.ok) {
+          log.info(`[${name}] 🔥✅ deleted`);
+          callback();
+        } else {
+          log.error(`[${name}] ${response}`);
+          throw new Error('Something happened!');
+        }
+      }).catch(error => {
+        log.error(`[${name}] 🔥💣 delete failed on attempt ${attemptCount}`, printError(error));
 
-      let remove = (name, callback = NO_OP, attemptCount = 0) => {
-        const {
-          apiToken,
-          versionUid
-        } = getSlackApiData();
-        const timestamp = Date.now() / 1000;
-        const version = versionUid ? versionUid.substring(0, 8) : 'noversion';
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('token', apiToken);
-        slackApi({
-          method: 'post',
-          url: `/emoji.remove`,
-          params: {
-            '_x_id': `${version}-${timestamp}`
-          },
-          data: formData,
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }).then(response => {
-          if (response && response.data.ok) {
-            log.info(`[${name}] 🔥✅ deleted`);
-            callback();
-          } else {
-            log.error(`[${name}] ${response}`);
-            throw new Error('Something happened!');
-          }
-        }).catch(error => {
-          log.error(`[${name}] 🔥💣 delete failed on attempt ${attemptCount}`, printError(error));
-
-          if (error.response) {
-            if (attemptCount < 3) {
-              if (error.response.status == 429) {
-                let delay = error.response.headers['retry-after'];
-                log.error(`[${name}] 🔥💤 throttling delete for ${delay} seconds`);
-                return setTimeout(() => {
-                  remove(name, callback, ++attemptCount);
-                }, delay * 1000);
-              } else {
-                log.error(`[${name}] 🔥🤷‍♀️Unknown status code ${error.response.status}`);
-              }
+        if (error.response) {
+          if (attemptCount < 3) {
+            if (error.response.status == 429) {
+              let delay = error.response.headers['retry-after'];
+              log.error(`[${name}] 🔥💤 throttling delete for ${delay} seconds`);
+              return setTimeout(() => {
+                removeEmoji(name, callback, ++attemptCount);
+              }, delay * 1000);
             } else {
-              log.error(`[${name}] 🔥⚰️ out of attempts to delete`);
+              log.error(`[${name}] 🔥🤷‍♀️Unknown status code ${error.response.status}`);
             }
           } else {
-            log.error(`[${name}] 🔥❓something else happened on attempt ${attemptCount}`, printError(error));
+            log.error(`[${name}] 🔥⚰️ out of attempts to delete`);
           }
+        } else {
+          log.error(`[${name}] 🔥❓something else happened on attempt ${attemptCount}`, printError(error));
+        }
 
-          callback(error);
-        });
-      };
+        callback(error);
+      });
+    }
 
-      let upload = (callback = NO_OP, attemptCount = 0) => {
+    const MAX_CONCURRENT_REQUESTS$1 = 5;
+    const slackApi$1 = axios$1.create({
+      baseURL: `${window.location.origin}/api`
+    });
+    axiosConcurrency_1(slackApi$1, MAX_CONCURRENT_REQUESTS$1);
+
+    const NO_OP$1 = function () {};
+
+    function printError$1(error) {
+      return error.toJSON ? error.toJSON().message : error.message;
+    }
+
+    function uploadEmoji(file, opts) {
+      const id = uuid_1.v4(); // let remove = (name, callback = NO_OP, attemptCount = 0) => {
+      //   const { apiToken, versionUid } = getSlackApiData();
+      //   const timestamp = Date.now() / 1000;
+      //   const version = versionUid ? versionUid.substring(0, 8) : 'noversion';
+      //   const formData = new FormData();
+      //   formData.append('name', name);
+      //   formData.append('token', apiToken);
+      //   slackApi({
+      //     method: 'post',
+      //     url: `/emoji.remove`,
+      //     params: {
+      //       '_x_id': `${version}-${timestamp}`
+      //     },
+      //     data: formData,
+      //     withCredentials: true,
+      //     headers: {
+      //       'Content-Type': 'application/x-www-form-urlencoded'
+      //     }
+      //   }).then((response) => {
+      //     if (response && response.data.ok) {
+      //       log.info(`[${name}] 🔥✅ deleted`)
+      //       callback()
+      //     } else {
+      //       log.error(`[${name}] ${response}`)
+      //       throw new Error('Something happened!')
+      //     }
+      //   }).catch((error) => {
+      //     log.error(`[${name}] 🔥💣 delete failed on attempt ${attemptCount}`, printError(error))
+      //     if (error.response) {
+      //       if (attemptCount < 3) {
+      //         if (error.response.status == 429) {
+      //           let delay = error.response.headers['retry-after']
+      //           log.error(`[${name}] 🔥💤 throttling delete for ${delay} seconds`)
+      //           return setTimeout(() => {
+      //             remove(name, callback, ++attemptCount)
+      //           }, delay * 1000)
+      //         } else {
+      //           log.error(`[${name}] 🔥🤷‍♀️Unknown status code ${error.response.status}`)
+      //         }
+      //       } else {
+      //         log.error(`[${name}] 🔥⚰️ out of attempts to delete`)
+      //       }
+      //     } else {
+      //       log.error(`[${name}] 🔥❓something else happened on attempt ${attemptCount}`, printError(error))
+      //     }
+      //     callback(error);
+      //   })
+      // }
+
+      let upload = (callback = NO_OP$1, attemptCount = 0) => {
         const {
           apiToken,
           versionUid
@@ -12965,7 +13053,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         formData.append('mode', 'data');
         formData.append('token', apiToken);
         formData.append('image', file);
-        slackApi({
+        slackApi$1({
           method: 'post',
           url: `/emoji.add`,
           params: {
@@ -12980,17 +13068,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
           const error = lodash.get(response, 'data.error');
 
           if (error) {
-            log.error(`[${name}] ⬆️😢 error uploading:`, printError(error));
+            log.error(`[${name}] ⬆️😢 error uploading:`, printError$1(error));
 
             switch (error) {
               case 'error_name_taken':
-                log.error(`[${name}] ⬆️✋ emoji already exists`);
+                log.error(`[${name}] ⬆️✋ emoji already exists and overwrite is${opts.allowOverwrite ? '' : ' not'} allowed`);
 
                 if (!opts.allowOverwrite) {
                   throw new Error('Emoji already exists');
                 }
 
-                return remove(name, err => {
+                return removeEmoji(name, err => {
                   if (err) {
                     throw new Error("Couldn't remove emoji");
                   }
@@ -13010,7 +13098,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           log.info(`[${name}] ⬆️✅ uploaded`);
           callback(id, error, response);
         }).catch(error => {
-          log.error(`[${name}] ⬆️😨 upload failed on attempt ${attemptCount}`, printError(error));
+          log.error(`[${name}] ⬆️😨 upload failed on attempt ${attemptCount}`, printError$1(error));
 
           if (error.response) {
             if (attemptCount < 3) {
@@ -13027,7 +13115,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               log.error(`[${name}] ⬆️⚰️ out of attempts to upload`);
             }
           } else {
-            log.error(`[${name}] ⬆️❌giving up upload on attempt ${attemptCount}`, printError(error));
+            log.error(`[${name}] ⬆️❌giving up upload on attempt ${attemptCount}`, printError$1(error));
           }
 
           callback(id, error, null);
@@ -13041,34 +13129,36 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     /* src/components/app.svelte generated by Svelte v3.22.2 */
+
+    const { Object: Object_1, console: console_1, document: document_1 } = globals;
     const file$2 = "src/components/app.svelte";
 
     function add_css$2() {
     	var style = element("style");
-    	style.id = "svelte-21xepa-style";
-    	style.textContent = ".neutral-face-emoji-tools.svelte-21xepa.svelte-21xepa{border:var(--color-slack-border) 1px solid;border-left:var(--color-neutral-face-emoji-tools) 3px solid;margin:0 0 25px 0;padding:25px;background:white}.icon.heading.svelte-21xepa.svelte-21xepa{margin:0 5px 0 0;height:1.25em;vertical-align:-25%}.input-note.svelte-21xepa.svelte-21xepa{font-size:.9rem;line-height:1.25rem;color:var(--color-text-gray)}.uploads.svelte-21xepa.svelte-21xepa{list-style-type:none;margin:0;font-size:0.9rem}.customizations.svelte-21xepa.svelte-21xepa{display:flex\n  }.toggle-opts.svelte-21xepa.svelte-21xepa{margin-bottom:1rem}.neutral-face-emoji-tools.svelte-21xepa .mono.svelte-21xepa{font-family:'Courier New', Courier, monospace\n  }\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiYXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBpbXBvcnQgVXBsb2FkIGZyb20gJy4vdXBsb2FkLnN2ZWx0ZSc7XG4gIGltcG9ydCBGaWxlRHJvcHpvbmUgZnJvbSAnLi9maWxlLWRyb3B6b25lLnN2ZWx0ZSc7XG5cbiAgaW1wb3J0IHVwbG9hZEVtb2ppIGZyb20gJy4uL3VwbG9hZC1lbW9qaS5qcyc7XG5cbiAgY29uc3QgU0VUX0lDT05fVVJMID0gc2FmYXJpLmV4dGVuc2lvbi5iYXNlVVJJICsgJ2ljb25fMTI4XzEyOC5wbmcnO1xuXG4gIGxldCB1cGxvYWRzID0gW107XG4gIGxldCB1cGxvYWRzU3RhdHVzQnlJZCA9IHt9O1xuXG4gIGxldCBwcmVmaXggPSAnJ1xuICBsZXQgc3VmZml4ID0gJydcblxuICBsZXQgc2VhcmNoU3RyID0gJydcbiAgbGV0IHJlcGxhY2VTdHIgPSAnJ1xuXG4gIGxldCBzaG93T3B0cyA9IGZhbHNlXG4gIGxldCBhbGxvd092ZXJ3cml0ZSA9IGZhbHNlXG5cbiAgZnVuY3Rpb24gdG9nZ2xlT3B0cygpIHtcbiAgICBzaG93T3B0cyA9ICFzaG93T3B0c1xuICB9XG5cbiAgZnVuY3Rpb24gdXBsb2FkRmlsZXMgKGZpbGVzLCBpZHgpIHtcbiAgICBjb25zdCB1cGxvYWRGbnMgPSBmaWxlcy5tYXAoZmlsZSA9PiB7XG4gICAgICBjb25zdCBvYmogPSB1cGxvYWRFbW9qaShmaWxlLCB7cHJlZml4LCBzdWZmaXgsIGFsbG93T3ZlcndyaXRlfSlcblxuICAgICAgdXBsb2Fkc1N0YXR1c0J5SWQgPSB7XG4gICAgICAgIC4uLnVwbG9hZHNTdGF0dXNCeUlkLFxuICAgICAgICBbb2JqLmlkXToge1xuICAgICAgICAgIHR5cGU6ICd1cGxvYWRpbmcnLFxuICAgICAgICAgIG1lc3NhZ2U6ICdVcGxvYWRpbmcuLi4nXG4gICAgICAgIH1cbiAgICAgIH07XG5cbiAgICAgIHVwbG9hZHMgPSBbLi4udXBsb2Fkcywge1xuICAgICAgICBmaWxlLFxuICAgICAgICBpZDogb2JqLmlkXG4gICAgICB9XTtcblxuICAgICAgcmV0dXJuIG9iai51cGxvYWRcbiAgICB9KTtcblxuICAgIHByb2Nlc3NVcGxvYWRzKHVwbG9hZEZucy5yZXZlcnNlKCkpXG4gIH1cblxuICBmdW5jdGlvbiBwcm9jZXNzVXBsb2Fkcyh1cGxvYWRzKSB7XG4gICAgaWYgKCF1cGxvYWRzIHx8IHVwbG9hZHMubGVuZ3RoID09IDApIHJldHVyblxuXG4gICAgY29uc3QgbmV4dFVwbG9hZCA9IHVwbG9hZHMucG9wKClcbiAgICAvLyBjb25zdCBuZXh0VGljayA9IERhdGUubm93KCkgKyAxMDAwXG5cbiAgICBuZXh0VXBsb2FkKChpZCwgZXJyb3IpID0+IHtcbiAgICAgICAgaWYgKGVycm9yKSB7XG4gICAgICAgICAgdXBsb2Fkc1N0YXR1c0J5SWQgPSB7XG4gICAgICAgICAgICAuLi51cGxvYWRzU3RhdHVzQnlJZCxcbiAgICAgICAgICAgIFtpZF06IHtcbiAgICAgICAgICAgICAgdHlwZTogJ2Vycm9yJyxcbiAgICAgICAgICAgICAgbWVzc2FnZTogZXJyb3IubWVzc2FnZSB8fCBlcnJvclxuICAgICAgICAgICAgfVxuICAgICAgICAgIH07XG4gICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgdXBsb2Fkc1N0YXR1c0J5SWQgPSB7XG4gICAgICAgICAgICAuLi51cGxvYWRzU3RhdHVzQnlJZCxcbiAgICAgICAgICAgIFtpZF06IHtcbiAgICAgICAgICAgICAgdHlwZTogJ3N1Y2Nlc3MnLFxuICAgICAgICAgICAgICBtZXNzYWdlOiAnU3VjY2Vzc2Z1bGx5IFVwbG9hZGVkLidcbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9O1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gbGV0IHNsZWVwRm9yID0gbmV4dFRpY2sgLSBEYXRlLm5vdygpXG4gICAgICAgIC8vIGlmIChzbGVlcEZvciA8IDApIHNsZWVwRm9yID0gMFxuXG4gICAgICAgIC8vIHNldFRpbWVvdXQoKCkgPT4gcHJvY2Vzc1VwbG9hZHModXBsb2FkcyksIHNsZWVwRm9yKVxuICAgICAgICBwcm9jZXNzVXBsb2Fkcyh1cGxvYWRzKVxuICAgICAgfSk7XG4gIH1cblxuICBmdW5jdGlvbiBoYW5kbGVGaWxlc0FkZGVkIChldmVudCkge1xuICAgIGNvbnN0IGZpbGVzID0gZXZlbnQuZGV0YWlsO1xuXG4gICAgdXBsb2FkRmlsZXMoZmlsZXMpO1xuICB9XG48L3NjcmlwdD5cblxuPHN0eWxlPlxuICAubmV1dHJhbC1mYWNlLWVtb2ppLXRvb2xzIHtcbiAgICBib3JkZXI6IHZhcigtLWNvbG9yLXNsYWNrLWJvcmRlcikgMXB4IHNvbGlkO1xuICAgIGJvcmRlci1sZWZ0OiB2YXIoLS1jb2xvci1uZXV0cmFsLWZhY2UtZW1vamktdG9vbHMpIDNweCBzb2xpZDtcbiAgICBtYXJnaW46IDAgMCAyNXB4IDA7XG4gICAgcGFkZGluZzogMjVweDtcbiAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgfVxuXG4gIC5pY29uLmhlYWRpbmcge1xuICAgIG1hcmdpbjogMCA1cHggMCAwO1xuICAgIGhlaWdodDogMS4yNWVtO1xuICAgIHZlcnRpY2FsLWFsaWduOiAtMjUlO1xuICB9XG5cbiAgLmlucHV0LW5vdGUge1xuICAgIGZvbnQtc2l6ZTogLjlyZW07XG4gICAgbGluZS1oZWlnaHQ6IDEuMjVyZW07XG4gICAgY29sb3I6IHZhcigtLWNvbG9yLXRleHQtZ3JheSk7XG4gIH1cblxuICAudXBsb2FkcyB7XG4gICAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xuICAgIG1hcmdpbjogMDtcbiAgICBmb250LXNpemU6IDAuOXJlbTtcbiAgfVxuXG4gIC5jdXN0b21pemF0aW9ucyB7XG4gICAgZGlzcGxheTogZmxleFxuICB9XG5cbiAgLnRvZ2dsZS1vcHRzIHtcbiAgICBtYXJnaW4tYm90dG9tOiAxcmVtO1xuICB9XG5cbiAgLm5ldXRyYWwtZmFjZS1lbW9qaS10b29scyAubW9ub3tcbiAgICBmb250LWZhbWlseTogJ0NvdXJpZXIgTmV3JywgQ291cmllciwgbW9ub3NwYWNlXG4gIH1cbjwvc3R5bGU+XG5cbjxkaXYgY2xhc3M9XCJuZXV0cmFsLWZhY2UtZW1vamktdG9vbHNcIj5cbiAgPGg0IGNsYXNzPVwiaGVhZGluZ1wiPlxuICAgIDxpbWcgY2xhc3M9XCJpY29uIGhlYWRpbmdcIiBzcmM9XCJ7U0VUX0lDT05fVVJMfVwiIGFsdD1cIlwiIC8+XG4gICAgPHNwYW4gY2xhc3M9XCJ0ZXh0XCI+QnVsayBFbW9qaSBVcGxvYWRlcjwvc3Bhbj5cbiAgPC9oND5cbiAgPHAgY2xhc3M9XCJzdWJoZWFkaW5nXCI+RHJhZyBhbmQgZHJvcCBpbWFnZXMgaW50byB0aGUgYXJlYSBiZWxvdy4gSW1hZ2VzIHdpbGwgYmUgdXBsb2FkZWQgdXNpbmcgdGhlaXIgZmlsZW5hbWUgYXMgdGhlIGVtb2ppIG5hbWUuPC9wPlxuICA8cCBjbGFzcz1cImlucHV0LW5vdGVcIj5FeGFtcGxlOiA8c3BhbiBjbGFzcz1cIm5vcm1hbFwiPlwibWVvdy1wYXJ0eS5naWZcIiB3aWxsIGJlIGFkZGVkIGFzIDxzcGFuIGNsYXNzPVwibW9ub1wiPjxzdHJvbmc+OntwcmVmaXh9bWVvdy1wYXJ0eXtzdWZmaXh9Ojwvc3Ryb25nPjwvc3Bhbj48L3NwYW4+PC9wPlxuICA8YnV0dG9uIGNsYXNzPVwiYy1idXR0b24gYy1idXR0b24tLW91dGxpbmUgYy1idXR0b24tLW1lZGl1bSB0b2dnbGUtb3B0c1wiIHR5cGU9XCJidXR0b25cIiBuYW1lPVwib3B0aW9uc1wiIG9uOmNsaWNrPXt0b2dnbGVPcHRzfT7impnvuI8geyBzaG93T3B0cyA/IFwiSGlkZVwiIDogXCJTaG93XCJ9IG9wdGlvbnM8L2J1dHRvbj5cbiAgPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7c2hvd09wdHMgPyBcImZsZXhcIiA6IFwibm9uZVwifVwiPlxuICAgIDxsYWJlbD5cbiAgICAgIDxpbnB1dCB0eXBlPWNoZWNrYm94IGJpbmQ6Y2hlY2tlZD17YWxsb3dPdmVyd3JpdGV9PlxuICAgICAgQWxsb3cgb3ZlcndyaXRpbmcgZXhpc3RpbmcgZW1vamkgKGRvZXMgbm90IGFwcGx5IHRvIHN0YW5kYXJkIGVtb2ppKVxuICAgIDwvbGFiZWw+XG4gIDwvcD5cbiAgPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7c2hvd09wdHMgPyBcImZsZXhcIiA6IFwibm9uZVwifVwiPlxuICAgIDxpbnB1dCBiaW5kOnZhbHVlPXtwcmVmaXh9IHR5cGU9XCJ0ZXh0XCIgbmFtZT1cInByZWZpeFwiIHBsYWNlaG9sZGVyPVwib3B0aW9uYWwgcHJlZml4XCI+XG4gICAgJm5ic3A7XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3N1ZmZpeH0gdHlwZT1cInRleHRcIiBuYW1lPVwic3VmZml4XCIgcGxhY2Vob2xkZXI9XCJvcHRpb25hbCBzdWZmaXhcIj5cbiAgPC9wPlxuICA8IS0tIDxwIGNsYXNzPVwiY3VzdG9taXphdGlvbnNcIiBzdHlsZT1cImRpc3BsYXk6e3Nob3dPcHRzID8gXCJmbGV4XCIgOiBcIm5vbmVcIn1cIj5cbiAgICA8aW5wdXQgYmluZDp2YWx1ZT17c2VhcmNoU3RyfSB0eXBlPVwidGV4dFwiIG5hbWU9XCJzZWFyY2hTdHJcIiBwbGFjZWhvbGRlcj1cInJlcGxhY2UgdGhlc2UgY2hhcmFjdGVycy4uLlwiPlxuICAgICZuYnNwO1xuICAgIDxpbnB1dCBiaW5kOnZhbHVlPXtyZXBsYWNlU3RyfSB0eXBlPVwidGV4dFwiIG5hbWU9XCJyZXBsYWNlU3RyXCIgcGxhY2Vob2xkZXI9XCIuLi53aXRoIHRoZXNlXCI+XG4gIDwvcD4gLS0+XG4gIDxGaWxlRHJvcHpvbmUgb246ZmlsZXNhZGRlZD17aGFuZGxlRmlsZXNBZGRlZH0gLz5cbiAgPHVsIGNsYXNzPVwidXBsb2Fkc1wiPlxuICAgIHsjZWFjaCB1cGxvYWRzIGFzIHVwbG9hZCAodXBsb2FkLmlkKX1cbiAgICAgIDxVcGxvYWQgdXBsb2FkPXt1cGxvYWR9IHN0YXR1cz17dXBsb2Fkc1N0YXR1c0J5SWRbdXBsb2FkLmlkXX0gcHJlZml4PXtwcmVmaXh9IHN1ZmZpeD17c3VmZml4fSBzZWFyY2hTdHI9e3NlYXJjaFN0cn0gcmVwbGFjZVN0cj17cmVwbGFjZVN0cn0gLz5cbiAgICB7L2VhY2h9XG4gIDwvdWw+XG48L2Rpdj5cbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUF3RkUseUJBQXlCLDRCQUFDLENBQUMsQUFDekIsTUFBTSxDQUFFLElBQUksb0JBQW9CLENBQUMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUMzQyxXQUFXLENBQUUsSUFBSSxnQ0FBZ0MsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQzVELE1BQU0sQ0FBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQ2xCLE9BQU8sQ0FBRSxJQUFJLENBQ2IsVUFBVSxDQUFFLEtBQUssQUFDbkIsQ0FBQyxBQUVELEtBQUssUUFBUSw0QkFBQyxDQUFDLEFBQ2IsTUFBTSxDQUFFLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FDakIsTUFBTSxDQUFFLE1BQU0sQ0FDZCxjQUFjLENBQUUsSUFBSSxBQUN0QixDQUFDLEFBRUQsV0FBVyw0QkFBQyxDQUFDLEFBQ1gsU0FBUyxDQUFFLEtBQUssQ0FDaEIsV0FBVyxDQUFFLE9BQU8sQ0FDcEIsS0FBSyxDQUFFLElBQUksaUJBQWlCLENBQUMsQUFDL0IsQ0FBQyxBQUVELFFBQVEsNEJBQUMsQ0FBQyxBQUNSLGVBQWUsQ0FBRSxJQUFJLENBQ3JCLE1BQU0sQ0FBRSxDQUFDLENBQ1QsU0FBUyxDQUFFLE1BQU0sQUFDbkIsQ0FBQyxBQUVELGVBQWUsNEJBQUMsQ0FBQyxBQUNmLE9BQU8sQ0FBRSxJQUFJO0VBQ2YsQ0FBQyxBQUVELFlBQVksNEJBQUMsQ0FBQyxBQUNaLGFBQWEsQ0FBRSxJQUFJLEFBQ3JCLENBQUMsQUFFRCx1Q0FBeUIsQ0FBQyxtQkFBSyxDQUFDLEFBQzlCLFdBQVcsQ0FBRSxhQUFhLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTO0VBQ2hELENBQUMifQ== */";
-    	append_dev(document.head, style);
+    	style.id = "svelte-1pcjwhi-style";
+    	style.textContent = ".neutral-face-emoji-tools.svelte-1pcjwhi.svelte-1pcjwhi{border:var(--color-slack-border) 1px solid;border-left:var(--color-neutral-face-emoji-tools) 3px solid;margin:0 0 25px 0;padding:25px;background:white}.icon.heading.svelte-1pcjwhi.svelte-1pcjwhi{margin:0 5px 0 0;height:1.25em;vertical-align:-25%}.input-note.svelte-1pcjwhi.svelte-1pcjwhi{font-size:.9rem;line-height:1.25rem;color:var(--color-text-gray)}.uploads.svelte-1pcjwhi.svelte-1pcjwhi{list-style-type:none;margin:0;font-size:0.9rem}.customizations.svelte-1pcjwhi.svelte-1pcjwhi{display:flex\n  }.toggle-opts.svelte-1pcjwhi.svelte-1pcjwhi{margin-bottom:1rem}.delete-mode.svelte-1pcjwhi.svelte-1pcjwhi{margin-bottom:1rem;float:right}.neutral-face-emoji-tools.svelte-1pcjwhi .mono.svelte-1pcjwhi{font-family:'Courier New', Courier, monospace\n  }\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiYXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuICBpbXBvcnQgVXBsb2FkIGZyb20gJy4vdXBsb2FkLnN2ZWx0ZSc7XG4gIGltcG9ydCBGaWxlRHJvcHpvbmUgZnJvbSAnLi9maWxlLWRyb3B6b25lLnN2ZWx0ZSc7XG5cbiAgaW1wb3J0IHVwbG9hZEVtb2ppIGZyb20gJy4uL3VwbG9hZC1lbW9qaS5qcyc7XG5cbiAgY29uc3QgU0VUX0lDT05fVVJMID0gc2FmYXJpLmV4dGVuc2lvbi5iYXNlVVJJICsgJ2ljb25fMTI4XzEyOC5wbmcnO1xuICBjb25zdCBFTU9KSV9MSVNUX1NFTEVDVE9SID0gJ2Rpdi5wLWN1c3RvbWl6ZV9lbW9qaV9saXN0X19yb3cnXG5cbiAgbGV0IHVwbG9hZHMgPSBbXTtcbiAgbGV0IHVwbG9hZHNTdGF0dXNCeUlkID0ge307XG5cbiAgbGV0IHByZWZpeCA9ICcnXG4gIGxldCBzdWZmaXggPSAnJ1xuXG4gIGxldCBzZWFyY2hTdHIgPSAnJ1xuICBsZXQgcmVwbGFjZVN0ciA9ICcnXG5cbiAgbGV0IHNob3dPcHRzID0gZmFsc2VcbiAgbGV0IGRlbGV0ZU1vZGUgPSBmYWxzZVxuICBsZXQgYWxsb3dPdmVyd3JpdGUgPSBmYWxzZVxuICBsZXQgZGVsZXRlQnV0dG9uRGlzYWJsZWQgPSB0cnVlXG4gIGxldCBlbW9qaVRvRGVsZXRlID0ge31cblxuICBmdW5jdGlvbiB0b2dnbGVPcHRzKCkge1xuICAgIHNob3dPcHRzID0gIXNob3dPcHRzXG4gIH1cblxuICBmdW5jdGlvbiB0b2dnbGVEZWxldGVNb2RlKCkge1xuICAgIGRlbGV0ZU1vZGUgPSAhZGVsZXRlTW9kZVxuXG4gICAgaWYgKCFkZWxldGVNb2RlKSB7XG4gICAgICBPYmplY3Qua2V5cyhlbW9qaVRvRGVsZXRlKS5mb3JFYWNoKGsgPT4ge1xuICAgICAgICBlbW9qaVRvRGVsZXRlW2tdLnJlbW92ZUF0dHJpYnV0ZSgndG9EZWxldGUnKVxuICAgICAgICBlbW9qaVRvRGVsZXRlW2tdLmNsYXNzTGlzdC5yZW1vdmUoJ2MtYWxlcnQtLWxldmVsX2Vycm9yJylcbiAgICAgIH0pXG4gICAgICBlbW9qaVRvRGVsZXRlID0ge31cbiAgICB9XG4gIH1cblxuICBmdW5jdGlvbiB1cGxvYWRGaWxlcyAoZmlsZXMsIGlkeCkge1xuICAgIGNvbnN0IHVwbG9hZEZucyA9IGZpbGVzLm1hcChmaWxlID0+IHtcbiAgICAgIGNvbnN0IG9iaiA9IHVwbG9hZEVtb2ppKGZpbGUsIHtwcmVmaXgsIHN1ZmZpeCwgYWxsb3dPdmVyd3JpdGV9KVxuXG4gICAgICB1cGxvYWRzU3RhdHVzQnlJZCA9IHtcbiAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgIFtvYmouaWRdOiB7XG4gICAgICAgICAgdHlwZTogJ3VwbG9hZGluZycsXG4gICAgICAgICAgbWVzc2FnZTogJ1VwbG9hZGluZy4uLidcbiAgICAgICAgfVxuICAgICAgfTtcblxuICAgICAgdXBsb2FkcyA9IFsuLi51cGxvYWRzLCB7XG4gICAgICAgIGZpbGUsXG4gICAgICAgIGlkOiBvYmouaWRcbiAgICAgIH1dO1xuXG4gICAgICByZXR1cm4gb2JqLnVwbG9hZFxuICAgIH0pO1xuXG4gICAgcHJvY2Vzc1VwbG9hZHModXBsb2FkRm5zLnJldmVyc2UoKSlcbiAgfVxuXG4gIGZ1bmN0aW9uIHByb2Nlc3NVcGxvYWRzKHVwbG9hZHMpIHtcbiAgICBpZiAoIXVwbG9hZHMgfHwgdXBsb2Fkcy5sZW5ndGggPT0gMCkgcmV0dXJuXG5cbiAgICBjb25zdCBuZXh0VXBsb2FkID0gdXBsb2Fkcy5wb3AoKVxuXG4gICAgbmV4dFVwbG9hZCgoaWQsIGVycm9yKSA9PiB7XG4gICAgICAgIGlmIChlcnJvcikge1xuICAgICAgICAgIHVwbG9hZHNTdGF0dXNCeUlkID0ge1xuICAgICAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgICAgICBbaWRdOiB7XG4gICAgICAgICAgICAgIHR5cGU6ICdlcnJvcicsXG4gICAgICAgICAgICAgIG1lc3NhZ2U6IGVycm9yLm1lc3NhZ2UgfHwgZXJyb3JcbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9O1xuICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgIHVwbG9hZHNTdGF0dXNCeUlkID0ge1xuICAgICAgICAgICAgLi4udXBsb2Fkc1N0YXR1c0J5SWQsXG4gICAgICAgICAgICBbaWRdOiB7XG4gICAgICAgICAgICAgIHR5cGU6ICdzdWNjZXNzJyxcbiAgICAgICAgICAgICAgbWVzc2FnZTogJ1N1Y2Nlc3NmdWxseSBVcGxvYWRlZC4nXG4gICAgICAgICAgICB9XG4gICAgICAgICAgfTtcbiAgICAgICAgfVxuXG4gICAgICAgIHByb2Nlc3NVcGxvYWRzKHVwbG9hZHMpXG4gICAgICB9KTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGhhbmRsZUZpbGVzQWRkZWQgKGV2ZW50KSB7XG4gICAgY29uc3QgZmlsZXMgPSBldmVudC5kZXRhaWw7XG5cbiAgICB1cGxvYWRGaWxlcyhmaWxlcyk7XG4gIH1cblxuICBmdW5jdGlvbiBkZWxldGVFbW9qaSgpIHt9XG5cbiAgLy8gIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyNcbiAgY29uc3QgdGFyZ2V0Tm9kZSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5wLWN1c3RvbWl6ZV9lbW9qaV9saXN0X19jb250YWluZXInKVswXVxuICAvLyBPcHRpb25zIGZvciB0aGUgb2JzZXJ2ZXIgKHdoaWNoIG11dGF0aW9ucyB0byBvYnNlcnZlKVxuICBjb25zdCBjb25maWcgPSB7IGF0dHJpYnV0ZXM6IGZhbHNlLCBjaGlsZExpc3Q6IHRydWUsIHN1YnRyZWU6IHRydWUgfTtcblxuICAvLyBDYWxsYmFjayBmdW5jdGlvbiB0byBleGVjdXRlIHdoZW4gbXV0YXRpb25zIGFyZSBvYnNlcnZlZFxuICBjb25zdCBjYWxsYmFjayA9IGZ1bmN0aW9uKG11dGF0aW9uc0xpc3QsIG9ic2VydmVyKSB7XG4gICAgICBmb3IobGV0IG11dGF0aW9uIG9mIG11dGF0aW9uc0xpc3QpIHtcbiAgICAgICAgICBpZiAobXV0YXRpb24udHlwZSA9PT0gJ2NoaWxkTGlzdCcpIHtcbiAgICAgICAgICAgICAgbXV0YXRpb24uYWRkZWROb2Rlcy5mb3JFYWNoKGUgPT4ge1xuICAgICAgICAgICAgICAgIHJlc3RvcmVEZWxldGVTdGF0ZShlKVxuICAgICAgICAgICAgICAgIGUuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCAoKSA9PiBvblJvd0NsaWNrKGUpKVxuICAgICAgICAgICAgICB9KTtcbiAgICAgICAgICB9XG4gICAgICAgICAgZWxzZSBpZiAobXV0YXRpb24udHlwZSA9PT0gJ2F0dHJpYnV0ZXMnKSB7XG4gICAgICAgICAgICAgIGNvbnNvbGUubG9nKCdUaGUgJyArIG11dGF0aW9uLmF0dHJpYnV0ZU5hbWUgKyAnIGF0dHJpYnV0ZSB3YXMgbW9kaWZpZWQuJyk7XG4gICAgICAgICAgfVxuICAgICAgfVxuICB9O1xuXG4gIC8vIENyZWF0ZSBhbiBvYnNlcnZlciBpbnN0YW5jZSBsaW5rZWQgdG8gdGhlIGNhbGxiYWNrIGZ1bmN0aW9uXG4gIGNvbnN0IG9ic2VydmVyID0gbmV3IE11dGF0aW9uT2JzZXJ2ZXIoY2FsbGJhY2spO1xuXG4gIC8vIFN0YXJ0IG9ic2VydmluZyB0aGUgdGFyZ2V0IG5vZGUgZm9yIGNvbmZpZ3VyZWQgbXV0YXRpb25zXG4gIG9ic2VydmVyLm9ic2VydmUodGFyZ2V0Tm9kZSwgY29uZmlnKTtcblxuICAvLyAjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjXG4gIGZ1bmN0aW9uIHJlc3RvcmVEZWxldGVTdGF0ZShlKSB7XG4gICAgbGV0IG5hbWUgPSBlLmlubmVyVGV4dC50cmltKCkuc3BsaXQoL1xccysvKVswXVxuXG4gICAgaWYgKGVtb2ppVG9EZWxldGVbbmFtZV0pIHtcbiAgICAgIGVtb2ppVG9EZWxldGVbbmFtZV0gPSBlXG5cbiAgICAgIGUuc2V0QXR0cmlidXRlKCd0b0RlbGV0ZScsICd0cnVlJylcbiAgICAgIGUuY2xhc3NMaXN0LmFkZCgnYy1hbGVydC0tbGV2ZWxfZXJyb3InKVxuICAgIH1cbiAgfVxuXG4gIGZ1bmN0aW9uIG9uUm93Q2xpY2soZSkge1xuICAgIGlmICghZGVsZXRlTW9kZSkgcmV0dXJuXG5cbiAgICBsZXQgbmFtZSA9IGUuaW5uZXJUZXh0LnRyaW0oKS5zcGxpdCgvXFxzKy8pWzBdXG5cbiAgICBpZiAoZS5nZXRBdHRyaWJ1dGUoJ3RvRGVsZXRlJykpIHtcbiAgICAgIGRlbGV0ZSBlbW9qaVRvRGVsZXRlW25hbWVdXG5cbiAgICAgIGUucmVtb3ZlQXR0cmlidXRlKCd0b0RlbGV0ZScpXG4gICAgICBlLmNsYXNzTGlzdC5yZW1vdmUoJ2MtYWxlcnQtLWxldmVsX2Vycm9yJylcbiAgICB9IGVsc2Uge1xuICAgICAgZW1vamlUb0RlbGV0ZVtuYW1lXSA9IGVcblxuICAgICAgZS5zZXRBdHRyaWJ1dGUoJ3RvRGVsZXRlJywgJ3RydWUnKVxuICAgICAgZS5jbGFzc0xpc3QuYWRkKCdjLWFsZXJ0LS1sZXZlbF9lcnJvcicpXG4gICAgfVxuXG4gICAgY29uc29sZS5sb2coT2JqZWN0LmtleXMoZW1vamlUb0RlbGV0ZSksIE9iamVjdC5rZXlzKGVtb2ppVG9EZWxldGUpLmxlbmd0aClcbiAgICBkZWxldGVCdXR0b25EaXNhYmxlZCA9IE9iamVjdC5rZXlzKGVtb2ppVG9EZWxldGUpLmxlbmd0aCA9PSAwXG4gIH1cblxuICBmdW5jdGlvbiBlbGVtZW50c0FyZVJlYWR5IChzZWxlY3Rvcikge1xuICAgIHJldHVybiBuZXcgUHJvbWlzZSgocmVzb2x2ZSkgPT4ge1xuICAgICAgZnVuY3Rpb24gY2hlY2tGb3JFbGVtZW50ICgpIHtcbiAgICAgICAgY29uc3QgZWxlbWVudHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKHNlbGVjdG9yKTtcblxuICAgICAgICBpZiAoZWxlbWVudHMgJiYgZWxlbWVudHMubGVuZ3RoID4gMCkge1xuICAgICAgICAgIHJlc29sdmUoZWxlbWVudHMpO1xuICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgIHNldFRpbWVvdXQoY2hlY2tGb3JFbGVtZW50LCAxMDAwKTtcbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICBjaGVja0ZvckVsZW1lbnQoKTtcbiAgICB9KTtcbiAgfVxuXG4gIGVsZW1lbnRzQXJlUmVhZHkoRU1PSklfTElTVF9TRUxFQ1RPUikudGhlbihlbHMgPT4ge1xuICAgIGVscy5mb3JFYWNoKGUgPT4gZS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IG9uUm93Q2xpY2soZSkpKVxuICB9KVxuICAvLyAjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjXG5cbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5uZXV0cmFsLWZhY2UtZW1vamktdG9vbHMge1xuICAgIGJvcmRlcjogdmFyKC0tY29sb3Itc2xhY2stYm9yZGVyKSAxcHggc29saWQ7XG4gICAgYm9yZGVyLWxlZnQ6IHZhcigtLWNvbG9yLW5ldXRyYWwtZmFjZS1lbW9qaS10b29scykgM3B4IHNvbGlkO1xuICAgIG1hcmdpbjogMCAwIDI1cHggMDtcbiAgICBwYWRkaW5nOiAyNXB4O1xuICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICB9XG5cbiAgLmljb24uaGVhZGluZyB7XG4gICAgbWFyZ2luOiAwIDVweCAwIDA7XG4gICAgaGVpZ2h0OiAxLjI1ZW07XG4gICAgdmVydGljYWwtYWxpZ246IC0yNSU7XG4gIH1cblxuICAuaW5wdXQtbm90ZSB7XG4gICAgZm9udC1zaXplOiAuOXJlbTtcbiAgICBsaW5lLWhlaWdodDogMS4yNXJlbTtcbiAgICBjb2xvcjogdmFyKC0tY29sb3ItdGV4dC1ncmF5KTtcbiAgfVxuXG4gIC51cGxvYWRzIHtcbiAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gICAgbWFyZ2luOiAwO1xuICAgIGZvbnQtc2l6ZTogMC45cmVtO1xuICB9XG5cbiAgLmN1c3RvbWl6YXRpb25zIHtcbiAgICBkaXNwbGF5OiBmbGV4XG4gIH1cblxuICAudG9nZ2xlLW9wdHMge1xuICAgIG1hcmdpbi1ib3R0b206IDFyZW07XG4gIH1cblxuICAuZGVsZXRlLW1vZGUge1xuICAgIG1hcmdpbi1ib3R0b206IDFyZW07XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICB9XG5cbiAgLm5ldXRyYWwtZmFjZS1lbW9qaS10b29scyAubW9ub3tcbiAgICBmb250LWZhbWlseTogJ0NvdXJpZXIgTmV3JywgQ291cmllciwgbW9ub3NwYWNlXG4gIH1cbjwvc3R5bGU+XG5cbjxkaXYgY2xhc3M9XCJuZXV0cmFsLWZhY2UtZW1vamktdG9vbHNcIj5cbiAgPGg0IGNsYXNzPVwiaGVhZGluZ1wiPlxuICAgIDxpbWcgY2xhc3M9XCJpY29uIGhlYWRpbmdcIiBzcmM9XCJ7U0VUX0lDT05fVVJMfVwiIGFsdD1cIlwiIC8+XG4gICAgPHNwYW4gY2xhc3M9XCJ0ZXh0XCI+QnVsayBFbW9qaSBVcGxvYWRlcjwvc3Bhbj5cbiAgPC9oND5cbiAgPHAgY2xhc3M9XCJzdWJoZWFkaW5nXCI+RHJhZyBhbmQgZHJvcCBpbWFnZXMgaW50byB0aGUgYXJlYSBiZWxvdy4gSW1hZ2VzIHdpbGwgYmUgdXBsb2FkZWQgdXNpbmcgdGhlaXIgZmlsZW5hbWUgYXMgdGhlIGVtb2ppIG5hbWUuPC9wPlxuICA8cCBjbGFzcz1cImlucHV0LW5vdGVcIj5FeGFtcGxlOlxuICAgIDxzcGFuIGNsYXNzPVwibm9ybWFsXCI+XCJtZW93LXBhcnR5LmdpZlwiIHdpbGwgYmUgYWRkZWQgYXNcbiAgICAgIDxzcGFuIGNsYXNzPVwibW9ub1wiPlxuICAgICAgICA8c3Ryb25nPjp7cHJlZml4fW1lb3ctcGFydHl7c3VmZml4fTo8L3N0cm9uZz5cbiAgICAgIDwvc3Bhbj5cbiAgICA8L3NwYW4+XG4gIDwvcD5cbiAgPGJ1dHRvbiBjbGFzcz1cImMtYnV0dG9uIGMtYnV0dG9uLS1vdXRsaW5lIGMtYnV0dG9uLS1tZWRpdW0gdG9nZ2xlLW9wdHNcIiBzdHlsZT1cInZpc2liaWxpdHk6IHtkZWxldGVNb2RlID8gXCJoaWRkZW5cIiA6IFwidmlzaWJsZVwifVwiXG4gICAgdHlwZT1cImJ1dHRvblwiIG5hbWU9XCJvcHRpb25zXCIgb246Y2xpY2s9e3RvZ2dsZU9wdHN9PuKame+4jyB7IHNob3dPcHRzID8gXCJIaWRlXCIgOiBcIlNob3dcIn0gb3B0aW9uc1xuICA8L2J1dHRvbj5cbiAgPHNwYW4gY2xhc3M9XCJkZWxldGUtbW9kZVwiPlxuICAgIDxidXR0b24gY2xhc3M9XCJjLWJ1dHRvbiBjLWJ1dHRvbi0tb3V0bGluZSBjLWJ1dHRvbi0tbWVkaXVtIHtkZWxldGVCdXR0b25EaXNhYmxlZCA/ICdjLWJ1dHRvbi0tZGlzYWJsZWQnIDogJyd9XCJcbiAgICAgIHR5cGU9XCJidXR0b25cIiBzdHlsZT1cImRpc3BsYXk6IHsgZGVsZXRlTW9kZSA/IFwiaW5saW5lXCIgOiBcIm5vbmVcIn1cIiBuYW1lPVwiZGVsZXRlU2VsZWN0ZWRcIlxuICAgICAgb246Y2xpY2s9e2RlbGV0ZUVtb2ppfT57IGRlbGV0ZUJ1dHRvbkRpc2FibGVkID8gXCJTZWxlY3Qgc29tZSBlbW9qaSB0byBkZWxldGVcIiA6IFwi8J+UpSBEZWxldGUgc2VsZWN0ZWQgZW1vamlcIn08L2J1dHRvbj5cbiAgICA8YnV0dG9uIGNsYXNzPVwiYy1idXR0b24gYy1idXR0b24tLW91dGxpbmUgYy1idXR0b24tLW1lZGl1bVwiIHR5cGU9XCJidXR0b25cIlxuICAgICAgbmFtZT1cImRlbGV0ZU1vZGVcIiBvbjpjbGljaz17dG9nZ2xlRGVsZXRlTW9kZX0+8J+SoyB7IGRlbGV0ZU1vZGUgPyBcIkRpc2FibGVcIiA6IFwiRW5hYmxlXCJ9IGJ1bGsgZGVsZXRlIG1vZGU8L2J1dHRvbj5cbiAgPC9zcGFuPlxuICA8cCBjbGFzcz1cImN1c3RvbWl6YXRpb25zXCIgc3R5bGU9XCJkaXNwbGF5Onsoc2hvd09wdHMgJiYgIWRlbGV0ZU1vZGUpID8gXCJmbGV4XCIgOiBcIm5vbmVcIn1cIj5cbiAgICA8bGFiZWwgY2xhc3M9XCJjaGVja2JveCBub3JtYWxcIj5cbiAgICAgIDxpbnB1dCB0eXBlPWNoZWNrYm94IGJpbmQ6Y2hlY2tlZD17YWxsb3dPdmVyd3JpdGV9PlxuICAgICAgQWxsb3cgb3ZlcndyaXRpbmcgZXhpc3RpbmcgZW1vamkgKGRvZXMgbm90IGFwcGx5IHRvIHN0YW5kYXJkIGVtb2ppKVxuICAgIDwvbGFiZWw+XG4gIDwvcD5cbiAgPHAgY2xhc3M9XCJjdXN0b21pemF0aW9uc1wiIHN0eWxlPVwiZGlzcGxheTp7KHNob3dPcHRzICYmICFkZWxldGVNb2RlKSA/IFwiZmxleFwiIDogXCJub25lXCJ9XCI+XG4gICAgPGlucHV0IGJpbmQ6dmFsdWU9e3ByZWZpeH0gdHlwZT1cInRleHRcIiBuYW1lPVwicHJlZml4XCIgcGxhY2Vob2xkZXI9XCJvcHRpb25hbCBwcmVmaXhcIj5cbiAgICAmbmJzcDtcbiAgICA8aW5wdXQgYmluZDp2YWx1ZT17c3VmZml4fSB0eXBlPVwidGV4dFwiIG5hbWU9XCJzdWZmaXhcIiBwbGFjZWhvbGRlcj1cIm9wdGlvbmFsIHN1ZmZpeFwiPlxuICA8L3A+XG4gIDxGaWxlRHJvcHpvbmUgb246ZmlsZXNhZGRlZD17aGFuZGxlRmlsZXNBZGRlZH0gdmlzaWJsZT17IWRlbGV0ZU1vZGV9IC8+XG4gIDx1bCBjbGFzcz1cInVwbG9hZHNcIj5cbiAgICB7I2VhY2ggdXBsb2FkcyBhcyB1cGxvYWQgKHVwbG9hZC5pZCl9XG4gICAgICA8VXBsb2FkIHVwbG9hZD17dXBsb2FkfSBzdGF0dXM9e3VwbG9hZHNTdGF0dXNCeUlkW3VwbG9hZC5pZF19IHByZWZpeD17cHJlZml4fSBzdWZmaXg9e3N1ZmZpeH0gc2VhcmNoU3RyPXtzZWFyY2hTdHJ9IHJlcGxhY2VTdHI9e3JlcGxhY2VTdHJ9IC8+XG4gICAgey9lYWNofVxuICA8L3VsPlxuPC9kaXY+XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBc0xFLHlCQUF5Qiw4QkFBQyxDQUFDLEFBQ3pCLE1BQU0sQ0FBRSxJQUFJLG9CQUFvQixDQUFDLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FDM0MsV0FBVyxDQUFFLElBQUksZ0NBQWdDLENBQUMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUM1RCxNQUFNLENBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUNsQixPQUFPLENBQUUsSUFBSSxDQUNiLFVBQVUsQ0FBRSxLQUFLLEFBQ25CLENBQUMsQUFFRCxLQUFLLFFBQVEsOEJBQUMsQ0FBQyxBQUNiLE1BQU0sQ0FBRSxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQ2pCLE1BQU0sQ0FBRSxNQUFNLENBQ2QsY0FBYyxDQUFFLElBQUksQUFDdEIsQ0FBQyxBQUVELFdBQVcsOEJBQUMsQ0FBQyxBQUNYLFNBQVMsQ0FBRSxLQUFLLENBQ2hCLFdBQVcsQ0FBRSxPQUFPLENBQ3BCLEtBQUssQ0FBRSxJQUFJLGlCQUFpQixDQUFDLEFBQy9CLENBQUMsQUFFRCxRQUFRLDhCQUFDLENBQUMsQUFDUixlQUFlLENBQUUsSUFBSSxDQUNyQixNQUFNLENBQUUsQ0FBQyxDQUNULFNBQVMsQ0FBRSxNQUFNLEFBQ25CLENBQUMsQUFFRCxlQUFlLDhCQUFDLENBQUMsQUFDZixPQUFPLENBQUUsSUFBSTtFQUNmLENBQUMsQUFFRCxZQUFZLDhCQUFDLENBQUMsQUFDWixhQUFhLENBQUUsSUFBSSxBQUNyQixDQUFDLEFBRUQsWUFBWSw4QkFBQyxDQUFDLEFBQ1osYUFBYSxDQUFFLElBQUksQ0FDbkIsS0FBSyxDQUFFLEtBQUssQUFDZCxDQUFDLEFBRUQsd0NBQXlCLENBQUMsb0JBQUssQ0FBQyxBQUM5QixXQUFXLENBQUUsYUFBYSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsU0FBUztFQUNoRCxDQUFDIn0= */";
+    	append_dev(document_1.head, style);
     }
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
+    	child_ctx[26] = list[i];
     	return child_ctx;
     }
 
-    // (154:4) {#each uploads as upload (upload.id)}
+    // (263:4) {#each uploads as upload (upload.id)}
     function create_each_block(key_1, ctx) {
     	let first;
     	let current;
 
     	const upload = new Upload({
     			props: {
-    				upload: /*upload*/ ctx[16],
-    				status: /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[16].id],
+    				upload: /*upload*/ ctx[26],
+    				status: /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[26].id],
     				prefix: /*prefix*/ ctx[2],
     				suffix: /*suffix*/ ctx[3],
-    				searchStr: /*searchStr*/ ctx[7],
-    				replaceStr: /*replaceStr*/ ctx[8]
+    				searchStr: /*searchStr*/ ctx[9],
+    				replaceStr: /*replaceStr*/ ctx[10]
     			},
     			$$inline: true
     		});
@@ -13088,8 +13178,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		},
     		p: function update(ctx, dirty) {
     			const upload_changes = {};
-    			if (dirty & /*uploads*/ 1) upload_changes.upload = /*upload*/ ctx[16];
-    			if (dirty & /*uploadsStatusById, uploads*/ 3) upload_changes.status = /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[16].id];
+    			if (dirty & /*uploads*/ 1) upload_changes.upload = /*upload*/ ctx[26];
+    			if (dirty & /*uploadsStatusById, uploads*/ 3) upload_changes.status = /*uploadsStatusById*/ ctx[1][/*upload*/ ctx[26].id];
     			if (dirty & /*prefix*/ 4) upload_changes.prefix = /*prefix*/ ctx[2];
     			if (dirty & /*suffix*/ 8) upload_changes.suffix = /*suffix*/ ctx[3];
     			upload.$set(upload_changes);
@@ -13113,7 +13203,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(154:4) {#each uploads as upload (upload.id)}",
+    		source: "(263:4) {#each uploads as upload (upload.id)}",
     		ctx
     	});
 
@@ -13142,33 +13232,54 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	let t10;
     	let t11;
     	let t12;
-    	let button;
+    	let button0;
     	let t13;
     	let t14_value = (/*showOpts*/ ctx[4] ? "Hide" : "Show") + "";
     	let t14;
     	let t15;
     	let t16;
+    	let span3;
+    	let button1;
+
+    	let t17_value = (/*deleteButtonDisabled*/ ctx[7]
+    	? "Select some emoji to delete"
+    	: "🔥 Delete selected emoji") + "";
+
+    	let t17;
+    	let button1_class_value;
+    	let t18;
+    	let button2;
+    	let t19;
+    	let t20_value = (/*deleteMode*/ ctx[5] ? "Disable" : "Enable") + "";
+    	let t20;
+    	let t21;
+    	let t22;
     	let p2;
     	let label;
     	let input0;
-    	let t17;
-    	let t18;
+    	let t23;
+    	let t24;
     	let p3;
     	let input1;
-    	let t19;
+    	let t25;
     	let input2;
-    	let t20;
-    	let t21;
+    	let t26;
+    	let t27;
     	let ul;
     	let each_blocks = [];
     	let each_1_lookup = new Map();
     	let current;
     	let dispose;
-    	const filedropzone = new File_dropzone({ $$inline: true });
-    	filedropzone.$on("filesadded", /*handleFilesAdded*/ ctx[10]);
+
+    	const filedropzone = new File_dropzone({
+    			props: { visible: !/*deleteMode*/ ctx[5] },
+    			$$inline: true
+    		});
+
+    	filedropzone.$on("filesadded", /*handleFilesAdded*/ ctx[13]);
     	let each_value = /*uploads*/ ctx[0];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*upload*/ ctx[16].id;
+    	const get_key = ctx => /*upload*/ ctx[26].id;
     	validate_each_keys(ctx, each_value, get_each_context, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -13190,9 +13301,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			p0.textContent = "Drag and drop images into the area below. Images will be uploaded using their filename as the emoji name.";
     			t4 = space();
     			p1 = element("p");
-    			t5 = text("Example: ");
+    			t5 = text("Example:\n    ");
     			span2 = element("span");
-    			t6 = text("\"meow-party.gif\" will be added as ");
+    			t6 = text("\"meow-party.gif\" will be added as\n      ");
     			span1 = element("span");
     			strong = element("strong");
     			t7 = text(":");
@@ -13201,71 +13312,105 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			t10 = text(/*suffix*/ ctx[3]);
     			t11 = text(":");
     			t12 = space();
-    			button = element("button");
+    			button0 = element("button");
     			t13 = text("⚙️ ");
     			t14 = text(t14_value);
     			t15 = text(" options");
     			t16 = space();
+    			span3 = element("span");
+    			button1 = element("button");
+    			t17 = text(t17_value);
+    			t18 = space();
+    			button2 = element("button");
+    			t19 = text("💣 ");
+    			t20 = text(t20_value);
+    			t21 = text(" bulk delete mode");
+    			t22 = space();
     			p2 = element("p");
     			label = element("label");
     			input0 = element("input");
-    			t17 = text("\n      Allow overwriting existing emoji (does not apply to standard emoji)");
-    			t18 = space();
+    			t23 = text("\n      Allow overwriting existing emoji (does not apply to standard emoji)");
+    			t24 = space();
     			p3 = element("p");
     			input1 = element("input");
-    			t19 = text("\n     \n    ");
+    			t25 = text("\n     \n    ");
     			input2 = element("input");
-    			t20 = space();
+    			t26 = space();
     			create_component(filedropzone.$$.fragment);
-    			t21 = space();
+    			t27 = space();
     			ul = element("ul");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(img, "class", "icon heading svelte-21xepa");
-    			if (img.src !== (img_src_value = /*SET_ICON_URL*/ ctx[6])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "class", "icon heading svelte-1pcjwhi");
+    			if (img.src !== (img_src_value = /*SET_ICON_URL*/ ctx[8])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 129, 4, 2626);
+    			add_location(img, file$2, 228, 4, 5405);
     			attr_dev(span0, "class", "text");
-    			add_location(span0, file$2, 130, 4, 2687);
+    			add_location(span0, file$2, 229, 4, 5466);
     			attr_dev(h4, "class", "heading");
-    			add_location(h4, file$2, 128, 2, 2601);
+    			add_location(h4, file$2, 227, 2, 5380);
     			attr_dev(p0, "class", "subheading");
-    			add_location(p0, file$2, 132, 2, 2743);
-    			add_location(strong, file$2, 133, 107, 2982);
-    			attr_dev(span1, "class", "mono svelte-21xepa");
-    			add_location(span1, file$2, 133, 88, 2963);
+    			add_location(p0, file$2, 231, 2, 5522);
+    			add_location(strong, file$2, 235, 8, 5780);
+    			attr_dev(span1, "class", "mono svelte-1pcjwhi");
+    			add_location(span1, file$2, 234, 6, 5752);
     			attr_dev(span2, "class", "normal");
-    			add_location(span2, file$2, 133, 33, 2908);
-    			attr_dev(p1, "class", "input-note svelte-21xepa");
-    			add_location(p1, file$2, 133, 2, 2877);
-    			attr_dev(button, "class", "c-button c-button--outline c-button--medium toggle-opts svelte-21xepa");
-    			attr_dev(button, "type", "button");
-    			attr_dev(button, "name", "options");
-    			add_location(button, file$2, 134, 2, 3048);
+    			add_location(span2, file$2, 233, 4, 5691);
+    			attr_dev(p1, "class", "input-note svelte-1pcjwhi");
+    			add_location(p1, file$2, 232, 2, 5656);
+    			attr_dev(button0, "class", "c-button c-button--outline c-button--medium toggle-opts svelte-1pcjwhi");
+    			set_style(button0, "visibility", /*deleteMode*/ ctx[5] ? "hidden" : "visible");
+    			attr_dev(button0, "type", "button");
+    			attr_dev(button0, "name", "options");
+    			add_location(button0, file$2, 239, 2, 5861);
+
+    			attr_dev(button1, "class", button1_class_value = "c-button c-button--outline c-button--medium " + (/*deleteButtonDisabled*/ ctx[7]
+    			? "c-button--disabled"
+    			: ""));
+
+    			attr_dev(button1, "type", "button");
+    			set_style(button1, "display", /*deleteMode*/ ctx[5] ? "inline" : "none");
+    			attr_dev(button1, "name", "deleteSelected");
+    			add_location(button1, file$2, 243, 4, 6130);
+    			attr_dev(button2, "class", "c-button c-button--outline c-button--medium");
+    			attr_dev(button2, "type", "button");
+    			attr_dev(button2, "name", "deleteMode");
+    			add_location(button2, file$2, 246, 4, 6461);
+    			attr_dev(span3, "class", "delete-mode svelte-1pcjwhi");
+    			add_location(span3, file$2, 242, 2, 6099);
     			attr_dev(input0, "type", "checkbox");
-    			add_location(input0, file$2, 137, 6, 3313);
-    			add_location(label, file$2, 136, 4, 3299);
-    			attr_dev(p2, "class", "customizations svelte-21xepa");
-    			set_style(p2, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
-    			add_location(p2, file$2, 135, 2, 3223);
+    			add_location(input0, file$2, 251, 6, 6796);
+    			attr_dev(label, "class", "checkbox normal");
+    			add_location(label, file$2, 250, 4, 6758);
+    			attr_dev(p2, "class", "customizations svelte-1pcjwhi");
+
+    			set_style(p2, "display", /*showOpts*/ ctx[4] && !/*deleteMode*/ ctx[5]
+    			? "flex"
+    			: "none");
+
+    			add_location(p2, file$2, 249, 2, 6665);
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "name", "prefix");
     			attr_dev(input1, "placeholder", "optional prefix");
-    			add_location(input1, file$2, 142, 4, 3537);
+    			add_location(input1, file$2, 256, 4, 7037);
     			attr_dev(input2, "type", "text");
     			attr_dev(input2, "name", "suffix");
     			attr_dev(input2, "placeholder", "optional suffix");
-    			add_location(input2, file$2, 144, 4, 3636);
-    			attr_dev(p3, "class", "customizations svelte-21xepa");
-    			set_style(p3, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
-    			add_location(p3, file$2, 141, 2, 3461);
-    			attr_dev(ul, "class", "uploads svelte-21xepa");
-    			add_location(ul, file$2, 152, 2, 4082);
-    			attr_dev(div, "class", "neutral-face-emoji-tools svelte-21xepa");
-    			add_location(div, file$2, 127, 0, 2560);
+    			add_location(input2, file$2, 258, 4, 7136);
+    			attr_dev(p3, "class", "customizations svelte-1pcjwhi");
+
+    			set_style(p3, "display", /*showOpts*/ ctx[4] && !/*deleteMode*/ ctx[5]
+    			? "flex"
+    			: "none");
+
+    			add_location(p3, file$2, 255, 2, 6944);
+    			attr_dev(ul, "class", "uploads svelte-1pcjwhi");
+    			add_location(ul, file$2, 261, 2, 7303);
+    			attr_dev(div, "class", "neutral-face-emoji-tools svelte-1pcjwhi");
+    			add_location(div, file$2, 226, 0, 5339);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -13291,26 +13436,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			append_dev(strong, t10);
     			append_dev(strong, t11);
     			append_dev(div, t12);
-    			append_dev(div, button);
-    			append_dev(button, t13);
-    			append_dev(button, t14);
-    			append_dev(button, t15);
+    			append_dev(div, button0);
+    			append_dev(button0, t13);
+    			append_dev(button0, t14);
+    			append_dev(button0, t15);
     			append_dev(div, t16);
+    			append_dev(div, span3);
+    			append_dev(span3, button1);
+    			append_dev(button1, t17);
+    			append_dev(span3, t18);
+    			append_dev(span3, button2);
+    			append_dev(button2, t19);
+    			append_dev(button2, t20);
+    			append_dev(button2, t21);
+    			append_dev(div, t22);
     			append_dev(div, p2);
     			append_dev(p2, label);
     			append_dev(label, input0);
-    			input0.checked = /*allowOverwrite*/ ctx[5];
-    			append_dev(label, t17);
-    			append_dev(div, t18);
+    			input0.checked = /*allowOverwrite*/ ctx[6];
+    			append_dev(label, t23);
+    			append_dev(div, t24);
     			append_dev(div, p3);
     			append_dev(p3, input1);
     			set_input_value(input1, /*prefix*/ ctx[2]);
-    			append_dev(p3, t19);
+    			append_dev(p3, t25);
     			append_dev(p3, input2);
     			set_input_value(input2, /*suffix*/ ctx[3]);
-    			append_dev(div, t20);
+    			append_dev(div, t26);
     			mount_component(filedropzone, div, null);
-    			append_dev(div, t21);
+    			append_dev(div, t27);
     			append_dev(div, ul);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -13321,10 +13475,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(button, "click", /*toggleOpts*/ ctx[9], false, false, false),
-    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[13]),
-    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[14]),
-    				listen_dev(input2, "input", /*input2_input_handler*/ ctx[15])
+    				listen_dev(button0, "click", /*toggleOpts*/ ctx[11], false, false, false),
+    				listen_dev(button1, "click", deleteEmoji, false, false, false),
+    				listen_dev(button2, "click", /*toggleDeleteMode*/ ctx[12], false, false, false),
+    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[23]),
+    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[24]),
+    				listen_dev(input2, "input", /*input2_input_handler*/ ctx[25])
     			];
     		},
     		p: function update(ctx, [dirty]) {
@@ -13332,12 +13488,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
     			if (!current || dirty & /*suffix*/ 8) set_data_dev(t10, /*suffix*/ ctx[3]);
     			if ((!current || dirty & /*showOpts*/ 16) && t14_value !== (t14_value = (/*showOpts*/ ctx[4] ? "Hide" : "Show") + "")) set_data_dev(t14, t14_value);
 
-    			if (dirty & /*allowOverwrite*/ 32) {
-    				input0.checked = /*allowOverwrite*/ ctx[5];
+    			if (!current || dirty & /*deleteMode*/ 32) {
+    				set_style(button0, "visibility", /*deleteMode*/ ctx[5] ? "hidden" : "visible");
     			}
 
-    			if (!current || dirty & /*showOpts*/ 16) {
-    				set_style(p2, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
+    			if ((!current || dirty & /*deleteButtonDisabled*/ 128) && t17_value !== (t17_value = (/*deleteButtonDisabled*/ ctx[7]
+    			? "Select some emoji to delete"
+    			: "🔥 Delete selected emoji") + "")) set_data_dev(t17, t17_value);
+
+    			if (!current || dirty & /*deleteButtonDisabled*/ 128 && button1_class_value !== (button1_class_value = "c-button c-button--outline c-button--medium " + (/*deleteButtonDisabled*/ ctx[7]
+    			? "c-button--disabled"
+    			: ""))) {
+    				attr_dev(button1, "class", button1_class_value);
+    			}
+
+    			if (!current || dirty & /*deleteMode*/ 32) {
+    				set_style(button1, "display", /*deleteMode*/ ctx[5] ? "inline" : "none");
+    			}
+
+    			if ((!current || dirty & /*deleteMode*/ 32) && t20_value !== (t20_value = (/*deleteMode*/ ctx[5] ? "Disable" : "Enable") + "")) set_data_dev(t20, t20_value);
+
+    			if (dirty & /*allowOverwrite*/ 64) {
+    				input0.checked = /*allowOverwrite*/ ctx[6];
+    			}
+
+    			if (!current || dirty & /*showOpts, deleteMode*/ 48) {
+    				set_style(p2, "display", /*showOpts*/ ctx[4] && !/*deleteMode*/ ctx[5]
+    				? "flex"
+    				: "none");
     			}
 
     			if (dirty & /*prefix*/ 4 && input1.value !== /*prefix*/ ctx[2]) {
@@ -13348,11 +13526,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     				set_input_value(input2, /*suffix*/ ctx[3]);
     			}
 
-    			if (!current || dirty & /*showOpts*/ 16) {
-    				set_style(p3, "display", /*showOpts*/ ctx[4] ? "flex" : "none");
+    			if (!current || dirty & /*showOpts, deleteMode*/ 48) {
+    				set_style(p3, "display", /*showOpts*/ ctx[4] && !/*deleteMode*/ ctx[5]
+    				? "flex"
+    				: "none");
     			}
 
-    			if (dirty & /*uploads, uploadsStatusById, prefix, suffix, searchStr, replaceStr*/ 399) {
+    			const filedropzone_changes = {};
+    			if (dirty & /*deleteMode*/ 32) filedropzone_changes.visible = !/*deleteMode*/ ctx[5];
+    			filedropzone.$set(filedropzone_changes);
+
+    			if (dirty & /*uploads, uploadsStatusById, prefix, suffix, searchStr, replaceStr*/ 1551) {
     				const each_value = /*uploads*/ ctx[0];
     				validate_each_argument(each_value);
     				group_outros();
@@ -13403,6 +13587,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	return block;
     }
 
+    const EMOJI_LIST_SELECTOR = "div.p-customize_emoji_list__row";
+
+    function deleteEmoji() {
+    	
+    }
+
+    function elementsAreReady(selector) {
+    	return new Promise(resolve => {
+    			function checkForElement() {
+    				const elements = document.querySelectorAll(selector);
+
+    				if (elements && elements.length > 0) {
+    					resolve(elements);
+    				} else {
+    					setTimeout(checkForElement, 1000);
+    				}
+    			}
+
+    			checkForElement();
+    		});
+    }
+
     function instance$2($$self, $$props, $$invalidate) {
     	const SET_ICON_URL = safari.extension.baseURI + "icon_128_128.png";
     	let uploads = [];
@@ -13412,10 +13618,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	let searchStr = "";
     	let replaceStr = "";
     	let showOpts = false;
+    	let deleteMode = false;
     	let allowOverwrite = false;
+    	let deleteButtonDisabled = true;
+    	let emojiToDelete = {};
 
     	function toggleOpts() {
     		$$invalidate(4, showOpts = !showOpts);
+    	}
+
+    	function toggleDeleteMode() {
+    		$$invalidate(5, deleteMode = !deleteMode);
+
+    		if (!deleteMode) {
+    			Object.keys(emojiToDelete).forEach(k => {
+    				emojiToDelete[k].removeAttribute("toDelete");
+    				emojiToDelete[k].classList.remove("c-alert--level_error");
+    			});
+
+    			emojiToDelete = {};
+    		}
     	}
 
     	function uploadFiles(files, idx) {
@@ -13441,7 +13663,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		if (!uploads || uploads.length == 0) return;
     		const nextUpload = uploads.pop();
 
-    		// const nextTick = Date.now() + 1000
     		nextUpload((id, error) => {
     			if (error) {
     				$$invalidate(1, uploadsStatusById = {
@@ -13461,9 +13682,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     				});
     			}
 
-    			// let sleepFor = nextTick - Date.now()
-    			// if (sleepFor < 0) sleepFor = 0
-    			// setTimeout(() => processUploads(uploads), sleepFor)
     			processUploads(uploads);
     		});
     	}
@@ -13473,10 +13691,73 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		uploadFiles(files);
     	}
 
+    	// ###################################
+    	const targetNode = document.querySelectorAll(".p-customize_emoji_list__container")[0];
+
+    	// Options for the observer (which mutations to observe)
+    	const config = {
+    		attributes: false,
+    		childList: true,
+    		subtree: true
+    	};
+
+    	// Callback function to execute when mutations are observed
+    	const callback = function (mutationsList, observer) {
+    		for (let mutation of mutationsList) {
+    			if (mutation.type === "childList") {
+    				mutation.addedNodes.forEach(e => {
+    					restoreDeleteState(e);
+    					e.addEventListener("click", () => onRowClick(e));
+    				});
+    			} else if (mutation.type === "attributes") {
+    				console.log("The " + mutation.attributeName + " attribute was modified.");
+    			}
+    		}
+    	};
+
+    	// Create an observer instance linked to the callback function
+    	const observer = new MutationObserver(callback);
+
+    	// Start observing the target node for configured mutations
+    	observer.observe(targetNode, config);
+
+    	// ###########################################
+    	function restoreDeleteState(e) {
+    		let name = e.innerText.trim().split(/\s+/)[0];
+
+    		if (emojiToDelete[name]) {
+    			emojiToDelete[name] = e;
+    			e.setAttribute("toDelete", "true");
+    			e.classList.add("c-alert--level_error");
+    		}
+    	}
+
+    	function onRowClick(e) {
+    		if (!deleteMode) return;
+    		let name = e.innerText.trim().split(/\s+/)[0];
+
+    		if (e.getAttribute("toDelete")) {
+    			delete emojiToDelete[name];
+    			e.removeAttribute("toDelete");
+    			e.classList.remove("c-alert--level_error");
+    		} else {
+    			emojiToDelete[name] = e;
+    			e.setAttribute("toDelete", "true");
+    			e.classList.add("c-alert--level_error");
+    		}
+
+    		console.log(Object.keys(emojiToDelete), Object.keys(emojiToDelete).length);
+    		$$invalidate(7, deleteButtonDisabled = Object.keys(emojiToDelete).length == 0);
+    	}
+
+    	elementsAreReady(EMOJI_LIST_SELECTOR).then(els => {
+    		els.forEach(e => e.addEventListener("click", () => onRowClick(e)));
+    	});
+
     	const writable_props = [];
 
-    	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<App> was created with unknown prop '${key}'`);
+    	Object_1.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
     	let { $$slots = {}, $$scope } = $$props;
@@ -13484,7 +13765,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     	function input0_change_handler() {
     		allowOverwrite = this.checked;
-    		$$invalidate(5, allowOverwrite);
+    		$$invalidate(6, allowOverwrite);
     	}
 
     	function input1_input_handler() {
@@ -13502,6 +13783,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		FileDropzone: File_dropzone,
     		uploadEmoji,
     		SET_ICON_URL,
+    		EMOJI_LIST_SELECTOR,
     		uploads,
     		uploadsStatusById,
     		prefix,
@@ -13509,11 +13791,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		searchStr,
     		replaceStr,
     		showOpts,
+    		deleteMode,
     		allowOverwrite,
+    		deleteButtonDisabled,
+    		emojiToDelete,
     		toggleOpts,
+    		toggleDeleteMode,
     		uploadFiles,
     		processUploads,
-    		handleFilesAdded
+    		handleFilesAdded,
+    		deleteEmoji,
+    		targetNode,
+    		config,
+    		callback,
+    		observer,
+    		restoreDeleteState,
+    		onRowClick,
+    		elementsAreReady
     	});
 
     	$$self.$inject_state = $$props => {
@@ -13521,10 +13815,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		if ("uploadsStatusById" in $$props) $$invalidate(1, uploadsStatusById = $$props.uploadsStatusById);
     		if ("prefix" in $$props) $$invalidate(2, prefix = $$props.prefix);
     		if ("suffix" in $$props) $$invalidate(3, suffix = $$props.suffix);
-    		if ("searchStr" in $$props) $$invalidate(7, searchStr = $$props.searchStr);
-    		if ("replaceStr" in $$props) $$invalidate(8, replaceStr = $$props.replaceStr);
+    		if ("searchStr" in $$props) $$invalidate(9, searchStr = $$props.searchStr);
+    		if ("replaceStr" in $$props) $$invalidate(10, replaceStr = $$props.replaceStr);
     		if ("showOpts" in $$props) $$invalidate(4, showOpts = $$props.showOpts);
-    		if ("allowOverwrite" in $$props) $$invalidate(5, allowOverwrite = $$props.allowOverwrite);
+    		if ("deleteMode" in $$props) $$invalidate(5, deleteMode = $$props.deleteMode);
+    		if ("allowOverwrite" in $$props) $$invalidate(6, allowOverwrite = $$props.allowOverwrite);
+    		if ("deleteButtonDisabled" in $$props) $$invalidate(7, deleteButtonDisabled = $$props.deleteButtonDisabled);
+    		if ("emojiToDelete" in $$props) emojiToDelete = $$props.emojiToDelete;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -13537,14 +13834,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
     		prefix,
     		suffix,
     		showOpts,
+    		deleteMode,
     		allowOverwrite,
+    		deleteButtonDisabled,
     		SET_ICON_URL,
     		searchStr,
     		replaceStr,
     		toggleOpts,
+    		toggleDeleteMode,
     		handleFilesAdded,
+    		emojiToDelete,
     		uploadFiles,
     		processUploads,
+    		targetNode,
+    		config,
+    		callback,
+    		observer,
+    		restoreDeleteState,
+    		onRowClick,
     		input0_change_handler,
     		input1_input_handler,
     		input2_input_handler
@@ -13554,7 +13861,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		if (!document.getElementById("svelte-21xepa-style")) add_css$2();
+    		if (!document_1.getElementById("svelte-1pcjwhi-style")) add_css$2();
     		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -13566,7 +13873,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	}
     }
 
-    const ELEMENT_TO_INSERT_BEFORE_SELECTOR = '.p-customize_emoji_wrapper__container';
+    const ELEMENT_TO_INSERT_BEFORE_SELECTOR = '.p-customize_emoji_wrapper__container'; // document.querySelectorAll(`div.p-customize_emoji_list__row`).forEach(e => e.addEventListener('click', (t) => { t.target.style.backgroundColor = 'pink' }))
 
     function elementIsReady(selector) {
       return new Promise(resolve => {

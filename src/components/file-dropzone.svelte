@@ -2,6 +2,8 @@
   import { createEventDispatcher } from 'svelte';
   import { fromEvent } from 'file-selector';
 
+  export let visible = true
+
   const dispatch = createEventDispatcher();
 
   let isOverDropZone = false;
@@ -69,6 +71,7 @@
 </style>
 
 <div
+  style="display: {visible ? "flex": "none"}"
   class="dropzone"
   class:over={isOverDropZone}
   on:drop={handleDrop}

@@ -5,6 +5,7 @@
   import uploadEmoji from '../upload-emoji.js';
 
   const SET_ICON_URL = safari.extension.baseURI + 'icon_128_128.png';
+  const EMOJI_LIST_SELECTOR = 'div.p-customize_emoji_list__row'
 
   let uploads = [];
   let uploadsStatusById = {};
@@ -16,10 +17,25 @@
   let replaceStr = ''
 
   let showOpts = false
+  let deleteMode = false
   let allowOverwrite = false
+  let deleteButtonDisabled = true
+  let emojiToDelete = {}
 
   function toggleOpts() {
     showOpts = !showOpts
+  }
+
+  function toggleDeleteMode() {
+    deleteMode = !deleteMode
+
+    if (!deleteMode) {
+      Object.keys(emojiToDelete).forEach(k => {
+        emojiToDelete[k].removeAttribute('toDelete')
+        emojiToDelete[k].classList.remove('c-alert--level_error')
+      })
+      emojiToDelete = {}
+    }
   }
 
   function uploadFiles (files, idx) {
@@ -49,7 +65,6 @@
     if (!uploads || uploads.length == 0) return
 
     const nextUpload = uploads.pop()
-    // const nextTick = Date.now() + 1000
 
     nextUpload((id, error) => {
         if (error) {
@@ -70,10 +85,6 @@
           };
         }
 
-        // let sleepFor = nextTick - Date.now()
-        // if (sleepFor < 0) sleepFor = 0
-
-        // setTimeout(() => processUploads(uploads), sleepFor)
         processUploads(uploads)
       });
   }
@@ -83,6 +94,89 @@
 
     uploadFiles(files);
   }
+
+  function deleteEmoji() {}
+
+  // ###################################
+  const targetNode = document.querySelectorAll('.p-customize_emoji_list__container')[0]
+  // Options for the observer (which mutations to observe)
+  const config = { attributes: false, childList: true, subtree: true };
+
+  // Callback function to execute when mutations are observed
+  const callback = function(mutationsList, observer) {
+      for(let mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+              mutation.addedNodes.forEach(e => {
+                restoreDeleteState(e)
+                e.addEventListener('click', () => onRowClick(e))
+              });
+          }
+          else if (mutation.type === 'attributes') {
+              console.log('The ' + mutation.attributeName + ' attribute was modified.');
+          }
+      }
+  };
+
+  // Create an observer instance linked to the callback function
+  const observer = new MutationObserver(callback);
+
+  // Start observing the target node for configured mutations
+  observer.observe(targetNode, config);
+
+  // ###########################################
+  function restoreDeleteState(e) {
+    let name = e.innerText.trim().split(/\s+/)[0]
+
+    if (emojiToDelete[name]) {
+      emojiToDelete[name] = e
+
+      e.setAttribute('toDelete', 'true')
+      e.classList.add('c-alert--level_error')
+    }
+  }
+
+  function onRowClick(e) {
+    if (!deleteMode) return
+
+    let name = e.innerText.trim().split(/\s+/)[0]
+
+    if (e.getAttribute('toDelete')) {
+      delete emojiToDelete[name]
+
+      e.removeAttribute('toDelete')
+      e.classList.remove('c-alert--level_error')
+    } else {
+      emojiToDelete[name] = e
+
+      e.setAttribute('toDelete', 'true')
+      e.classList.add('c-alert--level_error')
+    }
+
+    console.log(Object.keys(emojiToDelete), Object.keys(emojiToDelete).length)
+    deleteButtonDisabled = Object.keys(emojiToDelete).length == 0
+  }
+
+  function elementsAreReady (selector) {
+    return new Promise((resolve) => {
+      function checkForElement () {
+        const elements = document.querySelectorAll(selector);
+
+        if (elements && elements.length > 0) {
+          resolve(elements);
+        } else {
+          setTimeout(checkForElement, 1000);
+        }
+      }
+
+      checkForElement();
+    });
+  }
+
+  elementsAreReady(EMOJI_LIST_SELECTOR).then(els => {
+    els.forEach(e => e.addEventListener('click', () => onRowClick(e)))
+  })
+  // ########################################
+
 </script>
 
 <style>
@@ -120,6 +214,11 @@
     margin-bottom: 1rem;
   }
 
+  .delete-mode {
+    margin-bottom: 1rem;
+    float: right;
+  }
+
   .neutral-face-emoji-tools .mono{
     font-family: 'Courier New', Courier, monospace
   }
@@ -131,25 +230,35 @@
     <span class="text">Bulk Emoji Uploader</span>
   </h4>
   <p class="subheading">Drag and drop images into the area below. Images will be uploaded using their filename as the emoji name.</p>
-  <p class="input-note">Example: <span class="normal">"meow-party.gif" will be added as <span class="mono"><strong>:{prefix}meow-party{suffix}:</strong></span></span></p>
-  <button class="c-button c-button--outline c-button--medium toggle-opts" type="button" name="options" on:click={toggleOpts}>⚙️ { showOpts ? "Hide" : "Show"} options</button>
-  <p class="customizations" style="display:{showOpts ? "flex" : "none"}">
-    <label>
+  <p class="input-note">Example:
+    <span class="normal">"meow-party.gif" will be added as
+      <span class="mono">
+        <strong>:{prefix}meow-party{suffix}:</strong>
+      </span>
+    </span>
+  </p>
+  <button class="c-button c-button--outline c-button--medium toggle-opts" style="visibility: {deleteMode ? "hidden" : "visible"}"
+    type="button" name="options" on:click={toggleOpts}>⚙️ { showOpts ? "Hide" : "Show"} options
+  </button>
+  <span class="delete-mode">
+    <button class="c-button c-button--outline c-button--medium {deleteButtonDisabled ? 'c-button--disabled' : ''}"
+      type="button" style="display: { deleteMode ? "inline" : "none"}" name="deleteSelected"
+      on:click={deleteEmoji}>{ deleteButtonDisabled ? "Select some emoji to delete" : "🔥 Delete selected emoji"}</button>
+    <button class="c-button c-button--outline c-button--medium" type="button"
+      name="deleteMode" on:click={toggleDeleteMode}>💣 { deleteMode ? "Disable" : "Enable"} bulk delete mode</button>
+  </span>
+  <p class="customizations" style="display:{(showOpts && !deleteMode) ? "flex" : "none"}">
+    <label class="checkbox normal">
       <input type=checkbox bind:checked={allowOverwrite}>
       Allow overwriting existing emoji (does not apply to standard emoji)
     </label>
   </p>
-  <p class="customizations" style="display:{showOpts ? "flex" : "none"}">
+  <p class="customizations" style="display:{(showOpts && !deleteMode) ? "flex" : "none"}">
     <input bind:value={prefix} type="text" name="prefix" placeholder="optional prefix">
     &nbsp;
     <input bind:value={suffix} type="text" name="suffix" placeholder="optional suffix">
   </p>
-  <!-- <p class="customizations" style="display:{showOpts ? "flex" : "none"}">
-    <input bind:value={searchStr} type="text" name="searchStr" placeholder="replace these characters...">
-    &nbsp;
-    <input bind:value={replaceStr} type="text" name="replaceStr" placeholder="...with these">
-  </p> -->
-  <FileDropzone on:filesadded={handleFilesAdded} />
+  <FileDropzone on:filesadded={handleFilesAdded} visible={!deleteMode} />
   <ul class="uploads">
     {#each uploads as upload (upload.id)}
       <Upload upload={upload} status={uploadsStatusById[upload.id]} prefix={prefix} suffix={suffix} searchStr={searchStr} replaceStr={replaceStr} />

@@ -4,6 +4,8 @@ import App from './components/app.svelte';
 
 const ELEMENT_TO_INSERT_BEFORE_SELECTOR = '.p-customize_emoji_wrapper__container';
 
+// document.querySelectorAll(`div.p-customize_emoji_list__row`).forEach(e => e.addEventListener('click', (t) => { t.target.style.backgroundColor = 'pink' }))
+
 function elementIsReady (selector) {
   return new Promise((resolve) => {
     function checkForElement () {

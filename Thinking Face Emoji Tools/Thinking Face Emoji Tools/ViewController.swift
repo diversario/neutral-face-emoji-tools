@@ -15,11 +15,11 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appNameLabel.stringValue = "Thinking Face Emoji Tools";
+        self.appNameLabel.stringValue = "📦 Bulk Emoji Upload For Slack";
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.diversario.Thinking-Face-Emoji-Tools-Extension") { error in
+        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.diversario.Thinking-Face-Emoji-Tools.Extension") { error in
             if let _ = error {
                 // Insert code to inform the user that something went wrong.
 
