@@ -1,8 +1,10 @@
 <script>
   import Upload from './upload.svelte';
+  import Removal from './removal.svelte';
   import FileDropzone from './file-dropzone.svelte';
 
   import uploadEmoji from '../upload-emoji.js';
+  import removeEmoji from '../remove-emoji.js';
 
   const SET_ICON_URL = safari.extension.baseURI + 'icon_128_128.png';
   const EMOJI_LIST_SELECTOR = 'div.p-customize_emoji_list__row'
@@ -21,6 +23,8 @@
   let allowOverwrite = false
   let deleteButtonDisabled = true
   let emojiToDelete = {}
+  let removals = []
+  let removalStatusByName = {}
 
   function toggleOpts() {
     showOpts = !showOpts
@@ -95,35 +99,64 @@
     uploadFiles(files);
   }
 
-  function deleteEmoji() {}
-
-  // ###################################
-  const targetNode = document.querySelectorAll('.p-customize_emoji_list__container')[0]
-  // Options for the observer (which mutations to observe)
-  const config = { attributes: false, childList: true, subtree: true };
-
-  // Callback function to execute when mutations are observed
-  const callback = function(mutationsList, observer) {
-      for(let mutation of mutationsList) {
-          if (mutation.type === 'childList') {
-              mutation.addedNodes.forEach(e => {
-                restoreDeleteState(e)
-                e.addEventListener('click', () => onRowClick(e))
-              });
-          }
-          else if (mutation.type === 'attributes') {
-              console.log('The ' + mutation.attributeName + ' attribute was modified.');
-          }
+  function deleteSelectedEmoji() {
+    Object.keys(emojiToDelete).forEach(emoji => {
+      let img = emojiToDelete[emoji].childNodes[0].getElementsByTagName('img')[0]
+      removals.push({name: emoji, img})
+      removalStatusByName[emoji] = {
+        type: 'removing',
+        message: 'Deleting...'
       }
-  };
+    })
 
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(callback);
+    function remove(nameList) {
+      if (!nameList || nameList.length == 0) return
 
-  // Start observing the target node for configured mutations
-  observer.observe(targetNode, config);
+      let name = nameList.pop()
+      let apiName = name.slice(1, name.length - 1)
 
-  // ###########################################
+      removeEmoji(apiName, err => {
+        if (err) {
+          removalStatusByName[name].type = 'error'
+          removalStatusByName[name].message = err.message
+        } else {
+          removalStatusByName[name].type = 'success'
+          removalStatusByName[name].message = 'Deleted'
+        }
+
+        remove(nameList)
+      })
+    }
+
+    remove(Object.keys(emojiToDelete).reverse())
+  }
+
+  const EMOJI_LIST_CONTAINER = '.p-customize_emoji_list__container'
+  elementsAreReady(EMOJI_LIST_CONTAINER).then(els => {
+    const targetNode = els[0]
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: false, childList: true, subtree: true };
+
+    // Callback function to execute when mutations are observed
+    const callback = function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(e => {
+                  restoreDeleteState(e)
+                  e.addEventListener('click', () => onRowClick(e))
+                });
+            }
+        }
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
+  })
+
   function restoreDeleteState(e) {
     let name = e.innerText.trim().split(/\s+/)[0]
 
@@ -152,7 +185,6 @@
       e.classList.add('c-alert--level_error')
     }
 
-    console.log(Object.keys(emojiToDelete), Object.keys(emojiToDelete).length)
     deleteButtonDisabled = Object.keys(emojiToDelete).length == 0
   }
 
@@ -175,7 +207,6 @@
   elementsAreReady(EMOJI_LIST_SELECTOR).then(els => {
     els.forEach(e => e.addEventListener('click', () => onRowClick(e)))
   })
-  // ########################################
 
 </script>
 
@@ -201,6 +232,12 @@
   }
 
   .uploads {
+    list-style-type: none;
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .removals {
     list-style-type: none;
     margin: 0;
     font-size: 0.9rem;
@@ -243,7 +280,7 @@
   <span class="delete-mode">
     <button class="c-button c-button--outline c-button--medium {deleteButtonDisabled ? 'c-button--disabled' : ''}"
       type="button" style="display: { deleteMode ? "inline" : "none"}" name="deleteSelected"
-      on:click={deleteEmoji}>{ deleteButtonDisabled ? "Select some emoji to delete" : "🔥 Delete selected emoji"}</button>
+      on:click={deleteSelectedEmoji}>{ deleteButtonDisabled ? "Select some emoji to delete" : "🔥 Delete selected emoji"}</button>
     <button class="c-button c-button--outline c-button--medium" type="button"
       name="deleteMode" on:click={toggleDeleteMode}>💣 { deleteMode ? "Disable" : "Enable"} bulk delete mode</button>
   </span>
@@ -258,10 +295,18 @@
     &nbsp;
     <input bind:value={suffix} type="text" name="suffix" placeholder="optional suffix">
   </p>
+
   <FileDropzone on:filesadded={handleFilesAdded} visible={!deleteMode} />
+
   <ul class="uploads">
     {#each uploads as upload (upload.id)}
       <Upload upload={upload} status={uploadsStatusById[upload.id]} prefix={prefix} suffix={suffix} searchStr={searchStr} replaceStr={replaceStr} />
+    {/each}
+  </ul>
+
+  <ul class="removals" style="display:{deleteMode ? "block" : "none"}">
+    {#each removals as removal (removal.name)}
+      <Removal removal={removal} status={removalStatusByName[removal.name]} />
     {/each}
   </ul>
 </div>
