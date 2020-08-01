@@ -65,6 +65,10 @@ export default function uploadEmoji (file, opts) {
 
             return removeEmoji(name, err => {
               if (err) {
+                if (err.code == 'no_permission') {
+                  throw new Error(`You're not allowed to overwrite this emoji`)
+                }
+
                 throw new Error("Couldn't remove emoji")
               }
 
@@ -85,6 +89,10 @@ export default function uploadEmoji (file, opts) {
       log.error(`[${name}] ⬆️😨 upload failed on attempt ${attemptCount}`, printError(error))
 
       if (error.response) {
+        if (error.code == 'no_permission') {
+          return callback(id, 'Not allowed to overwrite this emoji', null)
+        }
+
         if (attemptCount < 3) {
           if (error.response.status == 429) {
             let delay = error.response.headers['retry-after']
