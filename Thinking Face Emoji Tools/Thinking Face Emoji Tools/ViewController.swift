@@ -15,7 +15,7 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appNameLabel.stringValue = "📦 Bulk Emoji Upload For Slack";
+        self.appNameLabel.stringValue = "Emoji 😎 Tools 🛠 For 4️⃣ Slack 💬 🥳";
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
