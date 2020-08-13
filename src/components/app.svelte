@@ -2,6 +2,7 @@
   import Upload from "./upload.svelte";
   import Removal from "./removal.svelte";
   import FileDropzone from "./file-dropzone.svelte";
+  import Options from "./options.svelte";
 
   import uploadEmoji from "../upload-emoji.js";
   import removeEmoji from "../remove-emoji.js";
@@ -29,7 +30,7 @@
     suffix: getOptionOrDefault("suffix", DEFAULT_OPTIONS.suffix),
   };
 
-  let prefs = new Proxy(_prefs, {
+  export let prefs = new Proxy(_prefs, {
     set: function(target, key, value) {
       target[key] = value;
       localStorage.setItem(key, JSON.stringify(value));
@@ -313,62 +314,8 @@
       </span>
     </span>
   </p>
-  <button
-    class="c-button c-button--outline c-button--medium toggle-opts"
-    style="visibility: {deleteMode ? 'hidden' : 'visible'}"
-    type="button"
-    name="options"
-    on:click={toggleOpts}>
-    ⚙️ { prefs.showOptions ? 'Hide' : 'Show'} options
-  </button>
-  <button
-    class="c-button c-button--outline c-button--medium toggle-opts"
-    style="visibility: {deleteMode ? 'hidden' : 'visible'}"
-    type="button"
-    name="reset-options"
-    on:click={resetOptions}>
-    🔄 Reset options
-  </button>
-  <span class="delete-mode">
-    <button
-      class="c-button c-button--outline c-button--medium {deleteButtonDisabled ? 'c-button--disabled' : ''}"
-      type="button"
-      style="display: {deleteMode ? 'inline' : 'none'}"
-      name="deleteSelected"
-      on:click={deleteSelectedEmoji}>
-      {deleteButtonDisabled ? 'Select some emoji to delete' : '🔥 Delete selected emoji'}
-    </button>
-    <button
-      class="c-button c-button--outline c-button--medium"
-      type="button"
-      name="deleteMode"
-      on:click={toggleDeleteMode}>
-      💣 {deleteMode ? 'Disable' : 'Enable'} bulk delete mode
-    </button>
-  </span>
-  <p
-    class="customizations"
-    style="display:{prefs.showOptions && !deleteMode ? 'flex' : 'none'}">
-    <label class="checkbox normal">
-      <input type="checkbox" bind:checked={prefs.allowOverwrite} />
-      Allow overwriting existing emoji (does not apply to standard emoji)
-    </label>
-  </p>
-  <p
-    class="customizations"
-    style="display:{prefs.showOptions && !deleteMode ? 'flex' : 'none'}">
-    <input
-      bind:value={prefs.prefix}
-      type="text"
-      name="prefix"
-      placeholder="optional prefix" />
-    &nbsp;
-    <input
-      bind:value={prefs.suffix}
-      type="text"
-      name="suffix"
-      placeholder="optional suffix" />
-  </p>
+
+  <Options bind:prefs={prefs} {deleteMode} {toggleOpts} {toggleDeleteMode} {resetOptions} {deleteButtonDisabled} {deleteSelectedEmoji} />
 
   <FileDropzone on:filesadded={handleFilesAdded} visible={!deleteMode} />
 
