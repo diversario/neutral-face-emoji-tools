@@ -1,4 +1,7 @@
 <script>
+  import Prefix from './pipeline/prefix.svelte'
+  import Suffix from './pipeline/suffix.svelte'
+
   export let prefs;
   export let deleteMode;
   export let toggleOpts;
@@ -6,6 +9,20 @@
   export let resetOptions;
   export let deleteButtonDisabled;
   export let deleteSelectedEmoji;
+
+  let availablePipelines = [
+    {id: 1, ctr: Prefix},
+    {id: 2, ctr: Suffix},
+  ]
+
+  export let pipeline = [];
+
+  let selectedPipeline = 1;
+
+  function addPipeline() {
+    console.log('🥳')
+    pipeline[pipeline.length] = availablePipelines.filter(p => p.id == selectedPipeline)[0].ctr
+  }
 </script>
 
 <style>
@@ -68,16 +85,27 @@
   <p
     class="customizations"
     style="display:{prefs.showOptions && !deleteMode ? 'flex' : 'none'}">
-    <input
-      bind:value={prefs.prefix}
-      type="text"
-      name="prefix"
-      placeholder="optional prefix" />
-    &nbsp;
-    <input
-      bind:value={prefs.suffix}
-      type="text"
-      name="suffix"
-      placeholder="optional suffix" />
+
+    <select bind:value={selectedPipeline}>
+      {#each availablePipelines as name}
+        <option value={name.id}>
+          {name.ctr.name}
+        </option>
+      {/each}
+    </select>
+
+    <button
+      class="c-button c-button--outline c-button--medium"
+      type="button"
+      name="add-pipeline"
+      on:click={addPipeline}
+    >Add transformation</button>
+  </p>
+
+  {#each pipeline as pipe}
+    <svelte:component this={pipe} bind:prefs={prefs} {deleteMode}/>
+  {/each}
+
+  <p>
   </p>
 </div>
