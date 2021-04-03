@@ -83,5 +83,6 @@
   <input
     class="file-input"
     type="file"
+    multiple="multiple"
     on:change={handleFileChange} />
 </div>
